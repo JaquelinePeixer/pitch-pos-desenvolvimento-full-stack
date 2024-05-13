@@ -13,38 +13,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import webservice.entity.User;
-import webservice.service.UserService;
+import webservice.entity.Book;
+import webservice.service.BookService;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("books")
 @AllArgsConstructor
-public class UserController {
+public class BookController {
 
-	private UserService userService;
+	private BookService bookService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUserPorId(@PathVariable Long id) {
-		return userService.getUserPorId(id);
+	public ResponseEntity<Book> getBookPorId(@PathVariable Long id) {
+		return bookService.getBookPorId(id);
 	}
 
 	@GetMapping
-	public List<User> getUserAll() {
-		return userService.getUserAll();
+	public List<Book> getBookAll() {
+		return bookService.getBookAll();
 	}
 
 	@PostMapping
-	public ResponseEntity<User> postUser(@RequestBody User user) {
-		return userService.postUser(user);
+	public ResponseEntity<Book> postBook(@RequestBody Book book) {
+		return bookService.postBook(book);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<User> putUser(@PathVariable Long id, @RequestBody User user) {
-		return userService.putUser(id, user);
+	public ResponseEntity<Book> putBook(@PathVariable Long id, @RequestBody Book book) {
+		return bookService.putBook(id, book);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> removeUser(@PathVariable Long id) {
-		return userService.removeUser(id);
+	public ResponseEntity<String> removeBook(@PathVariable Long id) {
+		return bookService.removeBook(id);
 	}
 }

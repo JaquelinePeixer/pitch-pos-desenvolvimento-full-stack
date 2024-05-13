@@ -1,56 +1,50 @@
 package webservice.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
 import webservice.entity.User;
+import webservice.repository.UserRepository;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
-	private static Map<Long, User> userList = new HashMap<>();
+	private UserRepository userRepository;
 
 	public ResponseEntity<User> getUserPorId(Long id) {
-		User user = userList.get(id);
-
-		if (user == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		if (userRepository.existsById(id)) {
+			return ResponseEntity.status(HttpStatus.OK).body(userRepository.findById(id).get());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(user);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
 
 	public List<User> getUserAll() {
-		return new ArrayList<>(userList.values());
+		return userRepository.findAll();
 	}
 
 	public ResponseEntity<User> postUser(User user) {
-		userList.put(user.getId(), user);
-		return ResponseEntity.status(HttpStatus.OK).body(user);
+		User userSave = userRepository.save(user);
+		return ResponseEntity.status(HttpStatus.CREATED).body(userSave);
 	}
 
-	public ResponseEntity<User> putUser(User User) {
-		User foundUser = userList.get(User.getId());
-
-		if (foundUser == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	public ResponseEntity<User> putUser(Long id, User user) {
+		if (userRepository.existsById(id)) {
+			User userSave = userRepository.save(user);
+			return ResponseEntity.status(HttpStatus.OK).body(userSave);
 		}
-		userList.put(User.getId(), User);
-		return ResponseEntity.status(HttpStatus.OK).body(foundUser);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
 
 	public ResponseEntity<String> removeUser(Long id) {
-		User foundUser = userList.get(id);
-
-		if (foundUser == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		if (userRepository.existsById(id)) {
+			userRepository.deleteById(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Success");
 		}
-		userList.remove(id);
-		return ResponseEntity.status(HttpStatus.OK).body("User deletado com sucesso!");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User não encontrado");
 	}
 }

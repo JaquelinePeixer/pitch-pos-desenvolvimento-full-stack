@@ -13,38 +13,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import webservice.entity.User;
-import webservice.service.UserService;
+import webservice.entity.Subject;
+import webservice.service.SubjectService;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("subjects")
 @AllArgsConstructor
-public class UserController {
+public class SubjectController {
 
-	private UserService userService;
+	private SubjectService subjectService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUserPorId(@PathVariable Long id) {
-		return userService.getUserPorId(id);
+	public ResponseEntity<Subject> getSubjectPorId(@PathVariable Long id) {
+		return subjectService.getSubjectPorId(id);
 	}
 
 	@GetMapping
-	public List<User> getUserAll() {
-		return userService.getUserAll();
+	public List<Subject> getSubjectAll() {
+		return subjectService.getSubjectAll();
 	}
 
 	@PostMapping
-	public ResponseEntity<User> postUser(@RequestBody User user) {
-		return userService.postUser(user);
+	public ResponseEntity<Subject> postSubject(@RequestBody Subject subject) {
+		return subjectService.postSubject(subject);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<User> putUser(@PathVariable Long id, @RequestBody User user) {
-		return userService.putUser(id, user);
+	public ResponseEntity<Subject> putSubject(@PathVariable Long id, @RequestBody Subject subject) {
+		return subjectService.putSubject(id, subject);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> removeUser(@PathVariable Long id) {
-		return userService.removeUser(id);
+	public ResponseEntity<String> removeSubject(@PathVariable Long id) {
+		return subjectService.removeSubject(id);
 	}
+
 }
