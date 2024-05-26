@@ -1,3 +1,32 @@
 {
-    "title": "Biblioteca Online"
+    "college": "Descomplica Faculdade Digital",
+    "course": "Pós-Graduação em Desenvolvimento Full Stack",
+    "menu": {
+        "intranet": "Ambiente Online",
+        "consultCollection": "Consultar Acervo",
+        "logout": "Sair",
+        "library": "Biblioteca"
+    },
+    "footer":{
+        "name": "Jaqueline Patricia Peixer",
+        "job": "Pitch - Avaliação final"
+    },
+    "home": {
+        "title": "Biblioteca Online",
+        "sutitle": "Na biblioteca on-line você poderá ter acesso a consulta dos acervos cadastrados e sua localização fictícia, como também verificar o ambiente do administrador, do bibliotecário e do usuário normal, onde cada um possui uma permissão diferente.",
+        "faq": {
+            "question_01": "O que é a Biblioteca On-line?",
+            "answers_01": "teste de resposta",
+            "question_02": "Como foi estruturado o sistema?",
+            "answers_02": "teste de resposta",
+            "question_03": "Quais tecnologias foram utilizadas para a implementação?",
+            "answers_03": "teste de resposta",
+            "question_04": "Quais são os níveis de permissões do sistema?",
+            "answers_04": "teste de resposta",
+            "question_05": "Como posso testar os diferentes níveis de permissões?",
+            "answers_05": "teste de resposta",
+            "question_06": "Porque não consigo remover alguns dados?",
+            "answers_06": "teste de resposta"
+        }
+    }
 }

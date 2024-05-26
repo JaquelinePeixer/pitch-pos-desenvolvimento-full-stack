@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+$body-bg-dark: #191A1A;
+$body-color-dark: #fff;
+$dark: #191A1A !default;
+
+$border: #3E4142;
+
+$secondary: #fff;
+$primary: #FED500;
+
+$font-family-sans-serif: "Ubuntu", sans-serif;
+
+$accordion-border-width: 0;
+$accordion-border-color: $border;
+$accordion-button-active-bg: $primary;
+$accordion-button-active-color: $body-bg-dark;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.btn {
+    border-radius: 100px;
+    padding: 14px 29px;
+}
+
+.accordion-header .accordion-button {
+    font-weight: 500;
+}
+
+.accordion-body {
+    font-weight: 300;
+    padding-bottom: 35px;
+}

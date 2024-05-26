@@ -1,0 +1,13 @@
+<section class="container pt-4 pb-4">
+    <div class="container-fluid">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                @for (item of contentInitial; track $index) {
+                <li class="breadcrumb-item">
+                    <a [routerLink]="item.action">{{ item.title| translate}}</a>
+                </li>
+                }
+            </ol>
+        </nav>
+    </div>
+</section>
