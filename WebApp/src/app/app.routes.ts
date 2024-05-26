@@ -9,6 +9,8 @@ import { AutorComponent } from './pages/intranet/autor/autor.component';
 import { LivroComponent } from './pages/intranet/livro/livro.component';
 import { EmprestimoComponent } from './pages/intranet/emprestimo/emprestimo.component';
 import { LocalizacaoComponent } from './pages/intranet/localizacao/localizacao.component';
+import { UsuarioComponent } from './pages/intranet/usuario/usuario.component';
+import { AssuntoComponent } from './pages/intranet/assunto/assunto.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -18,10 +20,11 @@ export const routes: Routes = [
             { path: 'renovacao', component: RenovacaoComponent, pathMatch: 'full' },
             { path: 'obras-emprestadas', component: LivroEmprestadoComponent },
             { path: 'perfil-usuario', component: PerfilUsuarioComponent },
-            { path: 'autor', component: AutorComponent },
-            { path: 'livro', component: LivroComponent },
             { path: 'emprestimo', component: EmprestimoComponent },
-            { path: 'livro-emprestado', component: LivroEmprestadoComponent },
+            { path: 'livro', component: LivroComponent },
+            { path: 'usuario', component: UsuarioComponent },
+            { path: 'autor', component: AutorComponent },
+            { path: 'assunto', component: AssuntoComponent },
             { path: 'localizacao', component: LocalizacaoComponent },
         ]
     },

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,13 +11,10 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
   contentBreadcrumb = [
     {
       title: 'Biblioteca Online',
       action: null
     }
   ];
-
-  constructor(public router: Router) { }
 }

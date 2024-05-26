@@ -5,9 +5,17 @@
         "intranet": "Ambiente Online",
         "consultCollection": "Consultar Acervo",
         "logout": "Sair",
-        "library": "Biblioteca"
+        "library": "Biblioteca",
+        "renovacao": "Renovação Online",
+        "emprestimo": "Empréstimos",
+        "livro": "Obras",
+        "usuario": "Usuários",
+        "autor": "Autores",
+        "localizacao": "Localizações",
+        "perfilUsuario": "Perfil do usuário",
+        "assunto": "Assuntos"
     },
-    "footer":{
+    "footer": {
         "name": "Jaqueline Patricia Peixer",
         "job": "Pitch - Avaliação final"
     },

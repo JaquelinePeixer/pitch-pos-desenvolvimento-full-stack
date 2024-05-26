@@ -1,1 +1,41 @@
-<p>intranet works!</p>
+<section id="menuIntranet">
+    <div class="container">
+        <div class="container-fluid">
+            <nav class="">
+                <ul class="navbar-nav d-flex flex-row justify-content-between">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/renovacao">{{'menu.renovacao' | translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/obras-emprestadas">{{'menu.emprestimo' |
+                            translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/perfil-usuario">{{'menu.perfilUsuario' |
+                            translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/emprestimo">{{'menu.emprestimo' | translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/livro">{{'menu.livro' | translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/usuario">{{'menu.usuario' | translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/autor">{{'menu.autor' | translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/assunto">{{'menu.assunto' | translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/intranet/localizacao">{{'menu.localizacao' | translate}}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<router-outlet />
