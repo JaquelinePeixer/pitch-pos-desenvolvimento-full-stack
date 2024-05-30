@@ -15,7 +15,7 @@ export class ListComponent {
     },
     {
       title: 'perfil-usuario.page.title',
-      actiion: null
+      action: null
     }
   ];
 }

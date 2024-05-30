@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

@@ -17,9 +17,6 @@ export class IntranetComponent implements OnInit {
   menuIntranet: AppMenuItem = AppMenuModel.menuIntranet;
 
   ngOnInit(): void {
-    this.menuIntranet.items?.forEach(menu => {
-      menu.routerLink = `${this.menuIntranet.routerLink}${menu.routerLink}`;
-    })
   }
 
 }

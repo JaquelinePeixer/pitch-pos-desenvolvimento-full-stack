@@ -15,7 +15,7 @@ export class ListComponent {
     },
     {
       title: 'renovacao.page.title',
-      actiion: null
+      action: null
     }
   ];
 }

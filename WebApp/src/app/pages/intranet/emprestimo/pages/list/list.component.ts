@@ -15,7 +15,7 @@ export class ListComponent {
     },
     {
       title: 'emprestimo.page.title',
-      actiion: null
+      action: null
     }
   ];
 }

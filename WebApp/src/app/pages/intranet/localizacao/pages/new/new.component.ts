@@ -15,7 +15,11 @@ export class NewComponent {
     },
     {
       title: 'localizacao.page.title',
-      actiion: null
+      action: AppMenuModel.menuLocalizacao.routerLink
+    },
+    {
+      title: 'localizacao.page.new',
+      action: null
     }
   ];
 }

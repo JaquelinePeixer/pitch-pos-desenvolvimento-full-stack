@@ -10,47 +10,47 @@ export class AppMenuModel {
 
     public static readonly menuRenovacao: AppMenuItem = {
         label: 'menu.renovacao',
-        routerLink: '/renovacao'
+        routerLink: '/intranet/renovacao'
     }
 
-    public static readonly menuObrasEmprestadas: AppMenuItem = {
-        label: 'menu.obraEmprestada',
-        routerLink: '/obra-emprestada'
+    public static readonly menuObraEmprestada: AppMenuItem = {
+        label: 'menu.obra-emprestada',
+        routerLink: '/intranet/obra-emprestada'
     }
 
     public static readonly menuEmprestimo: AppMenuItem = {
         label: 'menu.emprestimo',
-        routerLink: '/emprestimo'
+        routerLink: '/intranet/emprestimo'
     }
 
     public static readonly menuPerfilUsuario: AppMenuItem = {
         label: 'menu.perfilUsuario',
-        routerLink: '/perfil-usuario'
+        routerLink: '/intranet/perfil-usuario'
     }
 
     public static readonly menuUsuario: AppMenuItem = {
         label: 'menu.usuario',
-        routerLink: '/usuario'
+        routerLink: '/intranet/usuario'
     }
 
     public static readonly menuLocalizacao: AppMenuItem = {
         label: 'menu.localizacao',
-        routerLink: '/localizacao'
+        routerLink: '/intranet/localizacao'
     }
 
     public static readonly menuAssunto: AppMenuItem = {
         label: 'menu.assunto',
-        routerLink: '/assunto'
+        routerLink: '/intranet/assunto'
     }
 
     public static readonly menuObra: AppMenuItem = {
         label: 'menu.obra',
-        routerLink: '/obra'
+        routerLink: '/intranet/obra'
     }
 
     public static readonly menuAutor: AppMenuItem = {
         label: 'menu.autor',
-        routerLink: '/autor'
+        routerLink: '/intranet/autor'
     }
 
     public static readonly menuIntranet: AppMenuItem = {
@@ -64,7 +64,7 @@ export class AppMenuModel {
             AppMenuModel.menuAutor,
             AppMenuModel.menuAssunto,
             AppMenuModel.menuLocalizacao,
-            AppMenuModel.menuObrasEmprestadas,
+            AppMenuModel.menuObraEmprestada,
             AppMenuModel.menuPerfilUsuario
         ]
     }

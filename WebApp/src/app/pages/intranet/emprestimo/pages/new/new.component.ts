@@ -15,7 +15,11 @@ export class NewComponent {
     },
     {
       title: 'emprestimo.page.title',
-      actiion: null
+      action: AppMenuModel.menuEmprestimo.routerLink
+    },
+    {
+      title: 'emprestimo.page.new',
+      action: null
     }
   ];
 }

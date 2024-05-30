@@ -15,7 +15,11 @@ export class NewComponent {
     },
     {
       title: 'obra.page.title',
-      actiion: null
+      action: AppMenuModel.menuObra.routerLink
+    },
+    {
+      title: 'obra.page.new',
+      action: null
     }
   ];
 }

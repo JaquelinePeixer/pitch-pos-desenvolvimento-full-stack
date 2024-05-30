@@ -15,7 +15,7 @@ export class ListComponent {
     },
     {
       title: 'obra.page.title',
-      actiion: null
+      action: null
     }
   ];
 }

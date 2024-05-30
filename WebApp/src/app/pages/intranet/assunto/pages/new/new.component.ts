@@ -15,7 +15,11 @@ export class NewComponent {
     },
     {
       title: 'assunto.page.title',
-      actiion: null
+      action: AppMenuModel.menuAssunto.routerLink
+    },
+    {
+      title: 'assunto.page.new',
+      action: null
     }
   ];
 }

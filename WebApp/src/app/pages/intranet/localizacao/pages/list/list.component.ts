@@ -15,7 +15,7 @@ export class ListComponent {
     },
     {
       title: 'localizacao.page.title',
-      actiion: null
+      action: null
     }
   ];
 }
