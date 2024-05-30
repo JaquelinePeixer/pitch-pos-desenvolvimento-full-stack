@@ -8,7 +8,8 @@
         "library": "Biblioteca",
         "renovacao": "Renovação Online",
         "emprestimo": "Empréstimos",
-        "livro": "Obras",
+        "obra": "Obras",
+        "obra-emprestada": "Obras Emprestadas",
         "usuario": "Usuários",
         "autor": "Autores",
         "localizacao": "Localizações",
@@ -18,6 +19,11 @@
     "footer": {
         "name": "Jaqueline Patricia Peixer",
         "job": "Pitch - Avaliação final"
+    },
+    "action": {
+        "adicionar": "Adicionar",
+        "excluir": "Excluir",
+        "editar": "Editar"
     },
     "home": {
         "title": "Biblioteca Online",
@@ -35,6 +41,79 @@
             "answers_05": "teste de resposta",
             "question_06": "Porque não consigo remover alguns dados?",
             "answers_06": "teste de resposta"
+        }
+    },
+    "autor": {
+        "page": {
+            "title": "Autores",
+            "new": "Cadastrar Autor"
+        },
+        "field": {},
+        "message": {}
+    },
+    "obra": {
+        "page": {
+            "title": "Obras",
+            "new": "Cadastrar Obra"
+        },
+        "field": {},
+        "message": {}
+    },
+    "localizacao": {
+        "page": {
+            "title": "Localizações",
+            "new": "Cadastrar Localização"
+        },
+        "field": {},
+        "message": {}
+    },
+    "assunto": {
+        "page": {
+            "title": "Assuntos",
+            "new": "Cadastrar Assunto"
+        },
+        "field": {},
+        "message": {}
+    },
+    "usuario": {
+        "page": {
+            "title": "Usuários",
+            "new": "Cadastrar Usuário"
+        },
+        "field": {},
+        "message": {}
+    },
+    "renovacao": {
+        "page": {
+            "title": "Renovação Online"
+        },
+        "field": {},
+        "message": {}
+    },
+    "obra-emprestada": {
+        "page": {
+            "title": "Obras Emprestadas"
+        },
+        "field": {},
+        "message": {}
+    },
+    "emprestimo": {
+        "page": {
+            "title": "Empréstimos"
+        },
+        "field": {},
+        "message": {}
+    },
+    "perfil-usuario": {
+        "page": {
+            "title": "Perfil do Usuário"
+        },
+        "field": {},
+        "message": {}
+    },
+    "page-not-found": {
+        "page": {
+            "title": "Página Não Encontrada"
         }
     }
 }

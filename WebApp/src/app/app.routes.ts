@@ -2,30 +2,48 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { IntranetComponent } from './pages/intranet/intranet.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { RenovacaoComponent } from './pages/intranet/renovacao/renovacao.component';
-import { LivroEmprestadoComponent } from './pages/intranet/livro-emprestado/livro-emprestado.component';
-import { PerfilUsuarioComponent } from './pages/intranet/perfil-usuario/perfil-usuario.component';
-import { AutorComponent } from './pages/intranet/autor/autor.component';
-import { LivroComponent } from './pages/intranet/livro/livro.component';
-import { EmprestimoComponent } from './pages/intranet/emprestimo/emprestimo.component';
-import { LocalizacaoComponent } from './pages/intranet/localizacao/localizacao.component';
-import { UsuarioComponent } from './pages/intranet/usuario/usuario.component';
-import { AssuntoComponent } from './pages/intranet/assunto/assunto.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
     {
         path: 'intranet', component: IntranetComponent,
         children: [
-            { path: 'renovacao', component: RenovacaoComponent, pathMatch: 'full' },
-            { path: 'obras-emprestadas', component: LivroEmprestadoComponent },
-            { path: 'perfil-usuario', component: PerfilUsuarioComponent },
-            { path: 'emprestimo', component: EmprestimoComponent },
-            { path: 'livro', component: LivroComponent },
-            { path: 'usuario', component: UsuarioComponent },
-            { path: 'autor', component: AutorComponent },
-            { path: 'assunto', component: AssuntoComponent },
-            { path: 'localizacao', component: LocalizacaoComponent },
+            {
+                path: 'renovacao', pathMatch: 'full',
+                loadChildren: () => import('./pages/intranet/renovacao/renovacao.module').then(mod => mod.RenovacaoModule)
+            },
+            {
+                path: 'obra-emprestada',
+                loadChildren: () => import('./pages/intranet/obra-emprestada/obra-emprestada.module').then(mod => mod.ObraEmprestadaModule)
+            },
+            {
+                path: 'perfil-usuario',
+                loadChildren: () => import('./pages/intranet/perfil-usuario/perfil-usuario.module').then(mod => mod.PerfilUsuarioModule)
+            },
+            {
+                path: 'emprestimo',
+                loadChildren: () => import('./pages/intranet/emprestimo/emprestimo.module').then(mod => mod.EmprestimoModule)
+            },
+            {
+                path: 'obra',
+                loadChildren: () => import('./pages/intranet/obra/obra.module').then(mod => mod.ObraModule)
+            },
+            {
+                path: 'usuario',
+                loadChildren: () => import('./pages/intranet/usuario/usuario.module').then(mod => mod.UsuarioModule)
+            },
+            {
+                path: 'autor',
+                loadChildren: () => import('./pages/intranet/autor/autor.module').then(mod => mod.AutorModule)
+            },
+            {
+                path: 'assunto',
+                loadChildren: () => import('./pages/intranet/assunto/assunto.module').then(mod => mod.AssuntoModule)
+            },
+            {
+                path: 'localizacao',
+                loadChildren: () => import('./pages/intranet/localizacao/localizacao.module').then(mod => mod.LocalizacaoModule)
+            },
         ]
     },
     { path: 'acervo', component: PageNotFoundComponent },

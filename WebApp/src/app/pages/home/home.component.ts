@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
 export class HomeComponent {
   contentBreadcrumb = [
     {
-      title: 'Biblioteca Online',
+      title: 'menu.intranet',
       action: null
     }
   ];
