@@ -16,3 +16,19 @@
     font-weight: 300;
     padding-bottom: 35px;
 }
+
+.btn.btn-primary {
+    --bs-btn-hover-bg: #e9b005;
+    --bs-btn-hover-border-color: #e9b005;
+    --bs-btn-focus-shadow-rgb: initial;
+    --bs-btn-active-bg: #e9b005;
+    --bs-btn-active-border-color: #e9b005;
+}
+
+.btn-outline-secondary {
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #3E4142;
+    --bs-btn-hover-border-color: #fff;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #3E4142;
+}

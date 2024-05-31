@@ -23,7 +23,13 @@
     "action": {
         "adicionar": "Adicionar",
         "excluir": "Excluir",
-        "editar": "Editar"
+        "editar": "Editar",
+        "salvar": "Salvar",
+        "cancelar": "Cancelar"
+    },
+    "validation": {
+        "required": "O campo {{label}} é obrigatório.",
+        "maxLength": "O campo {{label}} deve ter no máximo {{requiredLenght}} caracteres."
     },
     "home": {
         "title": "Biblioteca Online",
@@ -48,8 +54,13 @@
             "title": "Autores",
             "new": "Cadastrar Autor"
         },
-        "field": {},
-        "message": {}
+        "message": {},
+        "field": {
+            "name": "Nome do Autor",
+            "birthYear": "Ano de nascimento",
+            "deathhYear": "Ano de falecimento"
+        },
+        "placeholder": {}
     },
     "obra": {
         "page": {

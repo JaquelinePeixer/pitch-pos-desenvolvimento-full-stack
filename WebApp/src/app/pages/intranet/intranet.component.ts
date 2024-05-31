@@ -4,11 +4,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppMenuItem, AppMenuModel } from '../../domain/menu/app-menu.model';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { LoadingComponent } from '../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-intranet',
   standalone: true,
-  imports: [RouterOutlet, TranslateModule, RouterLink, CommonModule],
+  imports: [RouterOutlet, TranslateModule, RouterLink, CommonModule, LoadingComponent],
   templateUrl: './intranet.component.html',
   styleUrl: './intranet.component.scss'
 })

@@ -3,11 +3,39 @@
 <main class="container" id="title">
     <div class="container-fluid">
         <div class="grid">
-            <div class="row">
+            <div class="row  mb-4">
                 <div class="col-10">
                     <h1>{{'autor.page.new' | translate}}</h1>
                 </div>
             </div>
+
+            <form (submit)="submit()" [formGroup]="formGroup">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <label for="name" class="form-label">{{'autor.field.name' | translate}}</label>
+                        <input type="text" class="form-control" id="name" formControlName="name"
+                            placeholder="{{'autor.field.name' | translate}}">
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <label for="birthYear" class="form-label">{{'autor.field.birthYear' | translate}}</label>
+                        <input type="date" class="form-control" id="birthYear" formControlName="birthYear">
+                    </div>
+                    <div class="col-4">
+                        <label for="deathhYear" class="form-label">{{'autor.field.deathhYear' | translate}}</label>
+                        <input type="date" class="form-control" id="deathhYear" formControlName="deathhYear">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="d-grid gap-2 d-md-flex">
+                        <button class="btn btn-primary" type="submit">{{'action.salvar' | translate}}</button>
+                        <button class="btn btn-outline-secondary" type="button" (click)="cancelar()">{{'action.cancelar'
+                            |
+                            translate}}</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </main>

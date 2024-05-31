@@ -3,9 +3,13 @@ $body-color-dark: #fff;
 $dark: #191A1A !default;
 
 $border: #3E4142;
+$border-white: #fff;
 
 $secondary: #fff;
 $primary: #FED500;
+$primary-hover: #c8a600;
+
+$color-placeholder: #CACCCE;
 
 $font-family-sans-serif: "Ubuntu", sans-serif;
 
@@ -13,3 +17,17 @@ $accordion-border-width: 0;
 $accordion-border-color: $border;
 $accordion-button-active-bg: $primary;
 $accordion-button-active-color: $body-bg-dark;
+
+$input-font-family: $font-family-sans-serif;
+$input-color: $border-white;
+$input-border-color: $border-white;
+$input-disabled-color: $border;
+$input-disabled-bg: null;
+$input-disabled-border-color: $border;
+$input-placeholder-color: $color-placeholder;
+$input-focus-box-shadow: initial;
+$input-font-weight: 300;
+
+$btn-font-family: $font-family-sans-serif;
+$btn-box-shadow: initial;
+$btn-focus-box-shadow: initial;

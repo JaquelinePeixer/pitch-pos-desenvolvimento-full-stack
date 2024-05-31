@@ -6,6 +6,7 @@ import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.compo
 import { TranslateModule } from '@ngx-translate/core';
 import { AutorRoutingModule } from './autor-routing.module';
 import { AutorService } from '../../../service/autor/autor.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { AutorService } from '../../../service/autor/autor.service';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     AutorRoutingModule,
     TranslateModule,
     BreadcrumbComponent
