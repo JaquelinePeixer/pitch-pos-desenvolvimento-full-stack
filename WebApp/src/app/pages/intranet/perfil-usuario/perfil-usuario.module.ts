@@ -5,6 +5,7 @@ import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.compo
 import { TranslateModule } from '@ngx-translate/core';
 import { PerfilUsuarioRoutingModule } from './perfil-usuario-routing.module';
 import { UsuarioService } from '../../../service/usuario/usuario.service';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { UsuarioService } from '../../../service/usuario/usuario.service';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     PerfilUsuarioRoutingModule,
     TranslateModule,
     BreadcrumbComponent

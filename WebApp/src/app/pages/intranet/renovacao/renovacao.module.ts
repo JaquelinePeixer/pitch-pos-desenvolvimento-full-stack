@@ -4,6 +4,7 @@ import { ListComponent } from './pages/list/list.component';
 import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RenovacaoRoutingModule } from './renovacao-routing.module';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { RenovacaoRoutingModule } from './renovacao-routing.module';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RenovacaoRoutingModule,
     TranslateModule,
     BreadcrumbComponent

@@ -6,6 +6,7 @@ import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.compo
 import { TranslateModule } from '@ngx-translate/core';
 import { LocalizacaoRoutingModule } from './localizacao-routing.module';
 import { LocalizacaoService } from '../../../service/localizacao/localizacao.service';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { LocalizacaoService } from '../../../service/localizacao/localizacao.ser
   ],
   imports: [
     CommonModule,
+    SharedModule,
     LocalizacaoRoutingModule,
     TranslateModule,
     BreadcrumbComponent

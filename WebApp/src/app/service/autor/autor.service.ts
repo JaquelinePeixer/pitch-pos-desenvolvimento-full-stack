@@ -13,11 +13,23 @@ export class AutorService {
 
   constructor(private http: HttpClient) { }
 
-  get(): Observable<Autor> {
-    return this.http.get<Autor>(`${this.baseUrl}`);
+  get(): Observable<Autor[]> {
+    return this.http.get<Autor[]>(`${this.baseUrl}`);
+  }
+
+  getId(id: any): Observable<Autor> {
+    return this.http.get<Autor>(`${this.baseUrl}/${id}`);
+  }
+
+  put(id: any, data: any): Observable<Autor> {
+    return this.http.put<Autor>(`${this.baseUrl}/${id}`, data);
   }
 
   post(data: any): Observable<Autor> {
     return this.http.post<Autor>(`${this.baseUrl}`, data);
+  }
+
+  delete(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
 }

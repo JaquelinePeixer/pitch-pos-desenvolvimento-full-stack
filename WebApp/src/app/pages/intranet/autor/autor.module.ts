@@ -2,24 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewComponent } from './pages/new/new.component';
 import { ListComponent } from './pages/list/list.component';
-import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AutorRoutingModule } from './autor-routing.module';
 import { AutorService } from '../../../service/autor/autor.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../../../shared/shared.module';
+import { EditComponent } from './pages/edit/edit.component';
+import { FormComponent } from './components/form/form.component';
 
 
 @NgModule({
   declarations: [
     NewComponent,
-    ListComponent
+    ListComponent,
+    EditComponent,
+    FormComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     AutorRoutingModule,
     TranslateModule,
-    BreadcrumbComponent
+    SharedModule
   ],
   providers: [
     AutorService

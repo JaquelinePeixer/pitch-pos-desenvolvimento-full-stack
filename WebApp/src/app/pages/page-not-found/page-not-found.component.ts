@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-page-not-found',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [SharedModule],
   templateUrl: './page-not-found.component.html',
   styleUrl: './page-not-found.component.scss'
 })

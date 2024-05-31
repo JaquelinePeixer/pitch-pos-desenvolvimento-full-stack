@@ -5,6 +5,7 @@ import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.compo
 import { TranslateModule } from '@ngx-translate/core';
 import { ObraEmprestadaRoutingModule } from './obra-emprestada-routing.module';
 import { ObraService } from '../../../service/obra/obra.service';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ObraService } from '../../../service/obra/obra.service';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     ObraEmprestadaRoutingModule,
     TranslateModule,
     BreadcrumbComponent

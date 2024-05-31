@@ -25,7 +25,8 @@
         "excluir": "Excluir",
         "editar": "Editar",
         "salvar": "Salvar",
-        "cancelar": "Cancelar"
+        "cancelar": "Cancelar",
+        "acoes": "Ações"
     },
     "validation": {
         "required": "O campo {{label}} é obrigatório.",

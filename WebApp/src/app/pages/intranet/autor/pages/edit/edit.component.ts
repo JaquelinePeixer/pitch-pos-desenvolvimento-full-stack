@@ -1,22 +1,20 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormComponent } from '../../components/form/form.component';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { AutorService } from '../../../../../service/autor/autor.service';
-import { finalize } from 'rxjs';
-import { Router } from '@angular/router';
-import { FormComponent } from '../../components/form/form.component';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Autor } from '../../../../../service/autor/autor';
-
-
+import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-edit',
   standalone: false,
-  templateUrl: './new.component.html',
-  styleUrl: './new.component.scss'
+  templateUrl: './edit.component.html',
+  styleUrl: './edit.component.scss'
 })
-export class NewComponent implements AfterViewInit {
+export class EditComponent implements OnInit, AfterViewInit {
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -34,24 +32,48 @@ export class NewComponent implements AfterViewInit {
 
   menuBack = AppMenuModel.menuAutor
 
-  @ViewChild('form') 
-  form!: FormComponent
+  private id!: number;
+
+  @ViewChild('form')
+  form!: FormComponent;
 
   constructor(
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private autorService: AutorService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.id = this.activatedRoute.snapshot.params['id'];
+  }
+
+  ngOnInit(): void {
+    this.fetch();
+  }
+
+  fetch() {
+    this.loadingService.startLoadind();
+    this.autorService.getId(this.id)
+      .pipe(finalize(() => this.loadingService.stopLoadind()))
+      .subscribe({
+        next: (result: Autor) => {
+          this.form.patchValue(result)
+        },
+        error: error => {
+          alert('fetch erro: ' + error.message);
+        }
+      })
+  }
 
   ngAfterViewInit(): void {
-    this.form.onSubmit = (entity: Autor) => this.onSubmit(entity);
+    console.log(this.form)
+    this.form.onSubmit = (entity: Autor) => this.submit(entity);
     this.form.onCancel = () => this.router.navigate([this.menuBack.routerLink]).then();
   }
 
-  onSubmit(entity: Autor): void {
+  submit(entity: Autor): void {
     this.loadingService.startLoadind();
-    this.autorService.post(entity)
+    this.autorService.put(this.id, entity)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: () => {
@@ -63,5 +85,4 @@ export class NewComponent implements AfterViewInit {
         }
       })
   }
-
 }
