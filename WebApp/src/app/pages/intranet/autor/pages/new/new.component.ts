@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { AutorService } from '../../../../../service/autor/autor.service';
 import { finalize } from 'rxjs';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-new',
@@ -26,15 +29,18 @@ export class NewComponent {
       action: null
     }
   ];
+  menuBack = AppMenuModel.menuAutor
 
   formGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
-    private autorService: AutorService
+    private autorService: AutorService,
+    private router: Router
   ) {
     this.formGroup = this.formBuilder.group({
+      id: [null],
       name: [null, [Validators.required, Validators.maxLength(150)]],
       birthYear: [null, [Validators.required]],
       deathhYear: [null]
@@ -47,7 +53,9 @@ export class NewComponent {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
-          debugger
+          this.clear()
+          this.router.navigate([this.menuBack.routerLink])
+
         },
         error: error => {
           debugger
@@ -57,6 +65,13 @@ export class NewComponent {
   }
 
   cancelar() {
-    debugger
+    this.clear()
+    this.router.navigate([this.menuBack.routerLink])
   }
+
+  clear() {
+    this.formGroup.reset();
+  }
+
+
 }
