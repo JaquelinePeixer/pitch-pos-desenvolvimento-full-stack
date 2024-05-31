@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-  formGroupFilter: FormGroup;
   tableData: Autor[] = []
 
   contentBreadcrumb = [
@@ -29,14 +28,10 @@ export class ListComponent {
   ];
 
   constructor(
-    private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private autorService: AutorService,
     private router: Router
   ) {
-    this.formGroupFilter = this.formBuilder.group({
-      name: [null]
-    })
     this.fetch();
   }
 
@@ -54,9 +49,6 @@ export class ListComponent {
       })
   }
 
-  filter() {
-    debugger
-  }
 
   edit(item?: any) {
     this.router.navigate([`${AppMenuModel.menuAutor.routerLink}/edit/${item.id}`])

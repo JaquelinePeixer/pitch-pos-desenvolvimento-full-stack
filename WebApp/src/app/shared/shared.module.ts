@@ -5,6 +5,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { BreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
 import { FormButtonsComponent } from "./form-buttons/form-buttons.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { AppFilterComponent } from "./filter/filter.component";
 
 @NgModule({
     declarations: [],
@@ -14,7 +15,8 @@ import { TranslateModule } from "@ngx-translate/core";
         LoadingComponent,
         FooterComponent,
         BreadcrumbComponent,
-        FormButtonsComponent
+        FormButtonsComponent,
+        AppFilterComponent
     ],
     exports: [
         TranslateModule,
@@ -22,7 +24,8 @@ import { TranslateModule } from "@ngx-translate/core";
         LoadingComponent,
         FooterComponent,
         BreadcrumbComponent,
-        FormButtonsComponent
+        FormButtonsComponent,
+        AppFilterComponent
     ],
     providers: []
 })

@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
 import { EditComponent } from './pages/edit/edit.component';
 import { FormComponent } from './components/form/form.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormComponent } from './components/form/form.component';
     NewComponent,
     ListComponent,
     EditComponent,
-    FormComponent
+    FormComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
