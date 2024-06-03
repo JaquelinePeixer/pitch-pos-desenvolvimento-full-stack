@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { AssuntoService } from '../../../../../service/assunto/assunto.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Assunto } from '../../../../../service/assunto/assunto';
+import { EditComponent } from '../edit/edit.component';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +15,7 @@ import { Assunto } from '../../../../../service/assunto/assunto';
 })
 export class ListComponent {
   tableData: Assunto[] = [];
-  
+
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -25,6 +26,9 @@ export class ListComponent {
       action: null
     }
   ];
+
+  @ViewChild('editForm')
+  editForm!: EditComponent
 
   constructor(
     private loadingService: LoadingService,
@@ -50,7 +54,9 @@ export class ListComponent {
 
 
   edit(item?: any) {
-    this.router.navigate([`${AppMenuModel.menuAssunto.routerLink}/edit/${item.id}`])
+    debugger
+
+
   }
 
   remover(item?: any) {

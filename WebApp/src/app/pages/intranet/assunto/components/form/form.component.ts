@@ -21,9 +21,7 @@ export class FormComponent {
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
       id: [null],
-      name: [null, [Validators.required, Validators.maxLength(150)]],
-      birthYear: [null, [Validators.required]],
-      deathhYear: [null]
+      name: [null, [Validators.required, Validators.maxLength(150)]]
     })
   }
 

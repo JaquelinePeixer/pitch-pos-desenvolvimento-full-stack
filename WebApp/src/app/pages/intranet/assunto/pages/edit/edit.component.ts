@@ -15,20 +15,6 @@ import { Assunto } from '../../../../../service/assunto/assunto';
   styleUrl: './edit.component.scss'
 })
 export class EditComponent implements OnInit, AfterViewInit {
-  contentBreadcrumb = [
-    {
-      title: 'menu.intranet',
-      action: AppMenuModel.menuIntranet.routerLink
-    },
-    {
-      title: 'assunto.page.title',
-      action: AppMenuModel.menuAssunto.routerLink
-    },
-    {
-      title: 'assunto.page.new',
-      action: null
-    }
-  ];
 
   menuBack = AppMenuModel.menuAssunto
 
@@ -48,7 +34,7 @@ export class EditComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.fetch();
+    // this.fetch();
   }
 
   fetch() {

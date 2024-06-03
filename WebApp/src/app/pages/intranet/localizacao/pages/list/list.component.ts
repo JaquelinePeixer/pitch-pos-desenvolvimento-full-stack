@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { AutorService } from '../../../../../service/autor/autor.service';
+import { LocalizacaoService } from '../../../../../service/localizacao/localizacao.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Localizacao } from '../../../../../service/localizacao/localizacao';
@@ -28,7 +28,7 @@ export class ListComponent {
 
   constructor(
     private loadingService: LoadingService,
-    private autorService: AutorService,
+    private localizacaoService: LocalizacaoService,
     private router: Router
   ) {
     this.fetch();
@@ -36,7 +36,7 @@ export class ListComponent {
 
   fetch() {
     this.loadingService.startLoadind();
-    this.autorService.get()
+    this.localizacaoService.get()
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
@@ -50,12 +50,12 @@ export class ListComponent {
 
 
   edit(item?: any) {
-    this.router.navigate([`${AppMenuModel.menuAutor.routerLink}/edit/${item.id}`])
+    this.router.navigate([`${AppMenuModel.menuLocalizacao.routerLink}/edit/${item.id}`])
   }
 
   remover(item?: any) {
     this.loadingService.startLoadind();
-    this.autorService.delete(item.id)
+    this.localizacaoService.delete(item.id)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: () => {
