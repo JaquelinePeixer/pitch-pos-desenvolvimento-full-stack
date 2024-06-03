@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-autor-filter',
+  selector: 'app-assunto-filter',
   standalone: false,
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'

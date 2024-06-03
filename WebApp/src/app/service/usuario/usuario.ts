@@ -6,4 +6,7 @@ export interface Usuario {
     cpf?: number;
     creationDate?: Date;
     creationUser?: Usuario;
+    delayedUsers?: Date;
+    situationUser: boolean;
+    accessLevel?: string;
 }

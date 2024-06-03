@@ -2,11 +2,11 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { FormComponent } from '../../components/form/form.component';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { AutorService } from '../../../../../service/autor/autor.service';
+import { AssuntoService } from '../../../../../service/assunto/assunto.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Autor } from '../../../../../service/autor/autor';
 import { finalize } from 'rxjs';
+import { Assunto } from '../../../../../service/assunto/assunto';
 
 @Component({
   selector: 'app-edit',
@@ -21,16 +21,16 @@ export class EditComponent implements OnInit, AfterViewInit {
       action: AppMenuModel.menuIntranet.routerLink
     },
     {
-      title: 'autor.page.title',
-      action: AppMenuModel.menuAutor.routerLink
+      title: 'assunto.page.title',
+      action: AppMenuModel.menuAssunto.routerLink
     },
     {
-      title: 'autor.page.new',
+      title: 'assunto.page.new',
       action: null
     }
   ];
 
-  menuBack = AppMenuModel.menuAutor
+  menuBack = AppMenuModel.menuAssunto
 
   private id!: number;
 
@@ -40,7 +40,7 @@ export class EditComponent implements OnInit, AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
-    private autorService: AutorService,
+    private assuntoService: AssuntoService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -53,10 +53,10 @@ export class EditComponent implements OnInit, AfterViewInit {
 
   fetch() {
     this.loadingService.startLoadind();
-    this.autorService.getId(this.id)
+    this.assuntoService.getId(this.id)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: (result: Autor) => {
+        next: (result: Assunto) => {
           this.form.patchValue(result)
         },
         error: error => {
@@ -67,13 +67,13 @@ export class EditComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log(this.form)
-    this.form.onSubmit = (entity: Autor) => this.submit(entity);
+    this.form.onSubmit = (entity: Assunto) => this.submit(entity);
     this.form.onCancel = () => this.router.navigate([this.menuBack.routerLink]).then();
   }
 
-  submit(entity: Autor): void {
+  submit(entity: Assunto): void {
     this.loadingService.startLoadind();
-    this.autorService.put(this.id, entity)
+    this.assuntoService.put(this.id, entity)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: () => {

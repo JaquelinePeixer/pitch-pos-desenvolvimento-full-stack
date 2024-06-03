@@ -55,7 +55,9 @@
             "title": "Autores",
             "new": "Cadastrar Autor"
         },
-        "message": {},
+        "message": {
+            "confirmaion_remove": "Tem certeza que deseja excluir este autor?"
+        },
         "field": {
             "name": "Nome do Autor",
             "birthYear": "Ano de nascimento",
@@ -68,32 +70,72 @@
             "title": "Obras",
             "new": "Cadastrar Obra"
         },
-        "field": {},
-        "message": {}
+        "message": {
+            "confirmaion_remove": "Tem certeza que deseja excluir esta obra?"
+        },
+        "field": {
+            "id": "Número de registro",
+            "title": "Nome da obra",
+            "authors": "Autores",
+            "author": "Autor",
+            "secondaryAuthor": "Autor Secundário",
+            "bookcase": "Estante",
+            "subject": "Assuntos",
+            "edition": "Edição",
+            "publisherName": "Nome da Editora",
+            "volume": "Volume",
+            "pageQuantity": "Quantidade de página",
+            "publicationYear": "Ano de publicação",
+            "publicationLocation": "Local de publicação",
+            "quantityOfCopies": "Quantidade de cópias"
+        }
     },
     "localizacao": {
         "page": {
             "title": "Localizações",
             "new": "Cadastrar Localização"
         },
-        "field": {},
-        "message": {}
+        "message": {
+            "confirmaion_remove": "Tem certeza que deseja excluir esta localização?"
+        },
+        "field": {
+            "floor": "Andar",
+            "section": "Seção",
+            "bookcase": "Estante",
+            "initialBookcase": "Estante Inicial",
+            "finalBookcase": "Estante Final"
+        }
     },
     "assunto": {
         "page": {
             "title": "Assuntos",
             "new": "Cadastrar Assunto"
         },
-        "field": {},
-        "message": {}
+        "message": {
+            "confirmaion_remove": "Tem certeza que deseja excluir este assunto?"
+        },
+        "field": {
+            "name": "Assunto"
+        }
     },
     "usuario": {
         "page": {
             "title": "Usuários",
             "new": "Cadastrar Usuário"
         },
-        "field": {},
-        "message": {}
+        "message": {
+            "confirmaion_remove": "Tem certeza que deseja excluir este usuário?"
+        },
+        "field": {
+            "id": "Registro",
+            "name": "Nome do Usuário",
+            "delayedUsers": "Usuários com atraso",
+            "situationUser": "Situação do Usuário",
+            "cpf": "CPF",
+            "email": "E-mail",
+            "accessLevel": "Nível de acesso",
+            "birthDate": "Data de aniversário"
+        }
     },
     "renovacao": {
         "page": {

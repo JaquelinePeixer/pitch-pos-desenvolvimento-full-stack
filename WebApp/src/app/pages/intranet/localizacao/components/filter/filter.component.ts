@@ -12,7 +12,9 @@ export class FilterComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroupFilter = this.formBuilder.group({
-      name: [null]
+      floor: [null],
+      section: [null],
+      bookcase: [null]
     })
   }
 

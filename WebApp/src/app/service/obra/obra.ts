@@ -9,4 +9,11 @@ export interface Obra {
     secondaryAuthor?: Autor;
     location?: Localizacao;
     subject?: Assunto;
+    edition?: string;
+    publisherName?: string;
+    volume?: number;
+    pageQuantity?: number;
+    publicationYear?: number;
+    publicationLocation?: string;
+    quantityOfCopies?: number;
 }

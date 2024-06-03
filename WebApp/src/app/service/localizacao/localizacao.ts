@@ -3,4 +3,6 @@ export interface Localizacao {
     floor?: number;
     section?: string;
     bookcase?: number;
+    initialBookcase?: number;
+    finalBookcase?: number;
 }

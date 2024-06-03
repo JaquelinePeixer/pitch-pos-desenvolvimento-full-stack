@@ -1,14 +1,14 @@
 <form [formGroup]="formGroupFilter">
     <app-filter (onSearch)="filter()">
-        <div class="col-4">
+        <div class="col-3">
             <label for="floor" class="form-label">{{'localizacao.field.floor' | translate}}</label>
             <input type="text" class="form-control" id="floor" formControlName="floor">
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <label for="section" class="form-label">{{'localizacao.field.section' | translate}}</label>
             <input type="text" class="form-control" id="section" formControlName="section">
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <label for="bookcase" class="form-label">{{'localizacao.field.bookcase' | translate}}</label>
             <input type="text" class="form-control" id="bookcase" formControlName="bookcase">
         </div>
