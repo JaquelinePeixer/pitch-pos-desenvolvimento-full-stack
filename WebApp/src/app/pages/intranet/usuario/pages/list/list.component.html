@@ -11,6 +11,31 @@
                     <button class="btn btn-primary" routerLink="./new">{{'action.adicionar' | translate}}</button>
                 </div>
             </div>
+
+            <app-usuario-filter></app-usuario-filter>
+
+            <div class="row ">
+                <table class="table  table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">{{ 'usuario.field.name' | translate}}</th>
+                            <th scope="col" class="text-center" style="width: 100px;">{{ 'action.acoes' | translate}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of tableData; track $index) {
+                        <tr>
+                            <td>{{item.name}}</td>
+                            <td class="text-center">
+                                <app-form-buttons [item]="item" (onEdit)="edit($event)"
+                                    (onDelete)="remover($event)"></app-form-buttons>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </main>

@@ -11,6 +11,35 @@
                     <button class="btn btn-primary" routerLink="./new">{{'action.adicionar' | translate}}</button>
                 </div>
             </div>
+
+            <app-localizacao-filter></app-localizacao-filter>
+
+            <div class="row ">
+                <table class="table  table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">{{ 'localizacao.field.floor' | translate}}</th>
+                            <th scope="col">{{ 'localizacao.field.section' | translate}}</th>
+                            <th scope="col">{{ 'localizacao.field.bookcase' | translate}}</th>
+                            <th scope="col" class="text-center" style="width: 100px;">{{ 'action.acoes' | translate}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of tableData; track $index) {
+                        <tr>
+                            <td>{{item.floor}}</td>
+                            <td>{{item.section}}</td>
+                            <td>{{item.bookcase}}</td>
+                            <td class="text-center">
+                                <app-form-buttons [item]="item" (onEdit)="edit($event)"
+                                    (onDelete)="remover($event)"></app-form-buttons>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </main>

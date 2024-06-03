@@ -16,8 +16,8 @@ export class AssuntoService {
     return this.http.get<Assunto[]>(`${this.baseUrl}`);
   }
 
-  getId(id: any): Observable<Assunto[]> {
-    return this.http.get<Assunto[]>(`${this.baseUrl}/${id}`);
+  getId(id: any): Observable<Assunto> {
+    return this.http.get<Assunto>(`${this.baseUrl}/${id}`);
   }
 
   put(id: any, data: any): Observable<Assunto> {

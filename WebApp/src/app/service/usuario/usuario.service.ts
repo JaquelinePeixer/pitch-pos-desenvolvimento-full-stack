@@ -16,8 +16,8 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(`${this.baseUrl}`);
   }
 
-  getId(id: any): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.baseUrl}/${id}`);
+  getId(id: any): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseUrl}/${id}`);
   }
 
   put(id: any, data: any): Observable<Usuario> {

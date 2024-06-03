@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListComponent } from './pages/list/list.component';
-import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RenovacaoRoutingModule } from './renovacao-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditComponent } from './pages/edit/edit.component';
+import { FormComponent } from './components/form/form.component';
 
 
 @NgModule({
   declarations: [
-    ListComponent
+    EditComponent,
+    FormComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule,
     RenovacaoRoutingModule,
     TranslateModule,
-    BreadcrumbComponent
+    ReactiveFormsModule
   ],
   providers: [
     // LivroService

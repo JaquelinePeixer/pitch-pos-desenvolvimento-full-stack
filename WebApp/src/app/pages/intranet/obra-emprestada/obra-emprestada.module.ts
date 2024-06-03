@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ObraEmprestadaRoutingModule } from './obra-emprestada-routing.module';
 import { ObraService } from '../../../service/obra/obra.service';
 import { SharedModule } from '../../../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { SharedModule } from '../../../shared/shared.module';
     SharedModule,
     ObraEmprestadaRoutingModule,
     TranslateModule,
-    BreadcrumbComponent
+    ReactiveFormsModule
   ],
   providers: [
     ObraService

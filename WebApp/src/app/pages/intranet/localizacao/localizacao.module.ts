@@ -7,19 +7,26 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LocalizacaoRoutingModule } from './localizacao-routing.module';
 import { LocalizacaoService } from '../../../service/localizacao/localizacao.service';
 import { SharedModule } from '../../../shared/shared.module';
+import { FilterComponent } from './components/filter/filter.component';
+import { FormComponent } from './components/form/form.component';
+import { EditComponent } from './pages/edit/edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     NewComponent,
-    ListComponent
+    ListComponent,
+    EditComponent,
+    FormComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule,
     LocalizacaoRoutingModule,
-    TranslateModule,
-    BreadcrumbComponent
+    TranslateModule
   ],
   providers: [
     LocalizacaoService

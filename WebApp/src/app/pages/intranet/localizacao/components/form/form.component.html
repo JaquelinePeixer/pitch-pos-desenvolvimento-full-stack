@@ -1,0 +1,32 @@
+<main class="container" id="title">
+    <div class="container-fluid">
+        <div class="grid">
+            <div class="row  mb-4">
+                <div class="col-10">
+                    <h1>{{'localizacao.page.new' | translate}}</h1>
+                </div>
+            </div>
+
+            <form (submit)="submit()" [formGroup]="formGroup">
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <label for="floor" class="form-label">{{'localizacao.field.floor' | translate}}</label>
+                        <input type="number" class="form-control" id="floor" formControlName="floor">
+                    </div>
+                    <div class="col-4">
+                        <label for="section" class="form-label">{{'localizacao.field.section' | translate}}</label>
+                        <input type="text" class="form-control" id="section" formControlName="section">
+                    </div>
+                    <div class="col-4">
+                        <label for="bookcase" class="form-label">{{'localizacao.field.bookcase' | translate}}</label>
+                        <input type="number" class="form-control" id="bookcase" formControlName="bookcase">
+                    </div>
+                    <div class="col-4">
+                        <label for="bookcase" class="form-label">{{'localizacao.field.bookcase' | translate}}</label>
+                        <input type="number" class="form-control" id="bookcase" formControlName="bookcase">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

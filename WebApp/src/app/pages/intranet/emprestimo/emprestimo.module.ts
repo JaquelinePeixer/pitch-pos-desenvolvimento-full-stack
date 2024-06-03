@@ -6,19 +6,26 @@ import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.compo
 import { TranslateModule } from '@ngx-translate/core';
 import { EmprestimoRoutingModule } from './emprestimo-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
+import { FilterComponent } from './components/filter/filter.component';
+import { FormComponent } from './components/form/form.component';
+import { EditComponent } from './pages/edit/edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     NewComponent,
-    ListComponent
+    ListComponent,
+    EditComponent,
+    FormComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule,
     EmprestimoRoutingModule,
-    TranslateModule,
-    BreadcrumbComponent
+    TranslateModule
   ],
   providers: [
     // EmprestimoService

@@ -1,13 +1,3 @@
 <app-breadcrumb [content]="contentBreadcrumb"></app-breadcrumb>
 
-<main class="container" id="title">
-    <div class="container-fluid">
-        <div class="grid">
-            <div class="row">
-                <div class="col-10">
-                    <h1>{{'emprestimo.page.new' | translate}}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
+<app-form [isNew]="true" #form></app-form>

@@ -16,8 +16,8 @@ export class LocalizacaoService {
     return this.http.get<Localizacao[]>(`${this.baseUrl}`);
   }
 
-  getId(id: any): Observable<Localizacao[]> {
-    return this.http.get<Localizacao[]>(`${this.baseUrl}/${id}`);
+  getId(id: any): Observable<Localizacao> {
+    return this.http.get<Localizacao>(`${this.baseUrl}/${id}`);
   }
 
   put(id: any, data: any): Observable<Localizacao> {

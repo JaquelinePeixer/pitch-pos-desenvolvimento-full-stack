@@ -16,8 +16,8 @@ export class ObraService {
     return this.http.get<Obra[]>(`${this.baseUrl}`);
   }
 
-  getId(id: any): Observable<Obra[]> {
-    return this.http.get<Obra[]>(`${this.baseUrl}/${id}`);
+  getId(id: any): Observable<Obra> {
+    return this.http.get<Obra>(`${this.baseUrl}/${id}`);
   }
 
   put(id: any, data: any): Observable<Obra> {
