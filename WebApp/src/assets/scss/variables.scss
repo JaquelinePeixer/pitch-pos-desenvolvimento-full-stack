@@ -13,6 +13,8 @@ $color-placeholder: #CACCCE;
 
 $font-family-sans-serif: "Ubuntu", sans-serif;
 
+$table-th-font-weight: 300;
+
 $accordion-border-width: 0;
 $accordion-border-color: $border;
 $accordion-button-active-bg: $primary;
@@ -31,3 +33,6 @@ $input-font-weight: 300;
 $btn-font-family: $font-family-sans-serif;
 $btn-box-shadow: initial;
 $btn-focus-box-shadow: initial;
+
+$pagination-focus-box-shadow: initial;
+$pagination-active-color: $dark;

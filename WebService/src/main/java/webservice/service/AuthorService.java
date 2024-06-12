@@ -1,7 +1,7 @@
 package webservice.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,8 @@ public class AuthorService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
-    public List<Author> getAuthorAll() {
-        return authorRepository.findAll();
+    public Page<Author> getAuthorAll(PageRequest page) {
+        return authorRepository.findAll(page);
     }
 
     public ResponseEntity<Author> postAuthor(Author author) {

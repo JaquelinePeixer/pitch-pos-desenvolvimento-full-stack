@@ -32,3 +32,15 @@
     --bs-btn-active-color: #000;
     --bs-btn-active-bg: #3E4142;
 }
+
+.table{
+    font-weight: 300;
+}
+
+.table-light {
+    --bs-table-color: #fff;
+    --bs-table-bg: #3E4142;
+    --bs-table-border-color: #3E4142;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+}

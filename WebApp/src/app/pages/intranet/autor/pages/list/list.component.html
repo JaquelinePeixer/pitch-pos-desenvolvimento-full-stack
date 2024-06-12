@@ -35,6 +35,7 @@
                         }
                     </tbody>
                 </table>
+                <app-pagination #pagination (pageChangeEvent)="fetch($event)"></app-pagination>
             </div>
         </div>
     </div>

@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { AutorService } from '../../../../../service/autor/autor.service';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { finalize } from 'rxjs';
 import { Autor } from '../../../../../service/autor/autor';
 import { Router } from '@angular/router';
+import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-  tableData: Autor[] = []
+  tableData: Autor[] = [];
 
   contentBreadcrumb = [
     {
@@ -27,6 +27,9 @@ export class ListComponent {
     }
   ];
 
+  @ViewChild('pagination')
+  pagination: PaginationComponent;
+
   constructor(
     private loadingService: LoadingService,
     private autorService: AutorService,
@@ -35,20 +38,27 @@ export class ListComponent {
     this.fetch();
   }
 
-  fetch() {
+  fetch(event?: number) {
     this.loadingService.startLoadind();
-    this.autorService.get()
+    this.autorService.get(event)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
-          this.tableData = result;
+          this.tableData = result.content;
+          if (event === undefined || event === null) {
+            this.pagination.createdPages({
+              pageNumber: result.number,
+              pageSize: result.size,
+              totalPages: result.totalPages,
+              totalElements: result.totalElements
+            })
+          }
         },
         error: error => {
           alert('fetch erro: ' + error.message);
         }
       })
   }
-
 
   edit(item?: any) {
     this.router.navigate([`${AppMenuModel.menuAutor.routerLink}/edit/${item.id}`])

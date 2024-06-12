@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { config } from '../../config';
 import { Observable } from 'rxjs';
 import { Autor } from './autor';
+import { PageSize } from '../../domain/pagination/pagesize.enum';
 
 
 @Injectable({
@@ -10,11 +11,12 @@ import { Autor } from './autor';
 })
 export class AutorService {
  private baseUrl = `${config.obterUrl()}/authors`;
+ pageSize = PageSize.sizeDefault;
 
   constructor(private http: HttpClient) { }
 
-  get(): Observable<Autor[]> {
-    return this.http.get<Autor[]>(`${this.baseUrl}`);
+  get(page?: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}?page=${page ?? 0}&pageSize=${this.pageSize}`);
   }
 
   getId(id: any): Observable<Autor> {
