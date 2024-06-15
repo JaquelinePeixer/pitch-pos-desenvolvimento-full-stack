@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Obra } from '../../../../../service/obra/obra';
 import { ObraService } from '../../../../../service/obra/obra.service';
+import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-list',
@@ -28,7 +29,8 @@ export class ListComponent {
   constructor(
     private loadingService: LoadingService,
     private obraService: ObraService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertModalService
   ) {
     this.fetch();
   }
@@ -41,9 +43,7 @@ export class ListComponent {
         next: result => {
           this.tableData = result;
         },
-        error: error => {
-          alert('fetch erro: ' + error.message);
-        }
+        error: error => this.alertService.defaultError(error.message)
       })
   }
 
@@ -57,13 +57,11 @@ export class ListComponent {
     this.obraService.delete(item.id)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: () => {
+        next: (result: any) => {
+          this.alertService.defaultSuccess(result)
           this.fetch();
-          alert('Removido com sucesso!');
         },
-        error: error => {
-          alert('remover erro: ' + error.message);
-        }
+        error: error => this.alertService.defaultError(error.message)
       })
   }
 }

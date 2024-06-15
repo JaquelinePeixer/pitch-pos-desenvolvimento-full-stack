@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ObraService } from '../../../../../service/obra/obra.service';
 import { Obra } from '../../../../../service/obra/obra';
+import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-edit',
@@ -42,7 +43,8 @@ export class EditComponent implements OnInit, AfterViewInit {
     private loadingService: LoadingService,
     private obraService: ObraService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private alertService: AlertModalService
   ) {
     this.id = this.activatedRoute.snapshot.params['id'];
   }
@@ -59,9 +61,7 @@ export class EditComponent implements OnInit, AfterViewInit {
         next: (result: Obra) => {
           this.form.patchValue(result)
         },
-        error: error => {
-          alert('fetch erro: ' + error.message);
-        }
+        error: error => this.alertService.defaultError(error.message)
       })
   }
 
@@ -76,13 +76,11 @@ export class EditComponent implements OnInit, AfterViewInit {
     this.obraService.put(this.id, entity)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: () => {
+        next: (result: any) => {
+          this.alertService.defaultSuccess(result)
           this.router.navigate([this.menuBack.routerLink])
-          alert('success')
         },
-        error: error => {
-          alert(error.message)
-        }
+        error: error => this.alertService.defaultError(error.message)
       })
   }
 }

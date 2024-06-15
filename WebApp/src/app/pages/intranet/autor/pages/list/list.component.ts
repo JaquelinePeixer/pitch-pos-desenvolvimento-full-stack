@@ -6,6 +6,7 @@ import { finalize } from 'rxjs';
 import { Autor } from '../../../../../service/autor/autor';
 import { Router } from '@angular/router';
 import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
+import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-list',
@@ -33,7 +34,8 @@ export class ListComponent {
   constructor(
     private loadingService: LoadingService,
     private autorService: AutorService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertModalService
   ) {
     this.fetch();
   }
@@ -54,9 +56,7 @@ export class ListComponent {
             })
           }
         },
-        error: error => {
-          alert('fetch erro: ' + error.message);
-        }
+        error: error => this.alertService.defaultError(error.message)
       })
   }
 
@@ -69,13 +69,11 @@ export class ListComponent {
     this.autorService.delete(item.id)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: () => {
+        next: (result: any) => {
+          this.alertService.defaultSuccess(result);
           this.fetch();
-          alert('Removido com sucesso!');
         },
-        error: error => {
-          alert('remover erro: ' + error.message);
-        }
+        error: error => this.alertService.defaultError(error.message)
       })
   }
 }

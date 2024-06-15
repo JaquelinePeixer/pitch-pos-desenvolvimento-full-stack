@@ -28,6 +28,12 @@
         "cancelar": "Cancelar",
         "acoes": "Ações"
     },
+    "toast": {
+        "error": "Erro!",
+        "info": "Informação!",
+        "success": "Sucesso!",
+        "warning": "Aviso!"
+    },
     "validation": {
         "required": "O campo {{label}} é obrigatório.",
         "maxLength": "O campo {{label}} deve ter no máximo {{requiredLenght}} caracteres."

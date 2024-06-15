@@ -33,7 +33,7 @@
     --bs-btn-active-bg: #3E4142;
 }
 
-.table{
+.table {
     font-weight: 300;
 }
 
@@ -43,4 +43,35 @@
     --bs-table-border-color: #3E4142;
     color: var(--bs-table-color);
     border-color: var(--bs-table-border-color);
+}
+
+.toast-container .ngx-toastr.yourclass {
+    box-shadow: none;
+    font-family: $font-family-sans-serif;
+    font-weight: 300;
+    border-radius: 10px;
+
+    .toast-title {
+        font-weight: 500;
+    }
+
+    .toast-close-button {
+        text-shadow: none;
+    }
+
+    &.toast-success {
+        background-color: #37753A;
+    }
+
+    &.toast-error {
+        background-color: #75362F;
+    }
+
+    &.toast-info {
+        background-color: #313875;
+    }
+
+    &.toast-warning {
+        background-color: #A89622;
+    }
 }

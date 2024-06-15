@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FormComponent } from '../../components/form/form.component';
 import { AssuntoService } from '../../../../../service/assunto/assunto.service';
 import { Assunto } from '../../../../../service/assunto/assunto';
+import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
 
 
 @Component({
@@ -40,7 +41,8 @@ export class NewComponent implements AfterViewInit {
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private assuntoService: AssuntoService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertModalService
   ) { }
 
   ngAfterViewInit(): void {
@@ -53,13 +55,11 @@ export class NewComponent implements AfterViewInit {
     this.assuntoService.post(entity)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: () => {
+        next: (result: any) => {
+          this.alertService.defaultSuccess(result)
           this.router.navigate([this.menuBack.routerLink])
-          alert('success')
         },
-        error: error => {
-          alert(error.message)
-        }
+        error: error => this.alertService.defaultError(error.message)
       })
   }
 

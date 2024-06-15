@@ -5,6 +5,7 @@ import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
+import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-edit',
@@ -40,7 +41,8 @@ export class EditComponent implements OnInit, AfterViewInit {
     private loadingService: LoadingService,
     // private renovacaoService: renovacaoService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private alertService: AlertModalService
   ) {
     this.id = this.activatedRoute.snapshot.params['id'];
   }
@@ -57,9 +59,7 @@ export class EditComponent implements OnInit, AfterViewInit {
   //       next: (result: renovacao) => {
   //         this.form.patchValue(result)
   //       },
-  //       error: error => {
-  //         alert('fetch erro: ' + error.message);
-  //       }
+  //       error: error => this.alertService.defaultError(error.message)
   //     })
   // }
 
@@ -75,12 +75,10 @@ export class EditComponent implements OnInit, AfterViewInit {
   //     .pipe(finalize(() => this.loadingService.stopLoadind()))
   //     .subscribe({
   //       next: () => {
+    // this.alertService.defaultSuccess(result)
   //         this.router.navigate([this.menuBack.routerLink])
-  //         alert('success')
   //       },
-  //       error: error => {
-  //         alert(error.message)
-  //       }
+  //       error: error => this.alertService.defaultError(error.message)
   //     })
   // }
 }
