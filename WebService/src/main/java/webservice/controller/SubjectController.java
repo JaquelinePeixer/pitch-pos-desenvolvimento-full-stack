@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.entity.Subject;
 import webservice.service.SubjectService;
@@ -19,6 +20,7 @@ import webservice.service.SubjectService;
 @RestController
 @RequestMapping("subjects")
 @AllArgsConstructor
+@Tag(name = "Subjects")
 public class SubjectController {
 
 	private SubjectService subjectService;

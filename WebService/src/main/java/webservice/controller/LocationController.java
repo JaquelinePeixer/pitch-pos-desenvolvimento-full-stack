@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.entity.Location;
 import webservice.service.LocationService;
@@ -19,6 +20,7 @@ import webservice.service.LocationService;
 @RestController
 @RequestMapping("locations")
 @AllArgsConstructor
+@Tag(name = "Locations")
 public class LocationController {
 
 	private LocationService locationService;
