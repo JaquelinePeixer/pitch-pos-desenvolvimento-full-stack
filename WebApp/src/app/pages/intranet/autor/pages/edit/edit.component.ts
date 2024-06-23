@@ -61,7 +61,7 @@ export class EditComponent implements OnInit, AfterViewInit {
         next: (result: Autor) => {
           this.form.patchValue(result)
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.alertService.defaultError(error.error)
       })
   }
 
@@ -77,10 +77,10 @@ export class EditComponent implements OnInit, AfterViewInit {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result)
+          this.alertService.defaultSuccess(result.message)
           this.router.navigate([this.menuBack.routerLink])
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.alertService.defaultError(error.error.message)
       })
   }
 }

@@ -72,10 +72,10 @@ export class ListComponent {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result);
+          this.alertService.defaultSuccess(result.message);
           this.fetch();
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.alertService.defaultError(error.error.message)
       })
   }
 

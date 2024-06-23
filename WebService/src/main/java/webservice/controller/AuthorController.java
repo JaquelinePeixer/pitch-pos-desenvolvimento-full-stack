@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.entity.Author;
+import webservice.entity.ResponseModel;
 import webservice.service.AuthorService;
 
 @RestController
@@ -48,12 +49,12 @@ public class AuthorController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Author> putAuthor(@PathVariable Long id, @RequestBody Author author) {
+	public ResponseEntity<ResponseModel> putAuthor(@PathVariable Long id, @RequestBody Author author) {
 		return authorService.putAuthor(id, author);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> removeAuthor(@PathVariable Long id) {
+	public ResponseEntity<ResponseModel> removeAuthor(@PathVariable Long id) {
 		return authorService.removeAuthor(id);
 	}
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import webservice.entity.Author;
+import webservice.entity.ResponseModel;
 import webservice.repository.AuthorRepository;
 
 @AllArgsConstructor
@@ -37,19 +38,23 @@ public class AuthorService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(authorSave);
 	}
 
-	public ResponseEntity<Author> putAuthor(Long id, Author author) {
+	public ResponseEntity<ResponseModel> putAuthor(Long id, Author author) {
 		if (authorRepository.existsById(id)) {
 			Author authorSave = authorRepository.save(author);
-			return ResponseEntity.status(HttpStatus.OK).body(authorSave);
+			ResponseModel responseModel = new ResponseModel(1, "Sucesso");
+			return ResponseEntity.status(HttpStatus.OK).body(responseModel);
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		ResponseModel responseModelError = new ResponseModel(2, "Autor não encontrado");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
 	}
 
-	public ResponseEntity<String> removeAuthor(Long id) {
+	public ResponseEntity<ResponseModel> removeAuthor(Long id) {
 		if (authorRepository.existsById(id)) {
 			authorRepository.deleteById(id);
-			return ResponseEntity.status(HttpStatus.OK).body("Success");
+			ResponseModel responseModel = new ResponseModel(1, "Sucesso");
+			return ResponseEntity.status(HttpStatus.OK).body(responseModel);
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Author não encontrado");
+		ResponseModel responseModelError = new ResponseModel(2, "Autor não encontrado");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
 	}
 }
