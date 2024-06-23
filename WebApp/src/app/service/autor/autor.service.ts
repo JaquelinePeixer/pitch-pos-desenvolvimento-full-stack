@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../config';
 import { Observable } from 'rxjs';
@@ -15,8 +15,8 @@ export class AutorService {
 
   constructor(private http: HttpClient) { }
 
-  get(page?: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}?page=${page ?? 0}&pageSize=${this.pageSize}`);
+  get(page?: number, params?: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}?page=${page ?? 0}&pageSize=${this.pageSize}`, {params});
   }
 
   getId(id: any): Observable<Autor> {

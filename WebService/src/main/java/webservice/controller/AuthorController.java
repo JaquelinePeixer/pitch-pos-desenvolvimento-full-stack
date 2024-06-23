@@ -1,7 +1,5 @@
 package webservice.controller;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +32,14 @@ public class AuthorController {
 	}
 
 	@GetMapping
-	public Page<Author> getAuthorAll(
+	public Page<Author> getAuthorAll(@RequestParam(required = false) String name,
 			@RequestParam(defaultValue = "0") Integer page,
-			@RequestParam(defaultValue = "5") Integer itensPerPage) {
-		return authorService.getAuthorAll(PageRequest.of(page, itensPerPage));
+			@RequestParam(defaultValue = "5") Integer pageSize) {
+		if (name != null) {
+			return authorService.authorFilter(name, PageRequest.of(page, pageSize));
+		} else {
+			return authorService.getAuthorAll(PageRequest.of(page, pageSize));
+		}
 	}
 
 	@PostMapping

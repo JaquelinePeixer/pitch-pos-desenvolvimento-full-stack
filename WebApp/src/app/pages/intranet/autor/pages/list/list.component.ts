@@ -31,6 +31,8 @@ export class ListComponent {
   @ViewChild('pagination')
   pagination: PaginationComponent;
 
+  search: any;
+
   constructor(
     private loadingService: LoadingService,
     private autorService: AutorService,
@@ -42,7 +44,7 @@ export class ListComponent {
 
   fetch(event?: number) {
     this.loadingService.startLoadind();
-    this.autorService.get(event)
+    this.autorService.get(event, this.search)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
@@ -75,5 +77,10 @@ export class ListComponent {
         },
         error: error => this.alertService.defaultError(error.message)
       })
+  }
+
+  filter(params: any) {
+    this.search = params;
+    this.fetch();
   }
 }
