@@ -16,6 +16,20 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
   styleUrl: './edit.component.scss'
 })
 export class EditComponent implements OnInit, AfterViewInit {
+  contentBreadcrumb = [
+    {
+      title: 'menu.intranet',
+      action: AppMenuModel.menuIntranet.routerLink
+    },
+    {
+      title: 'autor.page.title',
+      action: AppMenuModel.menuAssunto.routerLink
+    },
+    {
+      title: 'autor.page.new',
+      action: null
+    }
+  ];
 
   menuBack = AppMenuModel.menuAssunto
 
@@ -36,7 +50,7 @@ export class EditComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.fetch();
+    this.fetch();
   }
 
   fetch() {
@@ -47,7 +61,7 @@ export class EditComponent implements OnInit, AfterViewInit {
         next: (result: Assunto) => {
           this.form.patchValue(result)
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.alertService.defaultError(error.error)
       })
   }
 
@@ -63,10 +77,10 @@ export class EditComponent implements OnInit, AfterViewInit {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultError(result);
+          this.alertService.defaultSuccess(result.message)
           this.router.navigate([this.menuBack.routerLink])
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.alertService.defaultError(error.error.message)
       })
   }
 }

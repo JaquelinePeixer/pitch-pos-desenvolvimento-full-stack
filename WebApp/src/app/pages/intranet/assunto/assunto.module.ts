@@ -24,13 +24,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    SharedModule,
     AssuntoRoutingModule,
     TranslateModule,
-    BreadcrumbComponent
+    SharedModule
   ],
-  providers: [
-    AssuntoService
-  ]
+  providers: [AssuntoService]
 })
 export class AssuntoModule { }
