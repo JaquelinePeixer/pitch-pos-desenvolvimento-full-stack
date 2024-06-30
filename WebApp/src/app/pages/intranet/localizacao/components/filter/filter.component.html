@@ -1,10 +1,10 @@
 <form [formGroup]="formGroupFilter">
     <app-filter (onSearch)="filter()">
-        <div class="col-3">
+        <div class="col-4">
             <label for="floor" class="form-label">{{'localizacao.field.floor' | translate}}</label>
             <input type="text" class="form-control" id="floor" formControlName="floor">
         </div>
-        <div class="col-3">
+        <div class="col-4">
             <label for="section" class="form-label">{{'localizacao.field.section' | translate}}</label>
             <input type="text" class="form-control" id="section" formControlName="section">
         </div>

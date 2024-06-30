@@ -14,8 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Location {
-
+public class LocationReponse {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -24,6 +23,7 @@ public class Location {
 
 	private String section;
 
-	private Integer bookcase;
+	private Integer initialBookcase;
 
+	private Integer finalBookcase;
 }

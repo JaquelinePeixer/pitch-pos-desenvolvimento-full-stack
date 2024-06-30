@@ -21,15 +21,30 @@ export class FormComponent {
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
       id: [null],
-      floor: [null],
-      section: [null],
-      initialBookcase: [null],
+      floor: [null, [Validators.required]],
+      section: [null, [Validators.required]],
+      initialBookcase: [null, [Validators.required]],
       finalBookcase: [null]
     })
   }
 
   submit() {
-    this.onSubmit(this.formGroup.value)
+    this.validateBookCase()
+    if (this.formGroup.valid) {
+      this.onSubmit(this.formGroup.value)
+    }
+  }
+
+  validateBookCase() {
+    const initial = this.formGroup.controls['initialBookcase'].value;
+    const final = this.formGroup.controls['finalBookcase'].value;
+    if (final && initial > final) {
+      this.formGroup.controls['initialBookcase'].setErrors({ INITIAL_MORE_FINAL: true })
+    } else {
+      if (this.formGroup.controls['initialBookcase'].hasError('INITIAL_MORE_FINAL')) {
+        this.formGroup.controls['initialBookcase'].setErrors(null)
+      }
+    }
   }
 
   cancel() {

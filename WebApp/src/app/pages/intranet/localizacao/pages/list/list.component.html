@@ -4,18 +4,18 @@
     <div class="container-fluid">
         <div class="grid">
             <div class="row">
-                <div class="col-10">
+                <div class="col-9">
                     <h1>{{'localizacao.page.title' | translate}}</h1>
                 </div>
-                <div class="col-2 text-end">
+                <div class="col-3 text-end pe-0">
                     <button class="btn btn-primary" routerLink="./new">{{'action.adicionar' | translate}}</button>
                 </div>
             </div>
 
-            <app-localizacao-filter></app-localizacao-filter>
+            <app-localizacao-filter (onSearch)="filter($event)"></app-localizacao-filter>
 
             <div class="row ">
-                <table class="table  table-hover">
+                <table class="table table-hover">
                     <thead class="table-light">
                         <tr>
                             <th scope="col">{{ 'localizacao.field.floor' | translate}}</th>
@@ -39,6 +39,7 @@
                         }
                     </tbody>
                 </table>
+                <app-pagination #pagination (pageChangeEvent)="fetch($event)"></app-pagination>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 package webservice.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.entity.Location;
+import webservice.entity.LocationReponse;
+import webservice.entity.ResponseModel;
 import webservice.service.LocationService;
 
 @RestController
@@ -31,22 +34,29 @@ public class LocationController {
 	}
 
 	@GetMapping
-	public List<Location> getLocationAll() {
-		return locationService.getLocationAll();
+	public Page<Location> getAuthorAll(@RequestParam(required = false) Integer floor,
+			@RequestParam(required = false) String section, @RequestParam(required = false) Integer bookcase,
+			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
+
+		if (floor != null || section != null || bookcase != null) {
+			return locationService.locationFilter(floor, section, bookcase, PageRequest.of(page, pageSize));
+		} else {
+			return locationService.getLocationAll(PageRequest.of(page, pageSize));
+		}
 	}
 
 	@PostMapping
-	public ResponseEntity<Location> postLocation(@RequestBody Location location) {
+	public ResponseEntity<ResponseModel> postLocation(@RequestBody LocationReponse location) {
 		return locationService.postLocation(location);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Location> putLocation(@PathVariable Long id, @RequestBody Location location) {
+	public ResponseEntity<ResponseModel> putLocation(@PathVariable Long id, @RequestBody LocationReponse location) {
 		return locationService.putLocation(id, location);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> removeLocation(@PathVariable Long id) {
+	public ResponseEntity<ResponseModel> removeLocation(@PathVariable Long id) {
 		return locationService.removeLocation(id);
 	}
 

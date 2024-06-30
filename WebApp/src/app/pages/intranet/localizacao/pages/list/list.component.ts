@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { LocalizacaoService } from '../../../../../service/localizacao/localizacao.service';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Localizacao } from '../../../../../service/localizacao/localizacao';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +16,7 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
 })
 export class ListComponent {
   tableData: Localizacao[] = [];
-  
+
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -27,6 +28,11 @@ export class ListComponent {
     }
   ];
 
+  @ViewChild('pagination')
+  pagination: PaginationComponent;
+
+  search: Localizacao;
+
   constructor(
     private loadingService: LoadingService,
     private localizacaoService: LocalizacaoService,
@@ -36,18 +42,25 @@ export class ListComponent {
     this.fetch();
   }
 
-  fetch() {
+  fetch(event?: number) {
     this.loadingService.startLoadind();
-    this.localizacaoService.get()
+    this.localizacaoService.get(event, this.search)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
-          this.tableData = result;
+          this.tableData = result.content;
+          if (event === undefined || event === null) {
+            this.pagination.createdPages({
+              pageNumber: result.number,
+              pageSize: result.size,
+              totalPages: result.totalPages,
+              totalElements: result.totalElements
+            })
+          }
         },
         error: error => this.alertService.defaultError(error.message)
       })
   }
-
 
   edit(item?: any) {
     this.router.navigate([`${AppMenuModel.menuLocalizacao.routerLink}/edit/${item.id}`])
@@ -59,10 +72,24 @@ export class ListComponent {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result)
+          this.alertService.defaultSuccess(result.message);
           this.fetch();
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.alertService.defaultError(error.error.message)
       })
+  }
+
+  filter(params: Localizacao) {
+    this.search = {};
+    if (params.floor != null) {
+      this.search.floor = params.floor;
+    }
+    if (params.section != null) {
+      this.search.section = params.section;
+    }
+    if (params.bookcase != null) {
+      this.search.bookcase = params.bookcase;
+    }
+    this.fetch();
   }
 }

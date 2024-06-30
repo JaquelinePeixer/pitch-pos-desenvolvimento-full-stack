@@ -24,12 +24,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    SharedModule,
     LocalizacaoRoutingModule,
-    TranslateModule
+    TranslateModule,
+    SharedModule
   ],
-  providers: [
-    LocalizacaoService
-  ]
+  providers: [LocalizacaoService]
 })
 export class LocalizacaoModule { }
