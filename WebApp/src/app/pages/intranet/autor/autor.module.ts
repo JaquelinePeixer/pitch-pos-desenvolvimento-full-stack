@@ -27,8 +27,6 @@ import { FilterComponent } from './components/filter/filter.component';
     TranslateModule,
     SharedModule
   ],
-  providers: [
-    AutorService
-  ]
+  providers: [AutorService]
 })
 export class AutorModule { }

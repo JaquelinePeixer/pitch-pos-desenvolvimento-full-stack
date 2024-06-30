@@ -2,6 +2,7 @@ package webservice.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,9 +40,9 @@ public class LocationController {
 			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
 
 		if (floor != null || section != null || bookcase != null) {
-			return locationService.locationFilter(floor, section, bookcase, PageRequest.of(page, pageSize));
+			return locationService.locationFilter(floor, section, bookcase, PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
 		} else {
-			return locationService.getLocationAll(PageRequest.of(page, pageSize));
+			return locationService.getLocationAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
 		}
 	}
 

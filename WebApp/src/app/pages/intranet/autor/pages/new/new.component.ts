@@ -10,7 +10,6 @@ import { Autor } from '../../../../../service/autor/autor';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
 
 
-
 @Component({
   selector: 'app-new',
   standalone: false,

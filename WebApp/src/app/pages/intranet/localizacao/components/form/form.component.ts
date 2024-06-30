@@ -21,7 +21,7 @@ export class FormComponent {
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
       id: [null],
-      floor: [null, [Validators.required]],
+      floor: [null, [Validators.required, Validators.max(9)]],
       section: [null, [Validators.required]],
       initialBookcase: [null, [Validators.required]],
       finalBookcase: [null]
@@ -58,6 +58,7 @@ export class FormComponent {
   patchValue(entity: Localizacao): void {
     if (entity != null) {
       this.formGroup.patchValue(entity);
+      this.formGroup.controls['initialBookcase'].setValue(entity.bookcase);
     }
   }
 

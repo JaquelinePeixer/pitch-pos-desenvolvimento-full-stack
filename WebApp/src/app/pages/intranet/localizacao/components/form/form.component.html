@@ -15,7 +15,8 @@
                     </div>
                     <div class="col-3">
                         <label for="section" class="form-label">{{'localizacao.field.section' | translate}}</label>
-                        <input type="text" class="form-control" id="section" formControlName="section">
+                        <input #section type="text" class="form-control" id="section" formControlName="section"
+                            oninput="section.value = section.value.toUpperCase()">
                     </div>
                     <div class="col-3">
                         <label for="initialBookcase" class="form-label">{{'localizacao.field.initialBookcase' |
@@ -33,7 +34,8 @@
                 <div class="row">
                     <div class="d-grid gap-2 d-md-flex">
                         <button class="btn btn-primary" type="submit">{{'action.salvar' | translate}}</button>
-                        <button class="btn btn-outline-secondary" type="button" (click)="cancel()">{{'action.cancelar' | translate}}</button>
+                        <button class="btn btn-outline-secondary" type="button" (click)="cancel()">{{'action.cancelar' |
+                            translate}}</button>
                     </div>
                 </div>
             </form>
