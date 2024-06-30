@@ -23,13 +23,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    ReactiveFormsModule,
     ObraRoutingModule,
     TranslateModule,
-    ReactiveFormsModule
+    SharedModule
   ],
-  providers: [
-    ObraService
-  ]
+  providers: [ObraService]
 })
 export class ObraModule { }

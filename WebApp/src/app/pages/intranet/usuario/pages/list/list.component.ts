@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { UsuarioService } from '../../../../../service/usuario/usuario.service';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Usuario } from '../../../../../service/usuario/usuario';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +16,7 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
 })
 export class ListComponent {
   tableData: Usuario[] = [];
-  
+
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -27,6 +28,11 @@ export class ListComponent {
     }
   ];
 
+  @ViewChild('pagination')
+  pagination: PaginationComponent;
+
+  search: any;
+
   constructor(
     private loadingService: LoadingService,
     private usuarioService: UsuarioService,
@@ -36,21 +42,28 @@ export class ListComponent {
     this.fetch();
   }
 
-  fetch() {
+  fetch(event?: number) {
     this.loadingService.startLoadind();
-    this.usuarioService.get()
+    this.usuarioService.get(event, this.search)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
-          this.tableData = result;
+          this.tableData = result.content;
+          if (event === undefined || event === null) {
+            this.pagination.createdPages({
+              pageNumber: result.number,
+              pageSize: result.size,
+              totalPages: result.totalPages,
+              totalElements: result.totalElements
+            })
+          }
         },
         error: error => this.alertService.defaultError(error.message)
       })
   }
 
-
   edit(item?: any) {
-    this.router.navigate([`${AppMenuModel.menuUsuario.routerLink}/edit/${item.id}`])
+    this.router.navigate([`${AppMenuModel.menuAutor.routerLink}/edit/${item.id}`])
   }
 
   remover(item?: any) {
@@ -59,10 +72,15 @@ export class ListComponent {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result)
+          this.alertService.defaultSuccess(result.message);
           this.fetch();
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.alertService.defaultError(error.error.message)
       })
+  }
+
+  filter(params: any) {
+    this.search = params;
+    this.fetch();
   }
 }

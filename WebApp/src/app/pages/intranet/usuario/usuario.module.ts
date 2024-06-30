@@ -23,13 +23,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    ReactiveFormsModule,
     UsuarioRoutingModule,
     TranslateModule,
-    ReactiveFormsModule
+    SharedModule
   ],
-  providers: [
-    UsuarioService
-  ]
+  providers: [UsuarioService]
 })
 export class UsuarioModule { }

@@ -18,6 +18,10 @@ export class AssuntoService {
     return this.http.get<any>(`${this.baseUrl}?page=${page ?? 0}&pageSize=${this.pageSize}`, { params });
   }
 
+  getList(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/find-list`);
+  }
+
   getId(id: any): Observable<Assunto> {
     return this.http.get<Assunto>(`${this.baseUrl}/${id}`);
   }

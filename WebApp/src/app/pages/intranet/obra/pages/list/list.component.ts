@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { finalize } from 'rxjs';
 import { Obra } from '../../../../../service/obra/obra';
 import { ObraService } from '../../../../../service/obra/obra.service';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-list',
@@ -26,6 +27,11 @@ export class ListComponent {
     }
   ];
 
+  @ViewChild('pagination')
+  pagination: PaginationComponent;
+
+  search: any;
+
   constructor(
     private loadingService: LoadingService,
     private obraService: ObraService,
@@ -35,18 +41,25 @@ export class ListComponent {
     this.fetch();
   }
 
-  fetch() {
+  fetch(event?: number) {
     this.loadingService.startLoadind();
-    this.obraService.get()
+    this.obraService.get(event, this.search)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
-          this.tableData = result;
+          this.tableData = result.content;
+          if (event === undefined || event === null) {
+            this.pagination.createdPages({
+              pageNumber: result.number,
+              pageSize: result.size,
+              totalPages: result.totalPages,
+              totalElements: result.totalElements
+            })
+          }
         },
         error: error => this.alertService.defaultError(error.message)
       })
   }
-
 
   edit(item?: any) {
     this.router.navigate([`${AppMenuModel.menuObra.routerLink}/edit/${item.id}`])
@@ -58,10 +71,24 @@ export class ListComponent {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result)
+          this.alertService.defaultSuccess(result.message);
           this.fetch();
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.alertService.defaultError(error.error.message)
       })
+  }
+
+  filter(params: Obra) {
+    this.search = {};
+    if (params.title != null) {
+      this.search.title = params.title;
+    }
+    if (params.id != null) {
+      this.search.id = params.id;
+    }
+    if (params.author != null) {
+      this.search.author_id = params.author?.id;
+    }
+    this.fetch();
   }
 }

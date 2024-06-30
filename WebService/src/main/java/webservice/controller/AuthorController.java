@@ -2,6 +2,7 @@ package webservice.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,9 +38,10 @@ public class AuthorController {
 			@RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "5") Integer pageSize) {
 		if (name != null) {
-			return authorService.authorFilter(name, PageRequest.of(page, pageSize));
+			return authorService.authorFilter(name,
+					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "name")));
 		} else {
-			return authorService.getAuthorAll(PageRequest.of(page, pageSize));
+			return authorService.getAuthorAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "name")));
 		}
 	}
 

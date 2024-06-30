@@ -2,6 +2,12 @@ import { Component, Input } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Obra } from '../../../../../service/obra/obra';
+import { Assunto } from '../../../../../service/assunto/assunto';
+import { AssuntoService } from '../../../../../service/assunto/assunto.service';
+import { finalize } from 'rxjs';
+import { LoadingService } from '../../../../../shared/loading/loading.service';
+import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { TipoAutor } from '../../../../../domain/enum/tipoAutor.enum';
 
 @Component({
   selector: 'app-form',
@@ -14,17 +20,34 @@ export class FormComponent {
 
   menuBack = AppMenuModel.menuObra;
   formGroup: FormGroup;
+  optionAssuntos: Assunto[];
+  testeAutor: any[] = [];
 
   onSubmit!: (entity: Obra) => void;
   onCancel!: () => void;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loadingService: LoadingService,
+    private assuntoService: AssuntoService,
+    private alertService: AlertModalService
+  ) {
     this.formGroup = this.formBuilder.group({
       id: [null],
-      name: [null, [Validators.required, Validators.maxLength(150)]],
-      birthYear: [null, [Validators.required]],
-      deathhYear: [null]
+      title: [null],
+      bookcase: [null],
+      deathhYear: [null],
+      subject: [null],
+      edition: [null],
+      publisherName: [null],
+      volume: [null],
+      pageQuantity: [null],
+      publicationYear: [null],
+      publicationLocation: [null],
+      quantityOfCopies: [null],
+      location: [null]
     })
+    this.getAssuntos();
   }
 
   submit() {
@@ -43,6 +66,50 @@ export class FormComponent {
     if (entity != null) {
       this.formGroup.patchValue(entity);
     }
+  }
+
+  getAssuntos() {
+    this.loadingService.startLoadind();
+    this.assuntoService.getList()
+      .pipe(finalize(() => this.loadingService.stopLoadind()))
+      .subscribe({
+        next: result => this.optionAssuntos = result,
+        error: error => this.alertService.defaultError(error.message)
+      })
+  }
+
+  getSearchAutor() {
+    this.loadingService.startLoadind();
+    this.assuntoService.getList()
+      .pipe(finalize(() => this.loadingService.stopLoadind()))
+      .subscribe({
+        next: result => this.optionAssuntos = result,
+        error: error => this.alertService.defaultError(error.message)
+      })
+  }
+
+  removerAutor(id: any) {
+    this.testeAutor = this.testeAutor.filter(x => x.id != id);
+  }
+
+  addAutorSecundario() {
+    this.testeAutor.push({
+      id: this.getIdAutor(),
+      tipo: TipoAutor.autorSecundario,
+      author: `Autor ${this.testeAutor.length}`
+    })
+  }
+
+  addAutor() {
+    this.testeAutor.push({
+      id: this.getIdAutor(),
+      tipo: TipoAutor.autor,
+      author: `Autor ${this.testeAutor.length}`
+    })
+  }
+
+  getIdAutor() {
+    return this.testeAutor.length + 1;
   }
 
 }

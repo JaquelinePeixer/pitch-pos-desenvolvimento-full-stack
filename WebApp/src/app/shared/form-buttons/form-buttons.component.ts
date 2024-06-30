@@ -9,6 +9,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class FormButtonsComponent {
   @Input() item: any;
+  @Input() showEdit = true;
+  @Input() showDelete = true;
   @Output() onDelete: EventEmitter<void> = new EventEmitter();
   @Output() onEdit: EventEmitter<void> = new EventEmitter();
 

@@ -1,5 +1,7 @@
 package webservice.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +31,11 @@ public class SubjectService {
         return subjectRepository.findAll(page);
     }
 
+    public List<Subject> getSubjectAllFindList() {
+        System.out.println("entrei no find-list - service");
+        return subjectRepository.findAll();
+    }
+
     public Page<Subject> subjectFilter(String name, Pageable page) {
         return subjectRepository.findByNameContaining(name, page);
     }
@@ -40,7 +47,7 @@ public class SubjectService {
 
     public ResponseEntity<ResponseModel> putSubject(Long id, Subject subject) {
         if (subjectRepository.existsById(id)) {
-            Subject subjectSave = subjectRepository.save(subject);
+            subjectRepository.save(subject);
             ResponseModel responseModel = new ResponseModel(1, "Assunto atualizado");
             return ResponseEntity.status(HttpStatus.OK).body(responseModel);
         }

@@ -1,7 +1,10 @@
 package webservice.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,14 +35,21 @@ public class SubjectController {
 		return subjectService.getSubjectPorId(id);
 	}
 
+	@GetMapping("/find-list")
+	public List<Subject> getSubjectFindList() {
+		System.out.println("entrei no find-list");
+		return subjectService.getSubjectAllFindList();
+	}
+
 	@GetMapping
 	public Page<Subject> getAuthorAll(@RequestParam(required = false) String name,
 			@RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "5") Integer pageSize) {
 		if (name != null) {
-			return subjectService.subjectFilter(name, PageRequest.of(page, pageSize));
+			return subjectService.subjectFilter(name,
+					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "name")));
 		} else {
-			return subjectService.getSubjectAll(PageRequest.of(page, pageSize));
+			return subjectService.getSubjectAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "name")));
 		}
 	}
 
