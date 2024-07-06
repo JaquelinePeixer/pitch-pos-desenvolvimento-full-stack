@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewComponent } from './pages/new/new.component';
 import { ListComponent } from './pages/list/list.component';
-import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ObraRoutingModule } from './obra-routing.module';
 import { ObraService } from '../../../service/obra/obra.service';
@@ -14,20 +13,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [
-    NewComponent,
-    ListComponent,
-    EditComponent,
-    FormComponent,
-    FilterComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    ObraRoutingModule,
-    TranslateModule,
-    SharedModule
-  ],
-  providers: [ObraService]
+    declarations: [
+        NewComponent,
+        ListComponent,
+        EditComponent,
+        FormComponent,
+        FilterComponent
+    ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        ObraRoutingModule,
+        TranslateModule,
+        SharedModule
+    ],
+    providers: [ObraService]
 })
 export class ObraModule { }

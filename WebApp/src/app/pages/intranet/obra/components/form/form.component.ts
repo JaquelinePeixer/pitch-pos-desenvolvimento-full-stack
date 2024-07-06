@@ -8,6 +8,8 @@ import { finalize } from 'rxjs';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
 import { TipoAutor } from '../../../../../domain/enum/tipoAutor.enum';
+import { AutorService } from '../../../../../service/autor/autor.service';
+import { Autor } from '../../../../../service/autor/autor';
 
 @Component({
   selector: 'app-form',
@@ -21,7 +23,8 @@ export class FormComponent {
   menuBack = AppMenuModel.menuObra;
   formGroup: FormGroup;
   optionAssuntos: Assunto[];
-  testeAutor: any[] = [];
+  tableAutor: any[] = [];
+  optionAutor: Autor[] = [];
 
   onSubmit!: (entity: Obra) => void;
   onCancel!: () => void;
@@ -30,22 +33,23 @@ export class FormComponent {
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private assuntoService: AssuntoService,
+    private autorService: AutorService,
     private alertService: AlertModalService
   ) {
     this.formGroup = this.formBuilder.group({
       id: [null],
       title: [null],
-      bookcase: [null],
-      deathhYear: [null],
-      subject: [null],
-      edition: [null],
+      publicationYear: [null],
       publisherName: [null],
+      bookcase: [null],
       volume: [null],
       pageQuantity: [null],
-      publicationYear: [null],
       publicationLocation: [null],
       quantityOfCopies: [null],
-      location: [null]
+      author: [null],
+      secondaryAuthor: [null],
+      subject: [null],
+      edition: [null],
     })
     this.getAssuntos();
   }
@@ -78,38 +82,44 @@ export class FormComponent {
       })
   }
 
-  getSearchAutor() {
-    this.loadingService.startLoadind();
-    this.assuntoService.getList()
-      .pipe(finalize(() => this.loadingService.stopLoadind()))
-      .subscribe({
-        next: result => this.optionAssuntos = result,
-        error: error => this.alertService.defaultError(error.message)
-      })
+  searchAutor(event: any) {
+    const query = event.target.value;
+    if (query.length > 2) {
+      this.loadingService.startLoadind();
+      this.autorService.getList(query)
+        .pipe(finalize(() => this.loadingService.stopLoadind()))
+        .subscribe({
+          next: result => {
+            this.optionAutor = result; 
+
+          },
+          error: error => this.alertService.defaultError(error.message)
+        })
+    }
   }
 
   removerAutor(id: any) {
-    this.testeAutor = this.testeAutor.filter(x => x.id != id);
+    this.tableAutor = this.tableAutor.filter(x => x.id != id);
   }
 
   addAutorSecundario() {
-    this.testeAutor.push({
+    this.tableAutor.push({
       id: this.getIdAutor(),
       tipo: TipoAutor.autorSecundario,
-      author: `Autor ${this.testeAutor.length}`
+      author: `Autor ${this.tableAutor.length}`
     })
   }
 
   addAutor() {
-    this.testeAutor.push({
+    this.tableAutor.push({
       id: this.getIdAutor(),
       tipo: TipoAutor.autor,
-      author: `Autor ${this.testeAutor.length}`
+      author: `Autor ${this.tableAutor.length}`
     })
   }
 
   getIdAutor() {
-    return this.testeAutor.length + 1;
+    return this.tableAutor.length + 1;
   }
 
 }

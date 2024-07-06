@@ -1,5 +1,7 @@
 package webservice.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,6 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.entity.Author;
 import webservice.entity.ResponseModel;
+import webservice.entity.Subject;
 import webservice.service.AuthorService;
 
 @RestController
@@ -31,6 +34,11 @@ public class AuthorController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Author> getAuthorPorId(@PathVariable Long id) {
 		return authorService.getAuthorPorId(id);
+	}
+	
+	@GetMapping("/find-list")
+	public List<Author> getSubjectFindList(@RequestParam String name) {
+		return authorService.getAuthorAllFindList(name);
 	}
 
 	@GetMapping

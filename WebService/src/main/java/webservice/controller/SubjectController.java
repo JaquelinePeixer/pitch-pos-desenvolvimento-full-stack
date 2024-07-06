@@ -37,7 +37,6 @@ public class SubjectController {
 
 	@GetMapping("/find-list")
 	public List<Subject> getSubjectFindList() {
-		System.out.println("entrei no find-list");
 		return subjectService.getSubjectAllFindList();
 	}
 

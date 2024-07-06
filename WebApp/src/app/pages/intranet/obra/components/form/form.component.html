@@ -35,12 +35,13 @@
                 <div class="row mb-4">
                     <div class="col-3">
                         <label for="pageQuantity" class="form-label">{{'obra.field.pageQuantity' | translate}}</label>
-                        <input type="text" class="form-control" id="pageQuantity" formControlName="pageQuantity">
+                        <input type="number" class="form-control" id="pageQuantity" formControlName="pageQuantity">
                     </div>
                     <div class="col-2">
                         <label for="publicationYear" class="form-label">{{'obra.field.publicationYear' |
                             translate}}</label>
-                        <input type="text" class="form-control" id="publicationYear" formControlName="publicationYear">
+                        <input type="number" class="form-control" id="publicationYear"
+                            formControlName="publicationYear">
                     </div>
                     <div class="col-5">
                         <label for="publicationLocation" class="form-label">{{'obra.field.publicationLocation' |
@@ -49,8 +50,8 @@
                             formControlName="publicationLocation">
                     </div>
                     <div class="col-2">
-                        <label for="location" class="form-label">{{'obra.field.location' | translate}}</label>
-                        <input type="text" class="form-control" id="location" formControlName="location">
+                        <label for="bookcase" class="form-label">{{'obra.field.bookcase' | translate}}</label>
+                        <input type="number" class="form-control" id="bookcase" formControlName="bookcase">
                     </div>
                 </div>
                 <div class="row mb-4">
@@ -66,12 +67,12 @@
                     <div class="col-4">
                         <label for="quantityOfCopies" class="form-label">{{'obra.field.quantityOfCopies' |
                             translate}}</label>
-                        <input type="text" class="form-control" id="quantityOfCopies"
+                        <input type="number" class="form-control" id="quantityOfCopies"
                             formControlName="quantityOfCopies">
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="tableAutorSecundario">
                         <thead class="table-light">
                             <tr>
                                 <th scope="col">{{ 'obra.listAuthors.tipo' | translate}}</th>
@@ -82,12 +83,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (item of testeAutor; track $index) {
+                            @for (item of tableAutor; track $index) {
                             <tr>
-                                <td>{{item.tipo}}</td>
-                                <td>{{item.author}}</td>
+                                <td>
+                                    <span>{{item.tipo}}</span>
+                                </td>
+                                <td style="display: flex;">
+                                    <!-- <input type="text" class="form-control me-4 filter-author " style="width: 40%;" id="author"
+                                        (input)="searchAutor($event)" placeholder="Filtrar Autor">
+
+                                    <select class="form-select" id="subject" formControlName="subject">
+                                        <option disabled>Selecione um autor</option>
+                                        @for (item of optionAutor; track $index) {
+                                        <option [value]="item.id">{{item.name}}</option>
+                                        }
+                                    </select> -->
+
+                                </td>
                                 <td class="text-center">
-                                    <app-form-buttons [item]="item" [showEdit]="false" (onDelete)="removerAutor(item.id)"></app-form-buttons>
+                                    <app-form-buttons [item]="item" [showEdit]="false"
+                                        (onDelete)="removerAutor(item.id)"></app-form-buttons>
                                 </td>
                             </tr>
                             }
@@ -96,20 +111,10 @@
                     <div class="row">
                         <button class="col-3 btn btn-outline-primary btn-add-autor" type="button"
                             (click)="addAutorSecundario()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                            </svg>
                             {{'obra.listAuthors.addAutorSecundario' | translate}}
                         </button>
                         <button class="col-3 btn btn-outline-primary btn-add-autor ms-3" type="button"
                             (click)="addAutor()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                            </svg>
                             {{'obra.listAuthors.addAutor' | translate}}
                         </button>
                     </div>

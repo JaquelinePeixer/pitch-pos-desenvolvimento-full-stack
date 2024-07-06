@@ -1,3 +1,3 @@
 export enum PageSize {
-    sizeDefault = 5
+    sizeDefault = 10
 }

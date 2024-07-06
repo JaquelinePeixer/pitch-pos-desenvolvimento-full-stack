@@ -5,15 +5,15 @@ import { Localizacao } from "../localizacao/localizacao";
 export interface Obra {
     id?: string;
     title?: string;
+    publicationYear?: number;
+    publisherName?: string;
+    volume?: number;
+    pageQuantity?: number;
+    publicationLocation?: string;
+    quantityOfCopies?: number;
     author?: Autor;
     secondaryAuthor?: Autor;
     location?: Localizacao;
     subject?: Assunto;
     edition?: string;
-    publisherName?: string;
-    volume?: number;
-    pageQuantity?: number;
-    publicationYear?: number;
-    publicationLocation?: string;
-    quantityOfCopies?: number;
 }

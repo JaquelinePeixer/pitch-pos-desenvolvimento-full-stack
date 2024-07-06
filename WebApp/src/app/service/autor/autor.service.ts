@@ -19,6 +19,10 @@ export class AutorService {
     return this.http.get<any>(`${this.baseUrl}?page=${page ?? 0}&pageSize=${this.pageSize}`, { params });
   }
 
+  getList(name: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/find-list`, {params: {name}});
+  }
+
   getId(id: any): Observable<Autor> {
     return this.http.get<Autor>(`${this.baseUrl}/${id}`);
   }

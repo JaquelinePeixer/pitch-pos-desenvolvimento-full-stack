@@ -1,3 +1,14 @@
-.btn-add-autor{
+.btn-add-autor {
     padding: 10px 25px;
+}
+
+.btn-add-autor::before {
+    content: "\f067";
+    font: normal normal normal 14px / 1 FontAwesome;
+    margin-right: 5px;
+}
+
+#tableAutorSecundario tbody td {
+    vertical-align: middle;
+    height: 55.5px;
 }

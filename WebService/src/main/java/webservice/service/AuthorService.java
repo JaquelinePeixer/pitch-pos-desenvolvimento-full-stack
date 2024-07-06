@@ -1,5 +1,7 @@
 package webservice.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,10 @@ public class AuthorService {
 
 	public Page<Author> getAuthorAll(PageRequest page) {
 		return authorRepository.findAll(page);
+	}
+
+	public List<Author> getAuthorAllFindList(String name) {
+		return authorRepository.findAllByName(name);
 	}
 
 	public Page<Author> authorFilter(String name, Pageable page) {

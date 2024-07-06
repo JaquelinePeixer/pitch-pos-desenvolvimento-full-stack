@@ -32,7 +32,6 @@ public class SubjectService {
     }
 
     public List<Subject> getSubjectAllFindList() {
-        System.out.println("entrei no find-list - service");
         return subjectRepository.findAll();
     }
 

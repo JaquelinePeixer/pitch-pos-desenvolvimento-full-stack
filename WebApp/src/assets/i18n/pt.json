@@ -93,8 +93,7 @@
             "pageQuantity": "Quantidade de página",
             "publicationYear": "Ano de publicação",
             "publicationLocation": "Local de publicação",
-            "quantityOfCopies": "Quantidade de cópias",
-            "location": "Localização - Estante"
+            "quantityOfCopies": "Quantidade de cópias"
         },
         "listAuthors": {
             "tipo": "Tipo",
