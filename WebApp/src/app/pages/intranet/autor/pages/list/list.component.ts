@@ -5,7 +5,6 @@ import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { finalize } from 'rxjs';
 import { Autor } from '../../../../../service/autor/autor';
 import { Router } from '@angular/router';
-import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
 
 @Component({
@@ -16,6 +15,7 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
 })
 export class ListComponent {
   tableData: Autor[] = [];
+  search: any;
 
   contentBreadcrumb = [
     {
@@ -27,11 +27,6 @@ export class ListComponent {
       action: null
     }
   ];
-
-  @ViewChild('pagination')
-  pagination: PaginationComponent;
-
-  search: any;
 
   constructor(
     private loadingService: LoadingService,
@@ -49,14 +44,6 @@ export class ListComponent {
       .subscribe({
         next: result => {
           this.tableData = result.content;
-          if (event === undefined || event === null) {
-            this.pagination.createdPages({
-              pageNumber: result.number,
-              pageSize: result.size,
-              totalPages: result.totalPages,
-              totalElements: result.totalElements
-            })
-          }
         },
         error: error => this.alertService.defaultError(error.message)
       })

@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Localizacao } from '../../../../../service/localizacao/localizacao';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-list',
@@ -16,6 +15,7 @@ import { PaginationComponent } from '../../../../../shared/pagination/pagination
 })
 export class ListComponent {
   tableData: Localizacao[] = [];
+  search: Localizacao;
 
   contentBreadcrumb = [
     {
@@ -27,11 +27,6 @@ export class ListComponent {
       action: null
     }
   ];
-
-  @ViewChild('pagination')
-  pagination: PaginationComponent;
-
-  search: Localizacao;
 
   constructor(
     private loadingService: LoadingService,
@@ -48,15 +43,7 @@ export class ListComponent {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
-          this.tableData = result.content;
-          if (event === undefined || event === null) {
-            this.pagination.createdPages({
-              pageNumber: result.number,
-              pageSize: result.size,
-              totalPages: result.totalPages,
-              totalElements: result.totalElements
-            })
-          }
+          this.tableData = result.content;          
         },
         error: error => this.alertService.defaultError(error.message)
       })

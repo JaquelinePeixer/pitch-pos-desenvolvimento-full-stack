@@ -1,0 +1,240 @@
+:root {
+    --bs-body-color: #fff;
+    --bs-body-bg: #191A1A;
+    --bs-font-sans-serif: "Ubuntu", sans-serif;
+    --font-family: "Ubuntu", sans-serif;
+    --bs-border-color: #fff;
+
+    --text-color: #fff;
+    --primary-color: #FED500;
+    --primary-color-hover: #c8a600;
+    --primary-color-hover-outline: #c8a6003b; 
+    --primary-color-text: #191A1A;
+
+    --border: #3E4142;
+
+    --bs-border-width: 1px;
+
+
+
+    font-family: "Ubuntu", sans-serif;
+    font-variation-settings: normal;
+    --font-family: "Ubuntu", sans-serif;
+    --text-color: #fff;
+    --primary-color: #FED500;
+    --primary-color-text: #191A1A;
+    --border-radius: 6px;
+    --focus-ring: 0 0 0 0.2rem var(--primary-color);
+    --highlight-bg: var(--bs-body-bg);
+    --highlight-text-color: var(--primary-color);
+    color-scheme: dark;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #c8a600;
+}
+
+.btn {
+    --bs-btn-border-radius: 100px;
+    --bs-btn-font-family: "Ubuntu", sans-serif;
+    --bs-btn-border-width: 1px;
+}
+
+.btn-primary {
+    --bs-btn-color: var(--primary-color-text);
+    --bs-btn-bg: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-color: var(--primary-color-text);
+    --bs-btn-hover-bg: var(--primary-color-hover);
+    --bs-btn-hover-border-color: var(--primary-color-hover);
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: var(--primary-color-text);
+    --bs-btn-active-bg: var(--primary-color-hover);
+    --bs-btn-active-border-color: var(--primary-color-hover);
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: var(--primary-color-text);
+    --bs-btn-disabled-bg: var(--primary-color);
+    --bs-btn-disabled-border-color: var(--primary-color);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-color: var(--primary-color-text);
+    --bs-btn-hover-bg: var(--primary-color);
+    --bs-btn-hover-border-color: var(--primary-color);
+    --bs-btn-focus-shadow-rgb: none;
+    --bs-btn-active-color: var(--primary-color-text);
+    --bs-btn-active-bg: var(--primary-color);
+    --bs-btn-active-border-color: var(--primary-color);
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: var(--primary-color);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: var(--primary-color);
+    --bs-gradient: none;
+}
+
+.p-button.p-button-outlined {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid;
+    border-radius: var(--bs-border-radius);
+
+    &:hover {
+        background-color: var(--primary-color-hover-outline);
+        border-color: var(--primary-color);
+    }
+}
+
+.p-button:focus {
+    box-shadow: none;
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: var(--text-color);
+    --bs-btn-border-color: var(--border);
+    --bs-btn-hover-color: var(--text-color);
+    --bs-btn-hover-bg: var(--border);
+    --bs-btn-hover-border-color: var(--border);
+    --bs-btn-focus-shadow-rgb: 108, 117, 125;
+    --bs-btn-active-color: var(--text-color);
+    --bs-btn-active-bg: var(--text-color);
+    --bs-btn-active-border-color: var(--border);
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: var(--text-color);
+    --bs-btn-disabled-bg: var(--border);
+    --bs-btn-disabled-border-color: var(--border);
+    --bs-gradient: none;
+}
+
+a {
+    color: var(--primary-color);
+
+    &:hover {
+        color: var(--primary-color-hover);
+    }
+}
+
+.p-accordion .p-accordion-header .p-accordion-header-link {
+    border: none;
+    border-bottom: 1px solid var(--border);
+    background: var(--bs-body-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 0;
+}
+
+.p-accordion .p-accordion-content {
+    padding: 1.25rem;
+    border: none;
+    background: var(--bs-body-bg);
+    color: var(--text-color);
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+    --bs-table-color: #fff;
+    --bs-table-bg: #3E4142;
+    --bs-table-border-color: #3E4142;
+    color: var(--bs-table-color);
+    border: 1px solid var(--bs-table-border-color);
+    border-width: 0 0 1px 0;
+    font-weight: 400;
+    color: var(--bs-table-color);
+    background: var(--bs-table-bg);
+    padding: 0.7rem 0.7rem;
+}
+
+.p-datatable .p-datatable-tbody>tr {
+    background: var(--bs-body-bg);
+    color: var(--text-color);
+}
+
+.p-datatable .p-datatable-tbody>tr>td {
+    padding: 0.7rem 0.7rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.p-paginator {
+    background: var(--bs-body-bg);
+    color: var(--text-color);
+    border: solid var(--border);
+    border-width: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: var(--bs-body-bg);
+    border-color: var(--border);
+    color: var(--text-color);
+}
+
+.p-inputtext {
+    font-family: var(--font-family);
+    font-feature-settings: var(--font-feature-settings, normal);
+    font-size: 1rem;
+    color: var(--text-color);
+    background: var(--bs-body-bg);
+    padding: 0.75rem 0.75rem;
+    padding-top: 0.75rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 0.75rem;
+    border: 1px solid var(--border);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    border-radius: 6px;
+}
+
+.p-dropdown .p-dropdown-label {
+    border: none;
+}
+
+.p-dropdown .p-dropdown-trigger {
+    background: transparent;
+    color: var(--text-color);
+    width: 3rem;
+}
+
+.p-dropdown {
+    background: var(--bs-body-bg);
+    border: 1px solid var(--border);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+}
+
+.p-dropdown-panel {
+    background: var(--border);
+    color: var(--text-color);
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.p-dropdown-panel .p-dropdown-items {
+    padding: 0;
+    margin: 0;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    color: var(--text-color);
+    border-radius: 0;
+
+    &:hover {
+        background: var(--primary-color-hover);
+    }
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+    color: var(--primary-color-text);
+    background: var(--primary-color);
+
+    &:hover {
+        background: var(--primary-color-hover);
+    }
+}
+
+.p-dropdown:not(.p-disabled):hover.p-focus {
+    box-shadow: none
+}

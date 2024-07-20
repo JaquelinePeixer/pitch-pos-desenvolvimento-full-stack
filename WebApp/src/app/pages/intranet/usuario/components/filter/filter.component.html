@@ -2,15 +2,15 @@
     <app-filter (onSearch)="filter()">
         <div class="col-5">
             <label for="name" class="form-label">{{'usuario.field.name' | translate}}</label>
-            <input type="text" class="form-control" id="name" formControlName="name">
+            <input pInputText type="text" class="form-control" id="name" formControlName="name">
         </div>
         <div class="col-3">
             <label for="id" class="form-label">{{'usuario.field.id' | translate}}</label>
-            <input type="text" class="form-control" id="id" formControlName="id">
+            <input pInputText type="text" class="form-control" id="id" formControlName="id">
         </div>
         <div class="col-3">
             <label for="delayedUsers" class="form-label">{{'usuario.field.delayedUsers' | translate}}</label>
-            <input type="text" class="form-control" id="delayedUsers" formControlName="delayedUsers">
+            <input pInputText type="text" class="form-control" id="delayedUsers" formControlName="delayedUsers">
         </div>
     </app-filter>
 </form>

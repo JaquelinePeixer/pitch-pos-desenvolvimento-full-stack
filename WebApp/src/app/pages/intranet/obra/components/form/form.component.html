@@ -11,69 +11,68 @@
                 <div class="row mb-4">
                     <div class="col-8">
                         <label for="title" class="form-label">{{'obra.field.title' | translate}}</label>
-                        <input type="text" class="form-control" id="title" formControlName="title">
+                        <input pInputText type="text" class="form-control" id="title" formControlName="title">
                     </div>
                     <div class="col-4">
                         <label for="id" class="form-label">{{'obra.field.id' | translate}}</label>
-                        <input type="text" class="form-control" id="id" formControlName="id">
+                        <input pInputText type="text" class="form-control" id="id" formControlName="id">
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-8">
                         <label for="publisherName" class="form-label">{{'obra.field.publisherName' | translate}}</label>
-                        <input type="text" class="form-control" id="publisherName" formControlName="publisherName">
+                        <input pInputText type="text" class="form-control" id="publisherName"
+                            formControlName="publisherName">
                     </div>
                     <div class="col-2">
                         <label for="edition" class="form-label">{{'obra.field.edition' | translate}}</label>
-                        <input type="text" class="form-control" id="edition" formControlName="edition">
+                        <input pInputText type="text" class="form-control" id="edition" formControlName="edition">
                     </div>
                     <div class="col-2">
                         <label for="volume" class="form-label">{{'obra.field.volume' | translate}}</label>
-                        <input type="text" class="form-control" id="volume" formControlName="volume">
+                        <input pInputText type="text" class="form-control" id="volume" formControlName="volume">
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-3">
                         <label for="pageQuantity" class="form-label">{{'obra.field.pageQuantity' | translate}}</label>
-                        <input type="number" class="form-control" id="pageQuantity" formControlName="pageQuantity">
+                        <input pInputText type="number" class="form-control" id="pageQuantity"
+                            formControlName="pageQuantity">
                     </div>
                     <div class="col-2">
                         <label for="publicationYear" class="form-label">{{'obra.field.publicationYear' |
                             translate}}</label>
-                        <input type="number" class="form-control" id="publicationYear"
+                        <input pInputText type="number" class="form-control" id="publicationYear"
                             formControlName="publicationYear">
                     </div>
                     <div class="col-5">
                         <label for="publicationLocation" class="form-label">{{'obra.field.publicationLocation' |
                             translate}}</label>
-                        <input type="text" class="form-control" id="publicationLocation"
+                        <input pInputText type="text" class="form-control" id="publicationLocation"
                             formControlName="publicationLocation">
                     </div>
                     <div class="col-2">
                         <label for="bookcase" class="form-label">{{'obra.field.bookcase' | translate}}</label>
-                        <input type="number" class="form-control" id="bookcase" formControlName="bookcase">
+                        <input pInputText type="number" class="form-control" id="bookcase" formControlName="bookcase">
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-8">
                         <label for="subject" class="form-label">{{'obra.field.subject' | translate}}</label>
-                        <select class="form-select" id="subject" formControlName="subject">
-                            <option value="" disabled>Selecione uma opção</option>
-                            @for (item of optionAssuntos; track $index) {
-                            <option [value]="item.id">{{item.name}}</option>
-                            }
-                        </select>
+                        <p-dropdown id="subject" formControlName="subject" [showClear]="true" [options]="optionAssuntos"
+                            optionLabel="name" />
                     </div>
                     <div class="col-4">
                         <label for="quantityOfCopies" class="form-label">{{'obra.field.quantityOfCopies' |
                             translate}}</label>
-                        <input type="number" class="form-control" id="quantityOfCopies"
+                        <input pInputText type="number" class="form-control" id="quantityOfCopies"
                             formControlName="quantityOfCopies">
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <table class="table table-hover" id="tableAutorSecundario">
-                        <thead class="table-light">
+                    <p-table id="tableAutorSecundario" [value]="tableAutor" [paginator]="true" [rows]="5"
+                        [rowsPerPageOptions]="[5, 10, 20]">
+                        <ng-template pTemplate="header">
                             <tr>
                                 <th scope="col">{{ 'obra.listAuthors.tipo' | translate}}</th>
                                 <th scope="col">{{ 'obra.listAuthors.author' | translate}}</th>
@@ -81,39 +80,31 @@
                                     translate}}
                                 </th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @for (item of tableAutor; track $index) {
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
                             <tr>
                                 <td>
                                     <span>{{item.tipo}}</span>
                                 </td>
-                                <td style="display: flex;">
-                                    <!-- <input type="text" class="form-control me-4 filter-author " style="width: 40%;" id="author"
-                                        (input)="searchAutor($event)" placeholder="Filtrar Autor">
-
-                                    <select class="form-select" id="subject" formControlName="subject">
-                                        <option disabled>Selecione um autor</option>
-                                        @for (item of optionAutor; track $index) {
-                                        <option [value]="item.id">{{item.name}}</option>
-                                        }
-                                    </select> -->
-
+                                <td>
+                                    <p-autoComplete formControlName="author" [suggestions]="optionAutor"
+                                        (completeMethod)="searchAutor($event)" field="name"
+                                        class="form-control field" />
                                 </td>
                                 <td class="text-center">
                                     <app-form-buttons [item]="item" [showEdit]="false"
                                         (onDelete)="removerAutor(item.id)"></app-form-buttons>
                                 </td>
                             </tr>
-                            }
-                        </tbody>
-                    </table>
+                        </ng-template>
+                    </p-table>
+
                     <div class="row">
-                        <button class="col-3 btn btn-outline-primary btn-add-autor" type="button"
+                        <button pButton pRipple class="col-3 btn btn-outline-primary btn-add-autor" type="button"
                             (click)="addAutorSecundario()">
                             {{'obra.listAuthors.addAutorSecundario' | translate}}
                         </button>
-                        <button class="col-3 btn btn-outline-primary btn-add-autor ms-3" type="button"
+                        <button pButton pRipple class="col-3 btn btn-outline-primary btn-add-autor ms-3" type="button"
                             (click)="addAutor()">
                             {{'obra.listAuthors.addAutor' | translate}}
                         </button>
@@ -122,8 +113,10 @@
 
                 <div class="row">
                     <div class="d-grid gap-2 d-md-flex p-0">
-                        <button class="btn btn-primary" type="submit">{{'action.salvar' | translate}}</button>
-                        <button class="btn btn-outline-secondary" type="button" (click)="cancel()">{{'action.cancelar' |
+                        <button pButton pRipple class="btn btn-primary" type="submit">{{'action.salvar' |
+                            translate}}</button>
+                        <button pButton pRipple class="btn btn-outline-secondary" type="button"
+                            (click)="cancel()">{{'action.cancelar' |
                             translate}}</button>
                     </div>
                 </div>

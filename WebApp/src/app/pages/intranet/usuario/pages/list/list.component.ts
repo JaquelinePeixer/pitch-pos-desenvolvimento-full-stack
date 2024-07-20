@@ -16,7 +16,8 @@ import { PaginationComponent } from '../../../../../shared/pagination/pagination
 })
 export class ListComponent {
   tableData: Usuario[] = [];
-
+  search: any;
+  
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -27,11 +28,6 @@ export class ListComponent {
       action: null
     }
   ];
-
-  @ViewChild('pagination')
-  pagination: PaginationComponent;
-
-  search: any;
 
   constructor(
     private loadingService: LoadingService,
@@ -49,14 +45,6 @@ export class ListComponent {
       .subscribe({
         next: result => {
           this.tableData = result.content;
-          if (event === undefined || event === null) {
-            this.pagination.createdPages({
-              pageNumber: result.number,
-              pageSize: result.size,
-              totalPages: result.totalPages,
-              totalElements: result.totalElements
-            })
-          }
         },
         error: error => this.alertService.defaultError(error.message)
       })

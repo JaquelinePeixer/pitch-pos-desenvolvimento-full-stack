@@ -6,7 +6,13 @@ import { BreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
 import { FormButtonsComponent } from "./form-buttons/form-buttons.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { AppFilterComponent } from "./filter/filter.component";
-import { PaginationComponent } from "./pagination/pagination.component";
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from "primeng/inputnumber";
+import { DropdownModule } from "primeng/dropdown";
+import { ButtonModule } from "primeng/button";
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from "primeng/api";
 
 @NgModule({
     declarations: [],
@@ -18,7 +24,12 @@ import { PaginationComponent } from "./pagination/pagination.component";
         BreadcrumbComponent,
         FormButtonsComponent,
         AppFilterComponent,
-        PaginationComponent
+        ButtonModule,
+        InputTextModule,
+        DropdownModule,
+        InputNumberModule,
+        TableModule,
+        ToastModule
     ],
     exports: [
         TranslateModule,
@@ -28,7 +39,12 @@ import { PaginationComponent } from "./pagination/pagination.component";
         BreadcrumbComponent,
         FormButtonsComponent,
         AppFilterComponent,
-        PaginationComponent
+        ButtonModule,
+        InputTextModule,
+        DropdownModule,
+        InputNumberModule,
+        TableModule,
+        ToastModule
     ],
     providers: []
 })

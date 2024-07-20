@@ -10,7 +10,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { FormComponent } from './components/form/form.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,9 @@ import { ReactiveFormsModule } from '@angular/forms';
         ReactiveFormsModule,
         ObraRoutingModule,
         TranslateModule,
-        SharedModule
+        SharedModule,
+        AutoCompleteModule,
+        DropdownModule
     ],
     providers: [ObraService]
 })

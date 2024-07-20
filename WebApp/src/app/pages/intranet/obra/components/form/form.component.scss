@@ -10,5 +10,60 @@
 
 #tableAutorSecundario tbody td {
     vertical-align: middle;
-    height: 55.5px;
+    height: 56px;
+}
+
+.ng-autocomplete {
+    width: 100%;
+}
+
+:host::ng-deep .ng-autocomplete .autocomplete-container {
+
+    .not-found {
+        background: #191A1A;
+        color: #fff;
+        height: auto;
+        box-shadow: none;
+        box-sizing: border-box;
+
+    }
+
+    .input-container {
+        .x i {
+            color: #fff;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            // font-family: "Ubuntu", sans-serif;
+            // font-size: 1rem;
+            // font-weight: 300;
+            // line-height: 1.5;
+            color: #fff;
+            appearance: none;
+            background-color: #191A1A;
+            background-clip: padding-box;
+            border: 1px solid #fff;
+            border-radius: 0.375rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+    }
+
+    .suggestions-container {
+        position: absolute;
+        width: 100%;
+        background: #191A1A;
+        height: auto;
+        box-shadow: none;
+        box-sizing: border-box;
+
+        ul li a {
+            color: #fff;
+        }
+
+        .heading {
+            border: none;
+        }
+    }
 }

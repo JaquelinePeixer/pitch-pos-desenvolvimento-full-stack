@@ -20,66 +20,24 @@
 </main>
 
 <main class="container mt-4" id="faq">
-    <div class="accordion" id="accordionFaq">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#faqOne" aria-expanded="false"
-                    aria-controls="faqOne">{{'home.faq.question_01' | translate}}</button>
-            </h2>
-            <div id="faqOne" class="accordion-collapse collapse">
-                <div class="accordion-body"> {{'home.faq.answers_01' | translate}}</div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#faqTwo" aria-expanded="false"
-                    aria-controls="faqTwo">{{'home.faq.question_02' | translate}}</button>
-            </h2>
-            <div id="faqTwo" class="accordion-collapse collapse">
-                <div class="accordion-body"> {{'home.faq.answers_02' | translate}}</div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#faqThree" aria-expanded="false"
-                    aria-controls="faqThree">{{'home.faq.question_03' | translate}}</button>
-            </h2>
-            <div id="faqThree" class="accordion-collapse collapse ">
-                <div class="accordion-body"> {{'home.faq.answers_03' | translate}}</div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#faqFor" aria-expanded="false"
-                    aria-controls="faqFor">{{'home.faq.question_04' | translate}}</button>
-            </h2>
-            <div id="faqFor" class="accordion-collapse collapse ">
-                <div class="accordion-body"> {{'home.faq.answers_04' | translate}}</div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#faqFive" aria-expanded="false"
-                    aria-controls="faqFive">{{'home.faq.question_05' | translate}}</button>
-            </h2>
-            <div id="faqFive" class="accordion-collapse collapse ">
-                <div class="accordion-body"> {{'home.faq.answers_05' | translate}}</div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#faqSix" aria-expanded="false"
-                    aria-controls="faqSix">{{'home.faq.question_06' | translate}}</button>
-            </h2>
-            <div id="faqSix" class="accordion-collapse collapse ">
-                <div class="accordion-body"> {{'home.faq.answers_06' | translate}}</div>
-            </div>
-        </div>
-    </div>
+    <p-accordion [activeIndex]="0" id="accordionFaq">
+        <p-accordionTab header="{{'home.faq.question_01' | translate}}">
+            <p>{{'home.faq.answers_01' | translate}}</p>
+        </p-accordionTab>
+        <p-accordionTab header="{{'home.faq.question_02' | translate}}">
+            <p>{{'home.faq.answers_02' | translate}} </p>
+        </p-accordionTab>
+        <p-accordionTab header="{{'home.faq.question_03' | translate}}">
+            <p> {{'home.faq.answers_03' | translate}} </p>
+        </p-accordionTab>
+        <p-accordionTab header="{{'home.faq.question_04' | translate}}">
+            <p> {{'home.faq.answers_04' | translate}} </p>
+        </p-accordionTab>
+        <p-accordionTab header="{{'home.faq.question_05' | translate}}">
+            <p> {{'home.faq.answers_05' | translate}} </p>
+        </p-accordionTab>
+        <p-accordionTab header="{{'home.faq.question_06' | translate}}">
+            <p> {{'home.faq.answers_06' | translate}} </p>
+        </p-accordionTab>
+    </p-accordion>
 </main>

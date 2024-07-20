@@ -82,22 +82,6 @@ export class FormComponent {
       })
   }
 
-  searchAutor(event: any) {
-    const query = event.target.value;
-    if (query.length > 2) {
-      this.loadingService.startLoadind();
-      this.autorService.getList(query)
-        .pipe(finalize(() => this.loadingService.stopLoadind()))
-        .subscribe({
-          next: result => {
-            this.optionAutor = result; 
-
-          },
-          error: error => this.alertService.defaultError(error.message)
-        })
-    }
-  }
-
   removerAutor(id: any) {
     this.tableAutor = this.tableAutor.filter(x => x.id != id);
   }
@@ -120,6 +104,23 @@ export class FormComponent {
 
   getIdAutor() {
     return this.tableAutor.length + 1;
+  }
+
+  selectEvent(autor: Autor, item: any) {
+    item.author = autor;
+  }
+
+  searchAutor(query: any) {
+    debugger
+    if (query.length > 2) {
+      this.loadingService.startLoadind();
+      this.autorService.getList(query)
+        .pipe(finalize(() => this.loadingService.stopLoadind()))
+        .subscribe({
+          next: result => this.optionAutor = result,
+          error: error => this.alertService.defaultError(error.message)
+        })
+    }
   }
 
 }

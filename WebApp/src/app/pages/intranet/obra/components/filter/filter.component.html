@@ -2,15 +2,15 @@
     <app-filter (onSearch)="filter()">       
         <div class="col-4">
             <label for="title" class="form-label">{{'obra.field.title' | translate}}</label>
-            <input type="text" class="form-control" id="title" formControlName="title">
+            <input pInputText type="text" class="form-control" id="title" formControlName="title">
         </div>
         <div class="col-4">
             <label for="author" class="form-label">{{'obra.field.author' | translate}}</label>
-            <input type="text" class="form-control" id="author" formControlName="author">
+            <input pInputText type="text" class="form-control" id="author" formControlName="author">
         </div>
         <div class="col-3">
             <label for="id" class="form-label">{{'obra.field.id' | translate}}</label>
-            <input type="text" class="form-control" id="id" formControlName="id">
+            <input pInputText type="text" class="form-control" id="id" formControlName="id">
         </div>
     </app-filter>
 </form>
