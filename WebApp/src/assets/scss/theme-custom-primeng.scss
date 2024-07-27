@@ -155,20 +155,20 @@ a {
     border-bottom: 1px solid var(--border);
 }
 
-.p-paginator {
-    background: var(--bs-body-bg);
-    color: var(--text-color);
-    border: solid var(--border);
-    border-width: 0;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-}
+// .p-paginator {
+//     background: var(--bs-body-bg);
+//     color: var(--text-color);
+//     border: solid var(--border);
+//     border-width: 0;
+//     padding: 0.5rem 1rem;
+//     border-radius: 6px;
+// }
 
-.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: var(--bs-body-bg);
-    border-color: var(--border);
-    color: var(--text-color);
-}
+// .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+//     background: var(--bs-body-bg);
+//     border-color: var(--border);
+//     color: var(--text-color);
+// }
 
 .p-inputtext {
     font-family: var(--font-family);
@@ -237,4 +237,11 @@ a {
 
 .p-dropdown:not(.p-disabled):hover.p-focus {
     box-shadow: none
+}
+
+.dropdown-menu{
+    --bs-dropdown-color: var(--text-color);
+    --bs-dropdown-bg: var(--border);
+    --bs-dropdown-border-color: var(--border);
+    --bs-dropdown-border-radius: var(--border-radius);
 }

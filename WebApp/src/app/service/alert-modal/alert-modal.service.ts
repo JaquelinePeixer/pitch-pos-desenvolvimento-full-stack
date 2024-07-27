@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertModalService {
-  configDefault = {
-    timeOut: 3000,
-    closeButton: true,
-    toastClass: 'yourclass ngx-toastr'
-  }
-
   title = {
     error: this.translate.instant('toast.error'),
     info: this.translate.instant('toast.info'),
@@ -18,22 +13,22 @@ export class AlertModalService {
     warning: this.translate.instant('toast.warning'),
   };
 
-  constructor( public translate: TranslateService) { }
+  constructor(public translate: TranslateService, private messageService: MessageService) { }
 
   defaultSuccess(msg: string) {
-    // this.toastr.success(msg, this.title.success, this.configDefault);
+    this.messageService.add({ severity: 'success', summary: this.title.success, detail: msg })
   }
 
   defaultError(msg: string) {
-    // this.toastr.error(msg, this.title.error, this.configDefault);
+    this.messageService.add({ severity: 'error', summary: this.title.error, detail: msg })
   }
 
   defaultInfo(msg: string) {
-    // this.toastr.info(msg, this.title.success, this.configDefault);
+    this.messageService.add({ severity: 'info', summary: this.title.info, detail: msg })
   }
 
   defaultWarning(msg: string) {
-    // this.toastr.warning(msg, this.title.error, this.configDefault);
+    this.messageService.add({ severity: 'warn', summary: this.title.warning, detail: msg })
   }
 
 }
