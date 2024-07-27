@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { IntranetComponent } from './pages/intranet/intranet.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { AcervoComponent } from './pages/acervo/acervo.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -46,6 +47,6 @@ export const routes: Routes = [
             },
         ]
     },
-    { path: 'acervo', component: PageNotFoundComponent },
+    { path: 'acervo', component: AcervoComponent },
     { path: '**', component: PageNotFoundComponent },
 ];

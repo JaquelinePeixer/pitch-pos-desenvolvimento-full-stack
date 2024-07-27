@@ -26,7 +26,8 @@
         "editar": "Editar",
         "salvar": "Salvar",
         "cancelar": "Cancelar",
-        "acoes": "Ações"
+        "acoes": "Ações",
+        "paginaInicial": "Página Inicial"
     },
     "toast": {
         "error": "Erro!",
@@ -55,6 +56,9 @@
             "question_06": "Porque não consigo remover alguns dados?",
             "answers_06": "teste de resposta"
         }
+    },
+    "acervo": {
+        "title": "Acervo"
     },
     "autor": {
         "page": {

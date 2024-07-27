@@ -1,77 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-
-@import 'assets/scss/variables.scss';
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "assets/scss/theme-custom-primeng.scss";
+@import "primeicons/primeicons.css";
+@import "assets/scss/library-themes.css";
 
 .btn {
     border-radius: 100px;
     padding: 14px 45px;
 }
 
-.accordion-header .accordion-button {
-    font-weight: 500;
-}
-
-.accordion-body {
+.accordion-content {
     font-weight: 300;
     padding-bottom: 35px;
-}
-
-.btn.btn-primary {
-    --bs-btn-hover-bg: #e9b005;
-    --bs-btn-hover-border-color: #e9b005;
-    --bs-btn-focus-shadow-rgb: initial;
-    --bs-btn-active-bg: #e9b005;
-    --bs-btn-active-border-color: #e9b005;
-}
-
-.btn-outline-secondary {
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #3E4142;
-    --bs-btn-hover-border-color: #fff;
-    --bs-btn-active-color: #000;
-    --bs-btn-active-bg: #3E4142;
-}
-
-.table {
-    font-weight: 300;
-}
-
-.table-light {
-    --bs-table-color: #fff;
-    --bs-table-bg: #3E4142;
-    --bs-table-border-color: #3E4142;
-    color: var(--bs-table-color);
-    border-color: var(--bs-table-border-color);
-}
-
-.toast-container .ngx-toastr.yourclass {
-    box-shadow: none;
-    font-family: $font-family-sans-serif;
-    font-weight: 300;
-    border-radius: 10px;
-
-    .toast-title {
-        font-weight: 500;
-    }
-
-    .toast-close-button {
-        text-shadow: none;
-    }
-
-    &.toast-success {
-        background-color: #37753A;
-    }
-
-    &.toast-error {
-        background-color: #75362F;
-    }
-
-    &.toast-info {
-        background-color: #313875;
-    }
-
-    &.toast-warning {
-        background-color: #A89622;
-    }
 }

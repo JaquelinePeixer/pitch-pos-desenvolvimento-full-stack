@@ -2,7 +2,15 @@
     font-weight: 500;
 }
 
-.dropdown-toggle{
+.dropdown-toggle {
     color: #fff;
     text-decoration: none;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1.25rem;
+
+    &:hover{
+        background-color: var(--primary-700);
+    }
 }
