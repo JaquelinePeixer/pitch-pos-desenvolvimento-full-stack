@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -19,22 +18,22 @@ export class AlertModalService {
     warning: this.translate.instant('toast.warning'),
   };
 
-  constructor(private toastr: ToastrService, public translate: TranslateService) { }
+  constructor( public translate: TranslateService) { }
 
   defaultSuccess(msg: string) {
-    this.toastr.success(msg, this.title.success, this.configDefault);
+    // this.toastr.success(msg, this.title.success, this.configDefault);
   }
 
   defaultError(msg: string) {
-    this.toastr.error(msg, this.title.error, this.configDefault);
+    // this.toastr.error(msg, this.title.error, this.configDefault);
   }
 
   defaultInfo(msg: string) {
-    this.toastr.info(msg, this.title.success, this.configDefault);
+    // this.toastr.info(msg, this.title.success, this.configDefault);
   }
 
   defaultWarning(msg: string) {
-    this.toastr.warning(msg, this.title.error, this.configDefault);
+    // this.toastr.warning(msg, this.title.error, this.configDefault);
   }
 
 }

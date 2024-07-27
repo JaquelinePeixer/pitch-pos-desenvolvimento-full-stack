@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Usuario } from '../../../../../service/usuario/usuario';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-list',

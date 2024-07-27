@@ -6,7 +6,6 @@ import { finalize } from 'rxjs';
 import { Obra } from '../../../../../service/obra/obra';
 import { ObraService } from '../../../../../service/obra/obra.service';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-list',
