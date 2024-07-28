@@ -27,7 +27,8 @@
         "salvar": "Salvar",
         "cancelar": "Cancelar",
         "acoes": "Ações",
-        "paginaInicial": "Página Inicial"
+        "no": "Não",
+        "yes": "Sim"
     },
     "toast": {
         "error": "Erro!",
@@ -44,17 +45,15 @@
         "sutitle": "Na biblioteca on-line você poderá ter acesso a consulta dos acervos cadastrados e sua localização fictícia, como também verificar o ambiente do administrador, do bibliotecário e do usuário normal, onde cada um possui uma permissão diferente.",
         "faq": {
             "question_01": "O que é a Biblioteca On-line?",
-            "answers_01": "teste de resposta",
-            "question_02": "Como foi estruturado o sistema?",
-            "answers_02": "teste de resposta",
+            "answers_01": "Sistema de gerenciamento de empréstimos de livros.",
+            "question_02": "Quais são os níveis de permissões do sistema?",
+            "answers_02": "Foi pensado para atender quatro perfis, o usuário físico que deseja encontrar uma obra na estante, o usuário online que deseja renovar a obra emprestado e o bibliotecário que terá acesso aos dados dos usuários (exceto aos perfil bibliotecário) e obras, e o administrador que terá acesso geral ao sistema.",
             "question_03": "Quais tecnologias foram utilizadas para a implementação?",
-            "answers_03": "teste de resposta",
-            "question_04": "Quais são os níveis de permissões do sistema?",
+            "answers_03": "Para o front-end foi utilizado Angular 17, Bootstrap, PrimeNg. Para o back-end foi utilizado Java.",
+            "question_04": "Como posso testar os diferentes níveis de permissões?",
             "answers_04": "teste de resposta",
-            "question_05": "Como posso testar os diferentes níveis de permissões?",
-            "answers_05": "teste de resposta",
-            "question_06": "Porque não consigo remover alguns dados?",
-            "answers_06": "teste de resposta"
+            "question_05": "Porque não consigo remover alguns dados?",
+            "answers_05": "O sistema possui alguns dados que somente o desenvolvedor poderá remover para que os dados não sejam comprometidos no decorrer dos testes."
         }
     },
     "acervo": {
@@ -66,7 +65,7 @@
             "new": "Cadastrar Autor"
         },
         "message": {
-            "confirmaion_remove": "Tem certeza que deseja excluir este autor?"
+            "confirmation_remove": "Tem certeza que deseja excluir este autor?"
         },
         "field": {
             "name": "Nome do Autor",
@@ -81,7 +80,7 @@
             "new": "Cadastrar Obra"
         },
         "message": {
-            "confirmaion_remove": "Tem certeza que deseja excluir esta obra?"
+            "confirmation_remove": "Tem certeza que deseja excluir esta obra?"
         },
         "field": {
             "id": "Número de registro",
@@ -113,7 +112,7 @@
             "new": "Cadastrar Localização"
         },
         "message": {
-            "confirmaion_remove": "Tem certeza que deseja excluir esta localização?"
+            "confirmation_remove": "Tem certeza que deseja excluir esta localização?"
         },
         "field": {
             "floor": "Andar",
@@ -129,7 +128,7 @@
             "new": "Cadastrar Assunto"
         },
         "message": {
-            "confirmaion_remove": "Tem certeza que deseja excluir este assunto?"
+            "confirmation_remove": "Tem certeza que deseja excluir este assunto?"
         },
         "field": {
             "name": "Assunto"
@@ -141,7 +140,7 @@
             "new": "Cadastrar Usuário"
         },
         "message": {
-            "confirmaion_remove": "Tem certeza que deseja excluir este usuário?"
+            "confirmation_remove": "Tem certeza que deseja excluir este usuário?"
         },
         "field": {
             "id": "Registro",
@@ -158,7 +157,10 @@
         "page": {
             "title": "Renovação Online"
         },
-        "field": {},
+        "field": {
+            "idUser": "Registro do Usuário",
+            "obra": "Obra"
+        },
         "message": {}
     },
     "obra-emprestada": {

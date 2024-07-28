@@ -6,6 +6,7 @@ import { AutorService } from '../../../../../service/autor/autor.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
 
 @Component({
   selector: 'app-list',
@@ -15,6 +16,7 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
 })
 export class ListComponent {
   tableData: Obra[] = [];
+  pageSize = PageSize.sizeDefault;
   
   contentBreadcrumb = [
     {

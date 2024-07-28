@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { onlySpaceValidator } from '../../../../../domain/validators/only-space-validaor';
 
 @Component({
   selector: 'app-autor-filter',
@@ -17,7 +18,7 @@ export class FilterComponent {
     private alertService: AlertModalService
   ) {
     this.formGroupFilter = this.formBuilder.group({
-      name: [null]
+      name: [null, [Validators.maxLength(150), onlySpaceValidator]]
     })
   }
 

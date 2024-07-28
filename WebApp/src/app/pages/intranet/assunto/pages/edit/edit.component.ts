@@ -22,11 +22,11 @@ export class EditComponent implements OnInit, AfterViewInit {
       action: AppMenuModel.menuIntranet.routerLink
     },
     {
-      title: 'autor.page.title',
+      title: 'assunto.page.title',
       action: AppMenuModel.menuAssunto.routerLink
     },
     {
-      title: 'autor.page.new',
+      title: 'assunto.page.new',
       action: null
     }
   ];

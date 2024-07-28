@@ -1,21 +1,23 @@
-<div class="container">
-  <div class="container-fluid">
-    <nav class="navbar">
-      <a class="navbar-brand" routerLink="/">
-        <img src="../../../assets/img/logo-library.svg" height="27">
-      </a>
-      <span class="course">{{'course' | translate}}</span>
-      <div class="btn-group">
-        <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          {{usuario}}
+<div id="nav">
+  <div class="container">
+    <div class="container-fluid">
+      <nav class="navbar">
+        <a class="navbar-brand" routerLink="/">
+          <img src="../../../assets/img/logo-library.svg" height="27">
         </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" routerLink="/intranet">{{'menu.intranet' | translate}}</a></li>
-          <li><a class="dropdown-item" routerLink="/acervo">{{'menu.consultCollection' | translate}}</a></li>
-          <li><a class="dropdown-item" style="cursor: pointer;" (click)="logout()">{{'menu.logout' | translate}}</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <span class="course">{{'course' | translate}}</span>
+        <div class="btn-group">
+          <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {{usuario}}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" routerLink="/intranet">{{'menu.intranet' | translate}}</a></li>
+            <li><a class="dropdown-item" routerLink="/acervo">{{'menu.consultCollection' | translate}}</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="logout()">{{'menu.logout' | translate}}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
   </div>
 </div>

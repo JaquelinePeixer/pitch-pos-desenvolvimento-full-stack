@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../../../../service/usuario/usuario';
+import { onlySpaceValidator } from '../../../../../domain/validators/only-space-validaor';
 
 @Component({
   selector: 'app-form',
@@ -9,7 +10,7 @@ import { Usuario } from '../../../../../service/usuario/usuario';
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
   @Input() isNew?: boolean;
 
   menuBack = AppMenuModel.menuUsuario;
@@ -18,13 +19,27 @@ export class FormComponent {
   onSubmit!: (entity: Usuario) => void;
   onCancel!: () => void;
 
+  optionAccessLevel = [];
+
+  optionSituationUser = [
+    { value: true, label: "Ativo" },
+    { value: false, label: "Inativo" }
+  ]
+
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
       id: [null],
-      name: [null, [Validators.required, Validators.maxLength(150)]],
-      birthYear: [null, [Validators.required]],
-      deathhYear: [null]
+      name: [null, [Validators.required, Validators.maxLength(150), onlySpaceValidator]],
+      birthDate: [null, [Validators.required]],
+      email: [null, [Validators.email, onlySpaceValidator]],
+      accessLevel: [null],
+      cpf: [null],
+      situationUser: [{ value: true, label: "Ativo" }]
     })
+  }
+
+  ngOnInit(): void {
+    //get nivel acesso
   }
 
   submit() {

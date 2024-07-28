@@ -1,25 +1,22 @@
 :root {
     --bs-body-color: #fff;
     --bs-body-bg: #191A1A;
-    --bs-font-sans-serif: "Ubuntu", sans-serif;
-    --font-family: "Ubuntu", sans-serif;
+    --bs-font-sans-serif: "Open Sans", sans-serif;
+    --font-family: "Open Sans", sans-serif;
     --bs-border-color: #fff;
 
     --text-color: #fff;
     --primary-color: #FED500;
     --primary-color-hover: #c8a600;
-    --primary-color-hover-outline: #c8a6003b; 
+    --primary-color-hover-outline: #c8a6003b;
     --primary-color-text: #191A1A;
 
     --border: #3E4142;
-
     --bs-border-width: 1px;
 
-
-
-    font-family: "Ubuntu", sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-variation-settings: normal;
-    --font-family: "Ubuntu", sans-serif;
+    --font-family: "Open Sans", sans-serif;
     --text-color: #fff;
     --primary-color: #FED500;
     --primary-color-text: #191A1A;
@@ -37,7 +34,7 @@
 
 .btn {
     --bs-btn-border-radius: 100px;
-    --bs-btn-font-family: "Ubuntu", sans-serif;
+    --bs-btn-font-family: "Open Sans", sans-serif;
     --bs-btn-border-width: 1px;
 }
 
@@ -155,21 +152,6 @@ a {
     border-bottom: 1px solid var(--border);
 }
 
-// .p-paginator {
-//     background: var(--bs-body-bg);
-//     color: var(--text-color);
-//     border: solid var(--border);
-//     border-width: 0;
-//     padding: 0.5rem 1rem;
-//     border-radius: 6px;
-// }
-
-// .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-//     background: var(--bs-body-bg);
-//     border-color: var(--border);
-//     color: var(--text-color);
-// }
-
 .p-inputtext {
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings, normal);
@@ -201,14 +183,15 @@ a {
     background: var(--bs-body-bg);
     border: 1px solid var(--border);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
+    width: 100%;
 }
 
 .p-dropdown-panel {
     background: var(--border);
     color: var(--text-color);
     border: 0 none;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -239,9 +222,18 @@ a {
     box-shadow: none
 }
 
-.dropdown-menu{
+.dropdown-menu {
     --bs-dropdown-color: var(--text-color);
     --bs-dropdown-bg: var(--border);
     --bs-dropdown-border-color: var(--border);
     --bs-dropdown-border-radius: var(--border-radius);
+}
+
+.p-inputtext,
+.p-calendar {
+    width: 100%;
+}
+
+.icon-link{
+    text-decoration: none;
 }

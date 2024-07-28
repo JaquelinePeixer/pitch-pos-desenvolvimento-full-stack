@@ -11,6 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from "primeng/inputnumber";
 import { DropdownModule } from "primeng/dropdown";
 import { ButtonModule } from "primeng/button";
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations: [],
@@ -26,7 +27,8 @@ import { ButtonModule } from "primeng/button";
         InputTextModule,
         DropdownModule,
         InputNumberModule,
-        TableModule
+        TableModule,
+        CalendarModule
     ],
     exports: [
         TranslateModule,
@@ -40,7 +42,8 @@ import { ButtonModule } from "primeng/button";
         InputTextModule,
         DropdownModule,
         InputNumberModule,
-        TableModule
+        TableModule,
+        CalendarModule
     ],
     providers: []
 })

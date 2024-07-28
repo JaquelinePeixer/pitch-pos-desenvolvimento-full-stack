@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Renovacao } from '../../../../../service/renovacao/renovacao';
+import { Obra } from '../../../../../service/obra/obra';
 
 @Component({
   selector: 'app-form',
@@ -11,37 +13,30 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class FormComponent {
   @Input() isNew?: boolean;
 
+  optionObra:Obra[];
   menuBack = AppMenuModel.menuRenovacao;
   formGroup: FormGroup;
 
-  // onSubmit!: (entity: renovacao) => void;
-  onCancel!: () => void;
+  onSubmit!: (entity: Renovacao) => void;
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
-      id: [null],
-      name: [null, [Validators.required, Validators.maxLength(150)]],
-      birthYear: [null, [Validators.required]],
-      deathhYear: [null]
+      idUser: [null, [Validators.required]],
+      obra: [null, [Validators.required]]
     })
+    this.getObrasUsuario()
   }
 
   submit() {
-    // this.onSubmit(this.formGroup.value)
-  }
-
-  cancel() {
-    this.onCancel()
+    this.onSubmit(this.formGroup.value)
   }
 
   get form(): { [key: string]: AbstractControl } {
     return this.formGroup.controls;
   }
 
-  // patchValue(entity: renovacao): void {
-  //   if (entity != null) {
-  //     this.formGroup.patchValue(entity);
-  //   }
-  // }
+  getObrasUsuario(){
+    // Todo
+  }
 
 }

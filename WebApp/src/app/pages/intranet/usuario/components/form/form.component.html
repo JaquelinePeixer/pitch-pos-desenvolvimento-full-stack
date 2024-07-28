@@ -9,20 +9,41 @@
 
             <form (submit)="submit()" [formGroup]="formGroup">
                 <div class="row mb-4">
-                    <div class="col-12">
+                    <div class="col-8">
                         <label for="name" class="form-label">{{'usuario.field.name' | translate}}</label>
-                        <input pInputText type="text" class="form-control" id="name" formControlName="name"
-                            placeholder="{{'usuario.field.name' | translate}}">
+                        <input pInputText type="text" class="form-control" id="name" formControlName="name">
+                    </div>
+                    <div class="col-4">
+                        <label for="id" class="form-label">{{'usuario.field.id' | translate}}</label>
+                        <input pInputText type="text" class="form-control" id="id" formControlName="id">
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-8">
+                        <label for="email" class="form-label">{{'usuario.field.email' | translate}}</label>
+                        <input pInputText type="text" class="form-control" id="email" formControlName="email">
+                    </div>
+                    <div class="col-4">
+                        <label for="accessLevel" class="form-label">{{'usuario.field.accessLevel' | translate}}</label>
+                        <p-dropdown id="accessLevel" formControlName="accessLevel" [showClear]="true"
+                            [options]="optionAccessLevel" optionLabel="label" />
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-4">
-                        <label for="birthYear" class="form-label">{{'usuario.field.birthYear' | translate}}</label>
-                        <input pInputText type="number" class="form-control" id="birthYear" formControlName="birthYear">
+                        <label for="birthDate" class="form-label">{{'usuario.field.birthDate' | translate}}</label>
+                        <p-calendar id="=birthDate" formControlName="birthDate" [iconDisplay]="'input'"
+                            [showIcon]="true" inputId="icondisplay" dateFormat="dd/mm/yy" />
                     </div>
                     <div class="col-4">
-                        <label for="deathhYear" class="form-label">{{'usuario.field.deathhYear' | translate}}</label>
-                        <input pInputText type="number" class="form-control" id="deathhYear" formControlName="deathhYear">
+                        <label for="cpf" class="form-label">{{'usuario.field.cpf' | translate}}</label>
+                        <p-inputMask mask="999.999.999-99" inputId="cpf" formControlName="cpf"/>
+                    </div>
+                    <div class="col-4">
+                        <label for="situationUser" class="form-label">{{'usuario.field.situationUser' |
+                            translate}}</label>
+                        <p-dropdown id="situationUser" formControlName="situationUser" [showClear]="true"
+                            [options]="optionSituationUser" optionLabel="label" />
                     </div>
                 </div>
                 <div class="row">

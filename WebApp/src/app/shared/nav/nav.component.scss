@@ -10,7 +10,11 @@
 .dropdown-item {
     padding: 0.75rem 1.25rem;
 
-    &:hover{
+    &:hover {
         background-color: var(--primary-700);
     }
+}
+
+#nav {
+    border-bottom: 1px solid var(--border);
 }

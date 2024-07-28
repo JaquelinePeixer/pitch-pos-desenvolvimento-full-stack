@@ -6,6 +6,7 @@ import { finalize } from 'rxjs';
 import { Autor } from '../../../../../service/autor/autor';
 import { Router } from '@angular/router';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
 
 @Component({
   selector: 'app-list',
@@ -16,6 +17,7 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
 export class ListComponent {
   tableData: Autor[] = [];
   search: any;
+  pageSize = PageSize.sizeDefault;
 
   contentBreadcrumb = [
     {

@@ -11,10 +11,5 @@ import { AccordionModule } from 'primeng/accordion';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  contentBreadcrumb = [
-    {
-      title: 'menu.intranet',
-      action: null
-    }
-  ];
+  contentBreadcrumb = [ ];
 }

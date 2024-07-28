@@ -10,6 +10,7 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
 import { TipoAutor } from '../../../../../domain/enum/tipoAutor.enum';
 import { AutorService } from '../../../../../service/autor/autor.service';
 import { Autor } from '../../../../../service/autor/autor';
+import { onlySpaceValidator } from '../../../../../domain/validators/only-space-validaor';
 
 @Component({
   selector: 'app-form',
@@ -37,19 +38,19 @@ export class FormComponent {
     private alertService: AlertModalService
   ) {
     this.formGroup = this.formBuilder.group({
-      id: [null],
-      title: [null],
-      publicationYear: [null],
-      publisherName: [null],
-      bookcase: [null],
-      volume: [null],
-      pageQuantity: [null],
+      id: [null, [Validators.required]],
+      title: [null, [Validators.required, Validators.maxLength(255), onlySpaceValidator]],
+      publicationYear: [null, [Validators.required]],
+      publisherName: [null, [Validators.required, Validators.maxLength(255), onlySpaceValidator]],
+      bookcase: [null, [Validators.required]],
+      volume: [null, [Validators.required]],
+      pageQuantity: [null, [Validators.required]],
       publicationLocation: [null],
       quantityOfCopies: [null],
-      author: [null],
+      author: [null, [Validators.required]],
       secondaryAuthor: [null],
-      subject: [null],
-      edition: [null],
+      subject: [null, [Validators.required]],
+      edition: [null, [Validators.required]],
     })
     this.getAssuntos();
   }

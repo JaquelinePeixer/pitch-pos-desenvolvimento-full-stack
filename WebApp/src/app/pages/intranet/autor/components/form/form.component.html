@@ -17,17 +17,20 @@
                 <div class="row mb-4">
                     <div class="col-4">
                         <label for="birthYear" class="form-label">{{'autor.field.birthYear' | translate}}</label>
-                        <input pInputText type="number" class="form-control" id="birthYear" formControlName="birthYear">
+                        <p-calendar inputId="=birthYear" formControlName="birthYear" [iconDisplay]="'input'"
+                            [showIcon]="true" inputId="icondisplay" dateFormat="dd/mm/yy" />
                     </div>
                     <div class="col-4">
                         <label for="deathhYear" class="form-label">{{'autor.field.deathhYear' | translate}}</label>
-                        <input pInputText type="number" class="form-control" id="deathhYear" formControlName="deathhYear">
+                        <p-calendar inputId="=deathhYear" formControlName="deathhYear" [iconDisplay]="'input'"
+                            [showIcon]="true" inputId="icondisplay" dateFormat="dd/mm/yy" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="d-grid gap-2 d-md-flex">
                         <button class="btn btn-primary" type="submit">{{'action.salvar' | translate}}</button>
-                        <button class="btn btn-outline-secondary" type="button" (click)="cancel()">{{'action.cancelar' | translate}}</button>
+                        <button class="btn btn-outline-secondary" type="button" (click)="cancel()">{{'action.cancelar' |
+                            translate}}</button>
                     </div>
                 </div>
             </form>

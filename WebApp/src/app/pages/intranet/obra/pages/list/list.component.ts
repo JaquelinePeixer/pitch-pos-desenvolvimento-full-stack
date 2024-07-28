@@ -6,6 +6,7 @@ import { finalize } from 'rxjs';
 import { Obra } from '../../../../../service/obra/obra';
 import { ObraService } from '../../../../../service/obra/obra.service';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
 
 @Component({
   selector: 'app-list',
@@ -16,6 +17,7 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
 export class ListComponent {
   tableData: Obra[] = [];
   search: any;
+  pageSize = PageSize.sizeDefault;
 
   contentBreadcrumb = [
     {

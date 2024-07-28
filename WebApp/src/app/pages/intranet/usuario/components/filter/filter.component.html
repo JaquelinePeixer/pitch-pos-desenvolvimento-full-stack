@@ -10,7 +10,8 @@
         </div>
         <div class="col-3">
             <label for="delayedUsers" class="form-label">{{'usuario.field.delayedUsers' | translate}}</label>
-            <input pInputText type="text" class="form-control" id="delayedUsers" formControlName="delayedUsers">
+            <p-dropdown id="delayedUsers" formControlName="delayedUsers" [showClear]="true" [options]="optionSimNao"
+            optionLabel="label" />
         </div>
     </app-filter>
 </form>

@@ -4,8 +4,10 @@ import { FormComponent } from '../../components/form/form.component';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { Renovacao } from '../../../../../service/renovacao/renovacao';
+import { RenovacaoService } from '../../../../../service/renovacao/renovacao.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -13,7 +15,7 @@ import { AlertModalService } from '../../../../../service/alert-modal/alert-moda
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
 })
-export class EditComponent implements OnInit, AfterViewInit {
+export class EditComponent implements AfterViewInit {
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -21,17 +23,11 @@ export class EditComponent implements OnInit, AfterViewInit {
     },
     {
       title: 'renovacao.page.title',
-      action: AppMenuModel.menuRenovacao.routerLink
-    },
-    {
-      title: 'renovacao.page.new',
       action: null
     }
   ];
 
   menuBack = AppMenuModel.menuRenovacao
-
-  private id!: number;
 
   @ViewChild('form')
   form!: FormComponent;
@@ -39,46 +35,27 @@ export class EditComponent implements OnInit, AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
-    // private renovacaoService: renovacaoService,
+    private renovacaoService: RenovacaoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private alertService: AlertModalService
   ) {
-    this.id = this.activatedRoute.snapshot.params['id'];
   }
-
-  ngOnInit(): void {
-    // this.fetch();
-  }
-
-  // fetch() {
-  //   this.loadingService.startLoadind();
-  //   this.renovacaoService.getId(this.id)
-  //     .pipe(finalize(() => this.loadingService.stopLoadind()))
-  //     .subscribe({
-  //       next: (result: renovacao) => {
-  //         this.form.patchValue(result)
-  //       },
-  //       error: error => this.alertService.defaultError(error.message)
-  //     })
-  // }
 
   ngAfterViewInit(): void {
-    // console.log(this.form)
-    // this.form.onSubmit = (entity: renovacao) => this.submit(entity);
-    // this.form.onCancel = () => this.router.navigate([this.menuBack.routerLink]).then();
+    this.form.onSubmit = (entity: Renovacao) => this.submit(entity);
   }
 
-  // submit(entity: renovacao): void {
-  //   this.loadingService.startLoadind();
-  //   this.renovacaoService.put(this.id, entity)
-  //     .pipe(finalize(() => this.loadingService.stopLoadind()))
-  //     .subscribe({
-  //       next: () => {
-    // this.alertService.defaultSuccess(result)
-  //         this.router.navigate([this.menuBack.routerLink])
-  //       },
-  //       error: error => this.alertService.defaultError(error.message)
-  //     })
-  // }
+  submit(entity: Renovacao): void {
+    this.loadingService.startLoadind();
+    this.renovacaoService.post(entity)
+      .pipe(finalize(() => this.loadingService.stopLoadind()))
+      .subscribe({
+        next: () => {
+          // this.alertService.defaultSuccess(result)
+          // this.router.navigate([this.menuBack.routerLink])
+        },
+        error: error => this.alertService.defaultError(error.message)
+      })
+  }
 }

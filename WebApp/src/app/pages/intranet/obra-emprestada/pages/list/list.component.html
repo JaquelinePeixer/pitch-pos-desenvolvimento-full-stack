@@ -13,11 +13,11 @@
             </div>
 
             <div class="row ">
-                <p-table id="tableAssunto" [value]="tableData" [paginator]="true" [rows]="5"
-                    [rowsPerPageOptions]="[5, 10, 20]">
+                <p-table id="tableAssunto" [value]="tableData" [paginator]="true" [rows]="pageSize"
+                    [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50]">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th scope="col">{{ 'autor.field.name' | translate}}</th>
+                            <th scope="col">{{ 'obra-emprestada.field.name' | translate}}</th>
                             <th scope="col" class="text-center" style="width: 100px;">{{ 'action.acoes' | translate}}
                             </th>
                         </tr>
@@ -26,7 +26,7 @@
                         <tr>
                             <!-- <td>{{item.name}}</td> -->
                             <td class="text-center">
-                                <app-form-buttons [item]="item" (onEdit)="edit($event)"
+                                <app-form-buttons [item]="item" (onEdit)="edit($event)" page="obra-emprestada"
                                     (onDelete)="remover($event)"></app-form-buttons>
                             </td>
                         </tr>

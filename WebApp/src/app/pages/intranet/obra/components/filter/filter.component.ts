@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { onlySpaceValidator } from '../../../../../domain/validators/only-space-validaor';
 
 @Component({
   selector: 'app-obra-filter',
@@ -14,8 +15,8 @@ export class FilterComponent {
   constructor(private formBuilder: FormBuilder) {
     this.formGroupFilter = this.formBuilder.group({
       id: [null],
-      title: [null],
-      author: [null]
+      title: [null, [Validators.maxLength(255), onlySpaceValidator]],
+      author: [null, [Validators.maxLength(150), onlySpaceValidator]]
     })
   }
 

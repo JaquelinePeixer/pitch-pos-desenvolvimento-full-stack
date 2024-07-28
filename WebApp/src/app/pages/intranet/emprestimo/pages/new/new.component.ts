@@ -24,11 +24,11 @@ export class NewComponent implements AfterViewInit {
       action: AppMenuModel.menuIntranet.routerLink
     },
     {
-      title: 'autor.page.title',
-      action: AppMenuModel.menuAutor.routerLink
+      title: 'emprestimo.page.title',
+      action: AppMenuModel.menuEmprestimo.routerLink
     },
     {
-      title: 'autor.page.new',
+      title: 'emprestimo.page.new',
       action: null
     }
   ];

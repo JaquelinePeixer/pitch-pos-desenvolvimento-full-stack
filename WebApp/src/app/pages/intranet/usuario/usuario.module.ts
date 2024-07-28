@@ -11,7 +11,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { FormComponent } from './components/form/form.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     UsuarioRoutingModule,
     TranslateModule,
-    SharedModule
+    SharedModule,
+    CalendarModule,
+    InputMaskModule
   ],
   providers: [UsuarioService]
 })

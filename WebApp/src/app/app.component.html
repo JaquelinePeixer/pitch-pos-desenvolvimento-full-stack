@@ -1,4 +1,10 @@
-<p-toast position="top-right"></p-toast> 
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog #cd>
+    <ng-template pTemplate="footer">
+        <button class="btn btn-outline-secondary me-1" (click)="cd.reject()">{{'action.no' | translate}}</button>
+        <button class="btn btn-primary" (click)="cd.accept()">{{'action.yes' | translate}}</button>
+    </ng-template>
+</p-confirmDialog>
 <app-nav></app-nav>
 <router-outlet />
 <app-footer></app-footer>

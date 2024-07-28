@@ -70,8 +70,8 @@
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <p-table id="tableAutorSecundario" [value]="tableAutor" [paginator]="true" [rows]="5"
-                        [rowsPerPageOptions]="[5, 10, 20]">
+                    <!-- <p-table id="tableAutorSecundario" [value]="tableAutor" [paginator]="true" [rows]="pageSize"
+                        [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50]">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th scope="col">{{ 'obra.listAuthors.tipo' | translate}}</th>
@@ -92,12 +92,12 @@
                                         class="form-control field" />
                                 </td>
                                 <td class="text-center">
-                                    <app-form-buttons [item]="item" [showEdit]="false"
+                                    <app-form-buttons [item]="item" [showEdit]="false" page="obra"
                                         (onDelete)="removerAutor(item.id)"></app-form-buttons>
                                 </td>
                             </tr>
                         </ng-template>
-                    </p-table>
+                    </p-table> -->
 
                     <div class="row">
                         <button pButton pRipple class="col-3 btn btn-outline-primary btn-add-autor" type="button"

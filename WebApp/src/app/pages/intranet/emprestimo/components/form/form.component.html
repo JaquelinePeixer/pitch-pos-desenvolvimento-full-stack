@@ -3,25 +3,25 @@
         <div class="grid">
             <div class="row  mb-4">
                 <div class="col-10">
-                    <h1>{{'autor.page.new' | translate}}</h1>
+                    <h1>{{'emprestimo.page.new' | translate}}</h1>
                 </div>
             </div>
 
             <form (submit)="submit()" [formGroup]="formGroup">
                 <div class="row mb-4">
                     <div class="col-12">
-                        <label for="name" class="form-label">{{'autor.field.name' | translate}}</label>
+                        <label for="name" class="form-label">{{'emprestimo.field.name' | translate}}</label>
                         <input pInputText type="text" class="form-control" id="name" formControlName="name"
-                            placeholder="{{'autor.field.name' | translate}}">
+                            placeholder="{{'emprestimo.field.name' | translate}}">
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-4">
-                        <label for="birthYear" class="form-label">{{'autor.field.birthYear' | translate}}</label>
+                        <label for="birthYear" class="form-label">{{'emprestimo.field.birthYear' | translate}}</label>
                         <input pInputText type="number" class="form-control" id="birthYear" formControlName="birthYear">
                     </div>
                     <div class="col-4">
-                        <label for="deathhYear" class="form-label">{{'autor.field.deathhYear' | translate}}</label>
+                        <label for="deathhYear" class="form-label">{{'emprestimo.field.deathhYear' | translate}}</label>
                         <input pInputText type="number" class="form-control" id="deathhYear" formControlName="deathhYear">
                     </div>
                 </div>
