@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import webservice.entity.Book;
 
 @Repository
-public interface BookRepository extends JpaRepository<Book, Long>, CrudRepository<Book, Long> {
+public interface BookRepository extends JpaRepository<Book, String>, CrudRepository<Book, String> {
 
 }

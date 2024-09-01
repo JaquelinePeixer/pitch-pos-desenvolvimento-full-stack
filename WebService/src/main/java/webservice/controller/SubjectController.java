@@ -31,7 +31,7 @@ public class SubjectController {
 	private SubjectService subjectService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Subject> getSubjectPorId(@PathVariable Long id) {
+	public ResponseEntity<Subject> getSubjectPorId(@PathVariable String id) {
 		return subjectService.getSubjectPorId(id);
 	}
 
@@ -58,12 +58,12 @@ public class SubjectController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseModel> putSubject(@PathVariable Long id, @RequestBody Subject subject) {
+	public ResponseEntity<ResponseModel> putSubject(@PathVariable String id, @RequestBody Subject subject) {
 		return subjectService.putSubject(id, subject);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseModel> removeSubject(@PathVariable Long id) {
+	public ResponseEntity<ResponseModel> removeSubject(@PathVariable String id) {
 		return subjectService.removeSubject(id);
 	}
 

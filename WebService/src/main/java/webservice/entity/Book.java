@@ -23,9 +23,9 @@ import lombok.Setter;
 public class Book {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "id")
-	private Long id;
+	private String id;
 
 	private String title;
 	private Integer publicationYear;

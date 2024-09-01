@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import webservice.entity.Author;
 
 @Repository
-public interface AuthorRepository extends JpaRepository<Author, Long>, CrudRepository<Author, Long> {
+public interface AuthorRepository extends JpaRepository<Author, String>, CrudRepository<Author, String> {
 
 	Page<Author> findByNameContaining(String name, Pageable pageable);
 

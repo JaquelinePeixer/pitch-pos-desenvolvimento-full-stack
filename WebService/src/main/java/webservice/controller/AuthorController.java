@@ -20,7 +20,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.entity.Author;
 import webservice.entity.ResponseModel;
-import webservice.entity.Subject;
 import webservice.service.AuthorService;
 
 @RestController
@@ -32,10 +31,10 @@ public class AuthorController {
 	private AuthorService authorService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Author> getAuthorPorId(@PathVariable Long id) {
+	public ResponseEntity<Author> getAuthorPorId(@PathVariable String id) {
 		return authorService.getAuthorPorId(id);
 	}
-	
+
 	@GetMapping("/find-list")
 	public List<Author> getSubjectFindList(@RequestParam String name) {
 		return authorService.getAuthorAllFindList(name);
@@ -59,12 +58,12 @@ public class AuthorController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseModel> putAuthor(@PathVariable Long id, @RequestBody Author author) {
+	public ResponseEntity<ResponseModel> putAuthor(@PathVariable String id, @RequestBody Author author) {
 		return authorService.putAuthor(id, author);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseModel> removeAuthor(@PathVariable Long id) {
+	public ResponseEntity<ResponseModel> removeAuthor(@PathVariable String id) {
 		return authorService.removeAuthor(id);
 	}
 

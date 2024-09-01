@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import webservice.entity.Subject;
 
 @Repository
-public interface SubjectRepository extends JpaRepository<Subject, Long>, CrudRepository<Subject, Long> {
+public interface SubjectRepository extends JpaRepository<Subject, String>, CrudRepository<Subject, String> {
 
     Page<Subject> findByNameContaining(String name, Pageable pageable);
 

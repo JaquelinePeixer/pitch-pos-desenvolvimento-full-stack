@@ -19,7 +19,7 @@ public class LocationService {
 
 	private LocationRepository locationRepository;
 
-	public ResponseEntity<Location> getLocationPorId(Long id) {
+	public ResponseEntity<Location> getLocationPorId(String id) {
 		if (locationRepository.existsById(id)) {
 			return ResponseEntity.status(HttpStatus.OK).body(locationRepository.findById(id).get());
 		}
@@ -39,7 +39,7 @@ public class LocationService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(responseModel);
 	}
 
-	public ResponseEntity<ResponseModel> putLocation(Long id, LocationReponse location) {
+	public ResponseEntity<ResponseModel> putLocation(String id, LocationReponse location) {
 		if (locationRepository.existsById(id)) {
 			ResponseModel responseModel = saveLocation(location, RequestMethod.PUT);
 			return ResponseEntity.status(HttpStatus.OK).body(responseModel);
@@ -90,7 +90,7 @@ public class LocationService {
 		return new ResponseModel(2, "Não foi possivel salvar a localização");
 	}
 
-	public ResponseEntity<ResponseModel> removeLocation(Long id) {
+	public ResponseEntity<ResponseModel> removeLocation(String id) {
 		if (locationRepository.existsById(id)) {
 			locationRepository.deleteById(id);
 			ResponseModel responseModel = new ResponseModel(1, "Localização removida com sucesso");

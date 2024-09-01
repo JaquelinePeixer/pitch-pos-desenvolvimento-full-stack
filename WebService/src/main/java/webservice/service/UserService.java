@@ -16,7 +16,7 @@ public class UserService {
 
 	private UserRepository userRepository;
 
-	public ResponseEntity<User> getUserPorId(Long id) {
+	public ResponseEntity<User> getUserPorId(String id) {
 		if (userRepository.existsById(id)) {
 			return ResponseEntity.status(HttpStatus.OK).body(userRepository.findById(id).get());
 		}
@@ -32,7 +32,7 @@ public class UserService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userSave);
 	}
 
-	public ResponseEntity<User> putUser(Long id, User user) {
+	public ResponseEntity<User> putUser(String id, User user) {
 		if (userRepository.existsById(id)) {
 			User userSave = userRepository.save(user);
 			return ResponseEntity.status(HttpStatus.OK).body(userSave);
@@ -40,7 +40,7 @@ public class UserService {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
 
-	public ResponseEntity<String> removeUser(Long id) {
+	public ResponseEntity<String> removeUser(String id) {
 		if (userRepository.existsById(id)) {
 			userRepository.deleteById(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Success");

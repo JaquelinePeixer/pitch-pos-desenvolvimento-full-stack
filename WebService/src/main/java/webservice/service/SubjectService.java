@@ -20,7 +20,7 @@ public class SubjectService {
 
     private SubjectRepository subjectRepository;
 
-    public ResponseEntity<Subject> getSubjectPorId(Long id) {
+    public ResponseEntity<Subject> getSubjectPorId(String id) {
         if (subjectRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.OK).body(subjectRepository.findById(id).get());
         }
@@ -44,7 +44,7 @@ public class SubjectService {
         return ResponseEntity.status(HttpStatus.CREATED).body(subjectSave);
     }
 
-    public ResponseEntity<ResponseModel> putSubject(Long id, Subject subject) {
+    public ResponseEntity<ResponseModel> putSubject(String id, Subject subject) {
         if (subjectRepository.existsById(id)) {
             subjectRepository.save(subject);
             ResponseModel responseModel = new ResponseModel(1, "Assunto atualizado");
@@ -54,7 +54,7 @@ public class SubjectService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
     }
 
-    public ResponseEntity<ResponseModel> removeSubject(Long id) {
+    public ResponseEntity<ResponseModel> removeSubject(String id) {
         if (subjectRepository.existsById(id)) {
             subjectRepository.deleteById(id);
             ResponseModel responseModel = new ResponseModel(1, "Assunto removido com sucesso");

@@ -30,7 +30,7 @@ public class LocationController {
 	private LocationService locationService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Location> getLocationPorId(@PathVariable Long id) {
+	public ResponseEntity<Location> getLocationPorId(@PathVariable String id) {
 		return locationService.getLocationPorId(id);
 	}
 
@@ -40,7 +40,8 @@ public class LocationController {
 			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
 
 		if (floor != null || section != null || bookcase != null) {
-			return locationService.locationFilter(floor, section, bookcase, PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
+			return locationService.locationFilter(floor, section, bookcase,
+					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
 		} else {
 			return locationService.getLocationAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
 		}
@@ -52,12 +53,12 @@ public class LocationController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseModel> putLocation(@PathVariable Long id, @RequestBody LocationReponse location) {
+	public ResponseEntity<ResponseModel> putLocation(@PathVariable String id, @RequestBody LocationReponse location) {
 		return locationService.putLocation(id, location);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseModel> removeLocation(@PathVariable Long id) {
+	public ResponseEntity<ResponseModel> removeLocation(@PathVariable String id) {
 		return locationService.removeLocation(id);
 	}
 

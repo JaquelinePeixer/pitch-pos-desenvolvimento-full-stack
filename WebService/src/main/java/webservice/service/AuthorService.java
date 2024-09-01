@@ -20,7 +20,7 @@ public class AuthorService {
 
 	private AuthorRepository authorRepository;
 
-	public ResponseEntity<Author> getAuthorPorId(Long id) {
+	public ResponseEntity<Author> getAuthorPorId(String id) {
 		if (authorRepository.existsById(id)) {
 			return ResponseEntity.status(HttpStatus.OK).body(authorRepository.findById(id).get());
 		}
@@ -44,7 +44,7 @@ public class AuthorService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(authorSave);
 	}
 
-	public ResponseEntity<ResponseModel> putAuthor(Long id, Author author) {
+	public ResponseEntity<ResponseModel> putAuthor(String id, Author author) {
 		if (authorRepository.existsById(id)) {
 			authorRepository.save(author);
 			ResponseModel responseModel = new ResponseModel(1, "Autor atualizado");
@@ -54,7 +54,7 @@ public class AuthorService {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
 	}
 
-	public ResponseEntity<ResponseModel> removeAuthor(Long id) {
+	public ResponseEntity<ResponseModel> removeAuthor(String id) {
 		if (authorRepository.existsById(id)) {
 			authorRepository.deleteById(id);
 			ResponseModel responseModel = new ResponseModel(1, "Autor removido com sucesso");

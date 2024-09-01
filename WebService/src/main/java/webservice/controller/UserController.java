@@ -26,7 +26,7 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUserPorId(@PathVariable Long id) {
+	public ResponseEntity<User> getUserPorId(@PathVariable String id) {
 		return userService.getUserPorId(id);
 	}
 
@@ -41,12 +41,12 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<User> putUser(@PathVariable Long id, @RequestBody User user) {
+	public ResponseEntity<User> putUser(@PathVariable String id, @RequestBody User user) {
 		return userService.putUser(id, user);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> removeUser(@PathVariable Long id) {
+	public ResponseEntity<String> removeUser(@PathVariable String id) {
 		return userService.removeUser(id);
 	}
 }

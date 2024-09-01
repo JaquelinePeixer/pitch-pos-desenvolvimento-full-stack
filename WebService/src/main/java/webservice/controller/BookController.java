@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.entity.Book;
-import webservice.entity.ResponseModel;
 import webservice.service.BookService;
 
 @RestController
@@ -29,13 +28,13 @@ public class BookController {
 	private BookService bookService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Book> getBookPorId(@PathVariable Long id) {
+	public ResponseEntity<Book> getBookPorId(@PathVariable String id) {
 		return bookService.getBookPorId(id);
 	}
 
 	@GetMapping
 	public Page<Book> getBookAll(@RequestParam(required = false) String title,
-			@RequestParam(required = false) Long author_id, @RequestParam(required = false) Long id,
+			@RequestParam(required = false) String author_id, @RequestParam(required = false) String id,
 			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
 		if (title != null || author_id != null || id != null) {
 			return bookService.bookFilter(title, author_id, id,
@@ -51,12 +50,12 @@ public class BookController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseModel> putBook(@PathVariable Long id, @RequestBody Book book) {
+	public ResponseEntity<Book> putBook(@PathVariable String id, @RequestBody Book book) {
 		return bookService.putBook(id, book);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseModel> removeBook(@PathVariable Long id) {
+	public ResponseEntity<String> removeBook(@PathVariable String id) {
 		return bookService.removeBook(id);
 	}
 }
