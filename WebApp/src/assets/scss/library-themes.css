@@ -994,8 +994,8 @@
     }
 
     .p-checkbox .p-checkbox-box {
-        border: 2px solid #424b57;
-        background: #111827;
+        border: 2px solid var(--primary-500);
+        background: transparent;
         width: 22px;
         height: 22px;
         color: var(--text-color);
@@ -1006,7 +1006,7 @@
 
     .p-checkbox .p-checkbox-box .p-checkbox-icon {
         transition-duration: 0.2s;
-        color: var(--primary-color-text);
+        color: var(--primary-500);
         font-size: 14px;
     }
 
@@ -1017,7 +1017,7 @@
 
     .p-checkbox .p-checkbox-box.p-highlight {
         border-color: var(--border-color);
-        background: var(--primary-500);
+        background: var(--primary-50);
     }
 
     .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {

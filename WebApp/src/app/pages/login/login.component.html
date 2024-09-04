@@ -1,0 +1,32 @@
+<main class="container">
+    <div class="container-fluid">
+        <div class="grid" id="login">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{'login.page.title' | translate}}</h1>
+                </div>
+            </div>
+            <div class="row w-100">
+                <form (submit)="login()" [formGroup]="formGroup">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <label for="email" class="form-label">{{'login.field.email' | translate}}</label>
+                            <input pInputText type="text" class="form-control" id="email" formControlName="email">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <label for="password" class="form-label">{{'login.field.password' | translate}}</label>
+                            <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-primary w-100" type="submit">{{'login.field.entrar' |
+                            translate}}</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

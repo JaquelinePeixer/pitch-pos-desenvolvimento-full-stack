@@ -18,13 +18,17 @@
     "@angular/platform-browser": "^17.1.0",
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
+    "@auth0/angular-jwt": "^5.2.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "bootstrap": "^5.3.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "web-app": "file:",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {

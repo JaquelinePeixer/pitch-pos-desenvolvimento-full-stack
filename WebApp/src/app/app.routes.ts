@@ -3,11 +3,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { IntranetComponent } from './pages/intranet/intranet.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { AcervoComponent } from './pages/acervo/acervo.component';
+import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './authentication/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
     {
         path: 'intranet', component: IntranetComponent,
+        canActivate: [AuthGuard] ,
         children: [
             {
                 path: 'renovacao', pathMatch: 'full',
@@ -48,5 +51,6 @@ export const routes: Routes = [
         ]
     },
     { path: 'acervo', component: AcervoComponent },
+    { path: 'login', component: LoginComponent },
     { path: '**', component: PageNotFoundComponent },
 ];

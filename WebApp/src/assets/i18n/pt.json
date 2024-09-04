@@ -40,6 +40,17 @@
         "required": "O campo {{label}} é obrigatório.",
         "maxLength": "O campo {{label}} deve ter no máximo {{requiredLenght}} caracteres."
     },
+    "login":{
+        "page": {
+            "title": "Ambiente On-line"
+        },
+        "field": {
+            "email": "Email",
+            "password": "Senha",
+            "showPassword": "Mostrar senha",
+            "entrar": "Entrar"
+        }
+    },
     "home": {
         "title": "Biblioteca Online",
         "sutitle": "Na biblioteca on-line você poderá ter acesso a consulta dos acervos cadastrados e sua localização fictícia, como também verificar o ambiente do administrador, do bibliotecário e do usuário normal, onde cada um possui uma permissão diferente.",
