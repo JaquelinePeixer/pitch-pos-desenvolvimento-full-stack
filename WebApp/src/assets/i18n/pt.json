@@ -28,7 +28,12 @@
         "cancelar": "Cancelar",
         "acoes": "Ações",
         "no": "Não",
-        "yes": "Sim"
+        "yes": "Sim",
+        "goHomePage": "Ir para página inicial"
+    },
+    "label": {
+        "page-not-found": "Página Não Encontrada",
+        "page-error-404": "Sem permissão de acesso"
     },
     "toast": {
         "error": "Erro!",
@@ -40,7 +45,7 @@
         "required": "O campo {{label}} é obrigatório.",
         "maxLength": "O campo {{label}} deve ter no máximo {{requiredLenght}} caracteres."
     },
-    "login":{
+    "login": {
         "page": {
             "title": "Ambiente On-line"
         },
@@ -194,10 +199,5 @@
         },
         "field": {},
         "message": {}
-    },
-    "page-not-found": {
-        "page": {
-            "title": "Página Não Encontrada"
-        }
     }
 }
