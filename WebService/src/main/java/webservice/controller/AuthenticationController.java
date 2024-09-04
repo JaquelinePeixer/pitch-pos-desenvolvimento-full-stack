@@ -42,7 +42,7 @@ public class AuthenticationController {
 		var user = (User) auth.getPrincipal();
 		var token = tokenService.generateToken(user);
 		
-		String name = user.getUsername();
+		String name = user.getName();
 		UserRole userRole = user.getRole();
 		int role = user.getRole().compareTo(userRole);
 				

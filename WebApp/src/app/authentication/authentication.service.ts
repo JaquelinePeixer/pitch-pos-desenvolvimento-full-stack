@@ -26,9 +26,8 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('pg_dfs');
     const helper = new JwtHelperService();
-    const isExpired = helper.isTokenExpired(token);
+    const isExpired = helper.isTokenExpired(this.loggedUser()?.token);
     return !isExpired;
   }
 

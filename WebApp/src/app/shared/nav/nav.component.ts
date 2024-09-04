@@ -28,7 +28,8 @@ export class NavComponent {
   }
 
   getUsuario() {
-    return this.authService.getUser()?.name;
+    const user = this.authService.getUser()
+    return user?.name;
   }
 
   async logout() {

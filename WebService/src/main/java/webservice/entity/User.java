@@ -49,14 +49,12 @@ public class User implements UserDetails {
 	// @OneToMany(mappedBy = "book")
 	// private Set<Book> fk_book;
 
-	private String login;
-
 	private String passoword;
 
 	private UserRole role;
 	
-	public User(String login, String password, UserRole role) {
-		this.login = login;
+	public User(String email, String password, UserRole role) {
+		this.email = email;
 		this.passoword = password;
 		this.role = role;
 	}
@@ -71,9 +69,9 @@ public class User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return login;
+		return email;
 	}
-	
+		
 	@Override
 	public String getPassword() {
 		return passoword;
