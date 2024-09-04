@@ -6,6 +6,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { JwtModule } from '@auth0/angular-jwt';
 
 // required for AoT 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -26,7 +27,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom([
       HttpClientModule,
-      TranslateModule.forRoot(provideTranslation())
+      TranslateModule.forRoot(provideTranslation()),
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: () => localStorage.getItem('pg_dfs')
+        }
+      })
     ]),
     provideAnimations()
   ]

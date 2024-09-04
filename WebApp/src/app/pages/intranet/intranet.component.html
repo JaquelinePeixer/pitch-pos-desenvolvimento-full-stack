@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <nav class="">
                 <ul class="navbar-nav d-flex flex-row justify-content-between">
-                    @for (itemMenu of this.menuIntranet.items; track $index) {
+                    @for (itemMenu of this.menuIntranet; track $index) {
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="itemMenu.routerLink">{{ itemMenu.label ?? '' | translate}}</a>
                     </li>

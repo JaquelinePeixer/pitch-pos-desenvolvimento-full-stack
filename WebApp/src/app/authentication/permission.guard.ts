@@ -1,17 +1,30 @@
-import { CanActivateFn } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 
-export const PermissionGuard: CanActivateFn = (route, state) => {
+@Injectable({ providedIn: 'root' })
+export class PermissionGuard {
+    constructor(
+        private router: Router,
+        private authenticationService: AuthenticationService
+    ) { }
 
-  
-//   const userLogged = AuthenticationService.loggedUser();
+    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        const loggedUser = this.authenticationService.loggedUser();
+        if (!loggedUser) {
+            return this.authenticationService.logoutRedirect(state.url, this.router)
+        }
 
-//   if(userLogged){
-    return true
-//   } else {
-//     this.router.navigate(['logn'])
-//     return false
-//   }
+        const isTokenExpired = await this.authenticationService.isAuthenticatedRefresh();
+        if (isTokenExpired) {
+            return this.authenticationService.logoutRedirect(state.url, this.router)
+        }
 
+        if (!route.data['role'] || route.data['role'].includes(loggedUser.role)) {           
+            return true
+        }
 
-};
+        this.router.navigate(['/errors/403']);
+        return false
+    }
+}
