@@ -20,7 +20,7 @@ export class NewComponent implements AfterViewInit {
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
-      action: AppMenuModel.menuIntranet.routerLink
+      action: null
     },
     {
       title: 'assunto.page.title',

@@ -19,7 +19,7 @@ export class EditComponent implements OnInit, AfterViewInit {
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
-      action: AppMenuModel.menuIntranet.routerLink
+      action: null
     },
     {
       title: 'assunto.page.title',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../authentication/authentication.service';
@@ -34,7 +34,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private alertService: AlertModalService
+    private alertService: AlertModalService,
+    private router: Router
   ) {
     this.formGroup = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
@@ -48,7 +49,8 @@ export class LoginComponent {
 
       this.authService.loginUser(request).subscribe({
         next: response => {
-          this.authService.setLocalStorage(response)
+          this.authService.setLocalStorage(response);
+          this.router.navigate(['/intranet'])
         },
         error: error => {
           this.alertService.defaultError(error.message)
