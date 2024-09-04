@@ -43,8 +43,9 @@ public class AuthenticationController {
 		var token = tokenService.generateToken(user);
 		
 		String name = user.getUsername();
-		UserRole role = user.getRole();
-		
+		UserRole userRole = user.getRole();
+		int role = user.getRole().compareTo(userRole);
+				
 		return ResponseEntity.ok(new LoginResponseDTO(token, role, name));
 	}
 
