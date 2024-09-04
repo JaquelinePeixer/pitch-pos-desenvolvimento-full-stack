@@ -9,6 +9,6 @@ import webservice.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
-	UserDetails findByLogin(String login);
+	UserDetails findByEmail(String email);
 
 }

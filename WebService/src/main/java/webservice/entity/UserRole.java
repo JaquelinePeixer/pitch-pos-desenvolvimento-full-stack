@@ -2,7 +2,7 @@ package webservice.entity;
 
 public enum UserRole {
 
-	ADMIN("admin"), USER("user");
+	ADMIN("admin"), LIBRARIAN("librarian"), USER("user");
 
 	private String role;
 
