@@ -16,6 +16,7 @@ import webservice.entity.AuthenticationDTO;
 import webservice.entity.LoginResponseDTO;
 import webservice.entity.RegisterDTO;
 import webservice.entity.User;
+import webservice.entity.UserRole;
 import webservice.infra.security.TokenService;
 import webservice.repository.UserRepository;
 
@@ -38,9 +39,13 @@ public class AuthenticationController {
 		var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
 		var auth = this.authenticationManager.authenticate(usernamePassword);
 		
-		var token = tokenService.generateToken((User) auth.getPrincipal());
-
-		return ResponseEntity.ok(new LoginResponseDTO(token));
+		var user = (User) auth.getPrincipal();
+		var token = tokenService.generateToken(user);
+		
+		String name = user.getUsername();
+		UserRole role = user.getRole();
+		
+		return ResponseEntity.ok(new LoginResponseDTO(token, role, name));
 	}
 
 	@PostMapping("/register")
