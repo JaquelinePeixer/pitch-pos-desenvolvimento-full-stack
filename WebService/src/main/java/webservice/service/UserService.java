@@ -1,20 +1,25 @@
 package webservice.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import webservice.entity.User;
-import webservice.repository.UserRepository;
+import webservice.domains.users.SearchDao;
+import webservice.domains.users.User;
+import webservice.repository.users.UserRepository;
+import webservice.repository.users.UserSearchDao;
 
 @Service
 @AllArgsConstructor
 public class UserService {
 
 	private UserRepository userRepository;
+
+	private UserSearchDao userSearchDao;
 
 	public ResponseEntity<User> getUserPorId(String id) {
 		if (userRepository.existsById(id)) {
@@ -23,8 +28,16 @@ public class UserService {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
 
-	public List<User> getUserAll() {
-		return userRepository.findAll();
+	public Page<User> getUserAll(PageRequest page) {
+		return userRepository.findAll(page);
+	}
+
+	public Page<User> getUserFilter(String name, Boolean delayedUsers, Pageable page) {
+		SearchDao request = new SearchDao();
+		request.setName(name);
+		request.setDelayedUsers(delayedUsers);
+		
+		return userSearchDao.findAllByCriteria(request, page);
 	}
 
 	public ResponseEntity<User> postUser(User user) {
@@ -47,4 +60,5 @@ public class UserService {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User não encontrado");
 	}
+
 }

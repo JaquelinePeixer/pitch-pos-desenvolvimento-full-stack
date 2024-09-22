@@ -1,4 +1,4 @@
-package webservice.entity;
+package webservice.domains.users;
 
 public enum UserRole {
 

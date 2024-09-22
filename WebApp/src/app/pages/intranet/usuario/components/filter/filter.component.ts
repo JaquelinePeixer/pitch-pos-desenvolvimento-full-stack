@@ -20,7 +20,6 @@ export class FilterComponent {
   constructor(private formBuilder: FormBuilder) {
     this.formGroupFilter = this.formBuilder.group({
       name: [null, [Validators.maxLength(150), onlySpaceValidator]],
-      id: [null],
       delayedUsers: [null]
     })
   }

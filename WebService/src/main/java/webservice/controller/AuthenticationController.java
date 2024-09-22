@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import webservice.domains.users.User;
+import webservice.domains.users.UserRole;
 import webservice.entity.AuthenticationDTO;
 import webservice.entity.LoginResponseDTO;
 import webservice.entity.RegisterDTO;
-import webservice.entity.User;
-import webservice.entity.UserRole;
 import webservice.infra.security.TokenService;
-import webservice.repository.UserRepository;
+import webservice.repository.users.UserRepository;
 
 @CrossOrigin
 @RestController

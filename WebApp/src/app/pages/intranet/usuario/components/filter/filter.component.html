@@ -5,12 +5,8 @@
             <input pInputText type="text" class="form-control" id="name" formControlName="name">
         </div>
         <div class="col-3">
-            <label for="id" class="form-label">{{'usuario.field.id' | translate}}</label>
-            <input pInputText type="text" class="form-control" id="id" formControlName="id">
-        </div>
-        <div class="col-3">
             <label for="delayedUsers" class="form-label">{{'usuario.field.delayedUsers' | translate}}</label>
-            <p-dropdown id="delayedUsers" formControlName="delayedUsers" [showClear]="true" [options]="optionSimNao"
+            <p-dropdown id="delayedUsers" formControlName="delayedUsers" optionValue="value" [showClear]="true" [options]="optionSimNao"
             optionLabel="label" />
         </div>
     </app-filter>

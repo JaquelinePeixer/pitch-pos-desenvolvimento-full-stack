@@ -1,4 +1,4 @@
-package webservice.entity;
+package webservice.domains.users;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -15,16 +15,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import webservice.enumeration.UserSituationEnum;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
+@Table(name = "user")
 public class User implements UserDetails {
 
 	@Id
@@ -39,12 +42,13 @@ public class User implements UserDetails {
 
 	private Integer cpf;
 
-	// @Column(name = "user_situation")
-	// private UserSituationEnum userSituation;
+	 private UserSituationEnum userSituation;
 
 	private LocalDate creationDate;
 
 	private String creationUser;
+	
+	private Boolean delayedUsers;
 
 	// @OneToMany(mappedBy = "book")
 	// private Set<Book> fk_book;

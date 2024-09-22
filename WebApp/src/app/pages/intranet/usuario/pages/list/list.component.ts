@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
 import { UsuarioService } from '../../../../../service/usuario/usuario.service';
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Usuario } from '../../../../../service/usuario/usuario';
 import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
+import { PaginatorComponent } from '../../../../../shared/paginator/paginator.component';
 
 @Component({
   selector: 'app-list',
@@ -14,11 +14,8 @@ import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
+export class ListComponent extends PaginatorComponent {
   tableData: Usuario[] = [];
-  search: any;
-  pageSize = PageSize.sizeDefault;
-  
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -36,16 +33,17 @@ export class ListComponent {
     private router: Router,
     private alertService: AlertModalService
   ) {
-    this.fetch();
+    super();
   }
 
-  fetch(event?: number) {
+  fetch(page?: number) {
     this.loadingService.startLoadind();
-    this.usuarioService.get(event, this.search)
+    this.usuarioService.get(page, this.search)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
           this.tableData = result.content;
+          this.totalRecords = result.totalElements;
         },
         error: error => this.alertService.defaultError(error.message)
       })
@@ -68,8 +66,4 @@ export class ListComponent {
       })
   }
 
-  filter(params: any) {
-    this.search = params;
-    this.fetch();
-  }
 }

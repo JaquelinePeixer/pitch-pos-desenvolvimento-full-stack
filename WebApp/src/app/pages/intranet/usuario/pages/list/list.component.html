@@ -15,8 +15,16 @@
             <app-usuario-filter (onSearch)="filter($event)"></app-usuario-filter>
 
             <div class="row ">
-                <p-table id="tableAssunto" [value]="tableData" [paginator]="true" [rows]="pageSize"
-                    [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50]">
+                <p-table
+                id="tableUser"
+                [value]="tableData"
+                [paginator]="true"                
+                [lazy]="true"
+                (onLazyLoad)="paginate($event)"                         
+                [rows]="pageSize"
+                [totalRecords]="totalRecords"
+                dataKey="id"
+                >
                     <ng-template pTemplate="header">
                         <tr>
                             <th scope="col">{{ 'usuario.field.name' | translate}}</th>
