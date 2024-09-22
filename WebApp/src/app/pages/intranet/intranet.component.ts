@@ -14,7 +14,9 @@ export class IntranetComponent implements OnInit {
   model: any[] = [];
   menuIntranet: any[] = [];
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
+    this.redirectInitial()
+  }
 
   ngOnInit(): void {
     AppMenuModel.menuIntranet.items?.forEach(menu => {
@@ -22,12 +24,15 @@ export class IntranetComponent implements OnInit {
         this.menuIntranet.push(menu);
       }
     });
+  }
 
-    if (this.authenticationService.loggedUser()?.role === PermissionEnum.USER) {
-      this.router.navigate(['/intranet/obra-emprestada']);
-    } else {
-      this.router.navigate(['/intranet/emprestimo']);
-    }
-
+  redirectInitial() {
+    if (this.router.navigated)
+      if (this.authenticationService.loggedUser()?.role === PermissionEnum.USER) {
+        this.router.navigate(['/intranet/obra-emprestada']);
+      } else {
+        // this.router.navigate(['/intranet/emprestimo']);
+        this.router.navigate(['/intranet/usuario']);
+      }
   }
 }

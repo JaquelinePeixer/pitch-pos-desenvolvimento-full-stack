@@ -45,7 +45,7 @@ export class LoginComponent {
 
   login() {
     if (this.formGroup.valid) {
-      const request: Login = plainToClass(Login, this.formGroup.value)
+      const request: Login = plainToClass(Login, this.formGroup.value);
 
       this.authService.loginUser(request).subscribe({
         next: response => {
