@@ -1,15 +1,20 @@
 package webservice.service;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import webservice.domains.users.SearchDao;
 import webservice.domains.users.User;
+import webservice.domains.users.UserResponse;
+import webservice.entity.EmptyResponse;
 import webservice.repository.users.UserRepository;
 import webservice.repository.users.UserSearchDao;
 
@@ -21,11 +26,13 @@ public class UserService {
 
 	private UserSearchDao userSearchDao;
 
-	public ResponseEntity<User> getUserPorId(String id) {
-		if (userRepository.existsById(id)) {
-			return ResponseEntity.status(HttpStatus.OK).body(userRepository.findById(id).get());
-		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	public ResponseEntity<UserResponse> getUserPorId(String id) {
+		return userRepository.findById(id).map(user -> {
+			UserResponse userResponse = new UserResponse(user.getId(), user.getName(), user.getEmail(),
+					user.getBirthDate(), user.getCpf(), user.getUserSituation(), user.getRole());
+
+			return ResponseEntity.status(HttpStatus.OK).body(userResponse);
+		}).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 	}
 
 	public Page<User> getUserAll(PageRequest page) {
@@ -36,19 +43,14 @@ public class UserService {
 		SearchDao request = new SearchDao();
 		request.setName(name);
 		request.setDelayedUsers(delayedUsers);
-		
+
 		return userSearchDao.findAllByCriteria(request, page);
 	}
 
-	public ResponseEntity<User> postUser(User user) {
-		User userSave = userRepository.save(user);
-		return ResponseEntity.status(HttpStatus.CREATED).body(userSave);
-	}
-
-	public ResponseEntity<User> putUser(String id, User user) {
+	public ResponseEntity<EmptyResponse> putUser(String id, User user) {
 		if (userRepository.existsById(id)) {
-			User userSave = userRepository.save(user);
-			return ResponseEntity.status(HttpStatus.OK).body(userSave);
+			userRepository.save(user);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Usuário salvo com sucesso!"));
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}

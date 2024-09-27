@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from '../../../../../service/usuario/usuario';
-import { onlySpaceValidator } from '../../../../../domain/validators/only-space-validaor';
+import { Usuario } from '@service/usuario/usuario';
+import { onlySpaceValidator } from '@domain/validators/only-space-validaor';
+import { TranslateService } from '@ngx-translate/core';
+import { SituacaoUsuarioEnum } from '@app/domain/enum/situacaoUsuario.enum';
+import { AccessLevelEnum } from '@app/domain/enum/accessLevel.enum';
 
 @Component({
   selector: 'app-form',
@@ -14,36 +17,44 @@ export class FormComponent implements OnInit {
   @Input() isNew?: boolean;
 
   menuBack = AppMenuModel.menuUsuario;
-  formGroup: FormGroup;
+  formUsuario: FormGroup;
 
   onSubmit!: (entity: Usuario) => void;
   onCancel!: () => void;
 
-  optionAccessLevel = [];
+  optionAccessLevel = [
+    { value: AccessLevelEnum.USER, label: this.translateService.instant('label.user') },
+    { value: AccessLevelEnum.LIBRARIAN, label: this.translateService.instant('label.librarian') },
+    { value: AccessLevelEnum.ADMIN, label: this.translateService.instant('label.admin'), disabled: true }
+  ];
 
   optionSituationUser = [
-    { value: true, label: "Ativo" },
-    { value: false, label: "Inativo" }
+    { value: SituacaoUsuarioEnum.ACTIVE, label: this.translateService.instant('label.ativo') },
+    { value: SituacaoUsuarioEnum.INACTIVE, label: this.translateService.instant('label.inativo') }
   ]
 
-  constructor(private formBuilder: FormBuilder) {
-    this.formGroup = this.formBuilder.group({
+  constructor(
+    private formBuilder: FormBuilder,
+    private translateService: TranslateService
+  ) {
+    this.formUsuario = this.formBuilder.group({
       id: [null],
       name: [null, [Validators.required, Validators.maxLength(150), onlySpaceValidator]],
       birthDate: [null, [Validators.required]],
       email: [null, [Validators.email, onlySpaceValidator]],
-      accessLevel: [null],
+      role: [AccessLevelEnum.USER],
       cpf: [null],
-      situationUser: [{ value: true, label: "Ativo" }]
+      password: [null],
+      userSituation: [SituacaoUsuarioEnum.ACTIVE]
     })
   }
 
   ngOnInit(): void {
-    //get nivel acesso
+    if (!this.isNew) this.formUsuario.controls['password'].disable()
   }
 
   submit() {
-    this.onSubmit(this.formGroup.value)
+    this.onSubmit(this.formUsuario.value);
   }
 
   cancel() {
@@ -51,12 +62,13 @@ export class FormComponent implements OnInit {
   }
 
   get form(): { [key: string]: AbstractControl } {
-    return this.formGroup.controls;
+    return this.formUsuario.controls;
   }
 
   patchValue(entity: Usuario): void {
     if (entity != null) {
-      this.formGroup.patchValue(entity);
+      this.formUsuario.patchValue(entity);
+      if (entity.birthDate) this.formUsuario.controls['birthDate'].setValue(new Date(entity.birthDate));
     }
   }
 

@@ -7,45 +7,51 @@
                 </div>
             </div>
 
-            <form (submit)="submit()" [formGroup]="formGroup">
+            <form (submit)="submit()" [formGroup]="formUsuario">
                 <div class="row mb-4">
                     <div class="col-8">
                         <label for="name" class="form-label">{{'usuario.field.name' | translate}}</label>
-                        <input pInputText type="text" class="form-control" id="name" formControlName="name">
-                    </div>
-                    <div class="col-4">
-                        <label for="id" class="form-label">{{'usuario.field.id' | translate}}</label>
-                        <input pInputText type="text" class="form-control" id="id" formControlName="id">
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-8">
-                        <label for="email" class="form-label">{{'usuario.field.email' | translate}}</label>
-                        <input pInputText type="text" class="form-control" id="email" formControlName="email">
-                    </div>
-                    <div class="col-4">
-                        <label for="accessLevel" class="form-label">{{'usuario.field.accessLevel' | translate}}</label>
-                        <p-dropdown id="accessLevel" formControlName="accessLevel" [showClear]="true"
-                            [options]="optionAccessLevel" optionLabel="label" />
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-4">
-                        <label for="birthDate" class="form-label">{{'usuario.field.birthDate' | translate}}</label>
-                        <p-calendar id="=birthDate" formControlName="birthDate" [iconDisplay]="'input'"
-                            [showIcon]="true" inputId="icondisplay" dateFormat="dd/mm/yy" />
+                        <input pInputText type="text" class="form-control" id="name" formControlName="name"
+                            autocomplete="new-name">
                     </div>
                     <div class="col-4">
                         <label for="cpf" class="form-label">{{'usuario.field.cpf' | translate}}</label>
-                        <p-inputMask mask="999.999.999-99" inputId="cpf" formControlName="cpf"/>
+                        <p-inputMask mask="999.999.999-99" inputId="cpf" formControlName="cpf" />
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-8">
+                        <label for="email" class="form-label">{{'usuario.field.email' | translate}}</label>
+                        <input pInputText type="text" class="form-control" id="email" formControlName="email"
+                            autocomplete="new-email">
+                    </div>
+                    <div class="col-4">
+                        <label for="birthDate" class="form-label">{{'usuario.field.birthDate' | translate}}</label>
+                        <p-calendar id="birthDate" formControlName="birthDate" [iconDisplay]="'input'" [showIcon]="true"
+                            inputId="icondisplay" dateFormat="dd/mm/yy" />
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <label for="password" class="form-label">{{'usuario.field.password' | translate}}</label>
+                        <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false"
+                            autocomplete="new-password" />
+                    </div>
+                    <div class="col-4">
+                        <label for="accessLevel" class="form-label">{{'usuario.field.accessLevel' | translate}}</label>
+                        <p-dropdown id="accessLevel" formControlName="role" [showClear]="true" optionValue="value"
+                            [options]="optionAccessLevel" optionLabel="label" />
                     </div>
                     <div class="col-4">
                         <label for="situationUser" class="form-label">{{'usuario.field.situationUser' |
                             translate}}</label>
-                        <p-dropdown id="situationUser" formControlName="situationUser" [showClear]="true"
-                            [options]="optionSituationUser" optionLabel="label" />
+                        <p-dropdown id="situationUser" formControlName="userSituation" [showClear]="true"
+                            [options]="optionSituationUser" optionLabel="label" optionValue="value" />
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="d-grid gap-2 d-md-flex">
                         <button class="btn btn-primary" type="submit">{{'action.salvar' | translate}}</button>

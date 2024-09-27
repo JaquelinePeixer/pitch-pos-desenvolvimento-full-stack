@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.domains.users.User;
+import webservice.domains.users.UserResponse;
+import webservice.entity.EmptyResponse;
 import webservice.service.UserService;
 
 @RestController
@@ -28,7 +30,7 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUserPorId(@PathVariable String id) {
+	public ResponseEntity<UserResponse> getUserPorId(@PathVariable String id) {
 		return userService.getUserPorId(id);
 	}
 
@@ -44,13 +46,8 @@ public class UserController {
 		}
 	}
 
-	@PostMapping
-	public ResponseEntity<User> postUser(@RequestBody User user) {
-		return userService.postUser(user);
-	}
-
 	@PutMapping("/{id}")
-	public ResponseEntity<User> putUser(@PathVariable String id, @RequestBody User user) {
+	public ResponseEntity<EmptyResponse> putUser(@PathVariable String id, @RequestBody User user) {
 		return userService.putUser(id, user);
 	}
 

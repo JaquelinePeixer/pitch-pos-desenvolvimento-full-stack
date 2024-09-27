@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { FormComponent } from '../../components/form/form.component';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { FormBuilder } from '@angular/forms';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
+import { FormComponent } from '@intranet/usuario/components/form/form.component';
+import { LoadingService } from '@shared/loading/loading.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { UsuarioService } from '../../../../../service/usuario/usuario.service';
-import { Usuario } from '../../../../../service/usuario/usuario';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { UsuarioService } from '@service/usuario/usuario.service';
+import { Usuario } from '@service/usuario/usuario';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-edit',
@@ -39,10 +39,10 @@ export class EditComponent implements OnInit, AfterViewInit {
   form!: FormComponent;
 
   constructor(
-    private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private usuarioService: UsuarioService,
     private router: Router,
+    private toastErrorService: ToastErrorService,
     private activatedRoute: ActivatedRoute,
     private alertService: AlertModalService
   ) {
@@ -61,12 +61,11 @@ export class EditComponent implements OnInit, AfterViewInit {
         next: (result: Usuario) => {
           this.form.patchValue(result)
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
   ngAfterViewInit(): void {
-    console.log(this.form)
     this.form.onSubmit = (entity: Usuario) => this.submit(entity);
     this.form.onCancel = () => this.router.navigate([this.menuBack.routerLink]).then();
   }
@@ -77,10 +76,10 @@ export class EditComponent implements OnInit, AfterViewInit {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result)
+          this.alertService.defaultSuccess(result.message)
           this.router.navigate([this.menuBack.routerLink])
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 }

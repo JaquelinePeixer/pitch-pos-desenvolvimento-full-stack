@@ -33,13 +33,21 @@
     },
     "label": {
         "page-not-found": "Página Não Encontrada",
-        "page-error-404": "Sem permissão de acesso"
+        "page-error-404": "Sem permissão de acesso",
+        "admin": "Administrativo",
+        "librarian": "Bibliotecário",
+        "user": "Usuário",
+        "ativo": "Ativo",
+        "inativo": "Inativo"
     },
     "toast": {
         "error": "Erro!",
         "info": "Informação!",
         "success": "Sucesso!",
-        "warning": "Aviso!"
+        "warning": "Aviso!",
+        "msg-error":{
+            "403": "Usuário sem permissão"
+        }
     },
     "validation": {
         "required": "O campo {{label}} é obrigatório.",
@@ -166,7 +174,8 @@
             "cpf": "CPF",
             "email": "E-mail",
             "accessLevel": "Nível de acesso",
-            "birthDate": "Data de aniversário"
+            "birthDate": "Data de aniversário",
+            "password": "Senha"
         }
     },
     "renovacao": {

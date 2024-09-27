@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppMenuModel } from '../../domain/menu/app-menu.model';
-import { AuthenticationService } from '../../authentication/authentication.service';
-import { PermissionEnum } from '../../authentication/permission.enum';
-import { Router } from '@angular/router';
+import { AuthenticationService } from '@app/authentication/authentication.service';
+import { AppMenuModel } from '@app/domain/menu/app-menu.model';
 
 @Component({
   selector: 'app-intranet',
@@ -14,8 +12,7 @@ export class IntranetComponent implements OnInit {
   model: any[] = [];
   menuIntranet: any[] = [];
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
-    this.redirectInitial()
+  constructor(private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -26,13 +23,4 @@ export class IntranetComponent implements OnInit {
     });
   }
 
-  redirectInitial() {
-    if (this.router.navigated)
-      if (this.authenticationService.loggedUser()?.role === PermissionEnum.USER) {
-        this.router.navigate(['/intranet/obra-emprestada']);
-      } else {
-        // this.router.navigate(['/intranet/emprestimo']);
-        this.router.navigate(['/intranet/usuario']);
-      }
-  }
 }

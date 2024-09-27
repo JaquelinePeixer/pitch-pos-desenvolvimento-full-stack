@@ -2,7 +2,9 @@ package webservice.domains.users;
 
 public enum UserRole {
 
-	ADMIN("admin"), LIBRARIAN("librarian"), USER("user");
+	ADMIN("ROLE_ADMIN"), 
+	LIBRARIAN("ROLE_LIBRARIAN"), 
+	USER("ROLE_USER");
 
 	private String role;
 

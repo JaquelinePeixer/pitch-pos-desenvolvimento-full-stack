@@ -8,12 +8,13 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { AlertModalService } from './service/alert-modal/alert-modal.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { ToastErrorService } from './service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, FooterComponent, NavComponent, ToastModule, ConfirmDialogModule, TranslateModule],
-  providers: [MessageService, AlertModalService, ConfirmationService],
+  providers: [MessageService, AlertModalService, ConfirmationService, ToastErrorService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

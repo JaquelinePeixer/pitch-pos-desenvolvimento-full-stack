@@ -1,7 +1,11 @@
 package webservice.entity;
 
-import webservice.domains.users.UserRole;
+import java.time.LocalDateTime;
 
-public record RegisterDTO(String email, String password, UserRole role) {
+import webservice.domains.users.UserRole;
+import webservice.enumeration.UserSituationEnum;
+
+public record RegisterDTO(String name, LocalDateTime birthDate, String email, UserRole role, String cpf,
+		String password, UserSituationEnum userSituation) {
 
 }

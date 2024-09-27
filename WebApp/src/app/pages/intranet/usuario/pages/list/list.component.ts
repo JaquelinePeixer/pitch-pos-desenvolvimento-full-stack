@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { UsuarioService } from '../../../../../service/usuario/usuario.service';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
+import { LoadingService } from '@shared/loading/loading.service';
+import { UsuarioService } from '@service/usuario/usuario.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { Usuario } from '../../../../../service/usuario/usuario';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PaginatorComponent } from '../../../../../shared/paginator/paginator.component';
+import { Usuario } from '@service/usuario/usuario';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { PaginatorComponent } from '@shared/paginator/paginator.component';
 
 @Component({
   selector: 'app-list',
@@ -50,7 +50,7 @@ export class ListComponent extends PaginatorComponent {
   }
 
   edit(item?: any) {
-    this.router.navigate([`${AppMenuModel.menuAutor.routerLink}/edit/${item.id}`])
+    this.router.navigate([`${AppMenuModel.menuUsuario.routerLink}/edit/${item.id}`])
   }
 
   remover(item?: any) {

@@ -6,29 +6,22 @@ import { MessageService } from 'primeng/api';
   providedIn: 'root'
 })
 export class AlertModalService {
-  title = {
-    error: this.translate.instant('toast.error'),
-    info: this.translate.instant('toast.info'),
-    success: this.translate.instant('toast.success'),
-    warning: this.translate.instant('toast.warning'),
-  };
-
   constructor(public translate: TranslateService, private messageService: MessageService) { }
 
   defaultSuccess(msg: string) {
-    this.messageService.add({ severity: 'success', summary: this.title.success, detail: msg })
+    this.messageService.add({ severity: 'success', summary: this.translate.instant('toast.success'), detail: msg })
   }
 
   defaultError(msg: string) {
-    this.messageService.add({ severity: 'error', summary: this.title.error, detail: msg })
+    this.messageService.add({ severity: 'error', summary: this.translate.instant('toast.error'), detail: msg })
   }
 
   defaultInfo(msg: string) {
-    this.messageService.add({ severity: 'info', summary: this.title.info, detail: msg })
+    this.messageService.add({ severity: 'info', summary: this.translate.instant('toast.info'), detail: msg })
   }
 
   defaultWarning(msg: string) {
-    this.messageService.add({ severity: 'warn', summary: this.title.warning, detail: msg })
+    this.messageService.add({ severity: 'warn', summary: this.translate.instant('toast.warning'), detail: msg })
   }
 
 }
