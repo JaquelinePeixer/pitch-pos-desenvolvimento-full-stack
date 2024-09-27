@@ -1,5 +1,7 @@
 package webservice.entity;
 
-public record LoginResponseDTO(String token, int role, String name) {
+import webservice.domains.users.UserRole;
+
+public record LoginResponseDTO(String token, UserRole role, String name) {
 	
 }

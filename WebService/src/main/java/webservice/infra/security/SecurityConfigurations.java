@@ -35,6 +35,7 @@ public class SecurityConfigurations {
 								.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 								.requestMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "LIBRARIAN")
 								.requestMatchers(HttpMethod.PUT).hasAnyRole("ADMIN", "LIBRARIAN")
+								.requestMatchers(HttpMethod.DELETE).hasAnyRole("ADMIN", "LIBRARIAN")
 								.anyRequest().permitAll())
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
 	}

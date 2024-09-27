@@ -6,7 +6,7 @@ export class AppMenuItem {
     routerLink?: string;
     items?: AppMenuItem[];
     dontNeedPermission?: boolean;
-    role?: Array<number>;
+    role?: Array<string>;
 }
 
 export class AppMenuModel {

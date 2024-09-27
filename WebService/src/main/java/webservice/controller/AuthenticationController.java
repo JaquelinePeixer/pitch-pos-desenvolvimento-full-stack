@@ -53,7 +53,7 @@ public class AuthenticationController {
 		UserRole userRole = user.getRole();
 		int role = user.getRole().compareTo(userRole);
 
-		return ResponseEntity.ok(new LoginResponseDTO(token, role, name));
+		return ResponseEntity.ok(new LoginResponseDTO(token, userRole, name));
 	}
 
 	@PostMapping("/register")
@@ -77,5 +77,5 @@ public class AuthenticationController {
 		this.userRepository.save(newUser);
 		return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Usuário salvo com sucesso!"));
 	}
-
+	
 }

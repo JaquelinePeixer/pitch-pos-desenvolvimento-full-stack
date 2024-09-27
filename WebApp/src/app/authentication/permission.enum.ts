@@ -1,5 +1,5 @@
 export enum PermissionEnum {
-    ADMIN = 0,
-    LIBRARIAN = 1,
-    USER = 2
+    USER = "USER",
+    LIBRARIAN = "LIBRARIAN",
+    ADMIN = "ADMIN"
 }
