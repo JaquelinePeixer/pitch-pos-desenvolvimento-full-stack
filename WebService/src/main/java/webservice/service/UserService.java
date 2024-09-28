@@ -1,13 +1,14 @@
 package webservice.service;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -49,18 +50,49 @@ public class UserService {
 
 	public ResponseEntity<EmptyResponse> putUser(String id, User user) {
 		if (userRepository.existsById(id)) {
-			userRepository.save(user);
+			String encrytedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+			user.setPassword(encrytedPassword);
+			User userSave = userRepository.save(user);
 			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Usuário salvo com sucesso!"));
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Usuário não encontrado"));
 	}
 
-	public ResponseEntity<String> removeUser(String id) {
+	public ResponseEntity<EmptyResponse> removeUser(String id) {
 		if (userRepository.existsById(id)) {
+
+			// Obtém o usuário autenticado
+			UserDetails authenticatedUser = getAuthenticatedUser();
+			if (authenticatedUser == null) {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+						.body(new EmptyResponse("Usuário não autenticado"));
+			}
+			
+			User userAuth = (User) userRepository.findByEmail(authenticatedUser.getUsername());
+			if (userAuth == null) {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+						.body(new EmptyResponse("Usuário não autenticado"));
+			}
+
+			if (userAuth.getId().equals(id)) {
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+			}
+
 			userRepository.deleteById(id);
-			return ResponseEntity.status(HttpStatus.OK).body("Success");
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Usuário removido com sucesso!"));
+
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User não encontrado");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Usuário não encontrado"));
+	}
+
+	public UserDetails getAuthenticatedUser() {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+	    if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
+	        throw new IllegalStateException("Usuário não está autenticado.");
+	    }
+
+	    return (UserDetails) authentication.getPrincipal();
 	}
 
 }

@@ -53,11 +53,15 @@ public class AuthenticationController {
 		UserRole userRole = user.getRole();
 		int role = user.getRole().compareTo(userRole);
 
-		return ResponseEntity.ok(new LoginResponseDTO(token, role, name));
+		return ResponseEntity.ok(new LoginResponseDTO(token, userRole, name));
 	}
 
 	@PostMapping("/register")
 	public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
+		if (userRepository.existsByEmail(data.email())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("Usuário já cadastrado"));
+		}
+		
 		if (this.userRepository.findByEmail(data.email()) != null) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -77,5 +81,5 @@ public class AuthenticationController {
 		this.userRepository.save(newUser);
 		return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Usuário salvo com sucesso!"));
 	}
-
+	
 }

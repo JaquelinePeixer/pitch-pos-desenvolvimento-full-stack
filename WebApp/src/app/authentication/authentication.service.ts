@@ -63,7 +63,7 @@ export class AuthenticationService {
     return tokenExpired
   }
 
-  checkRole(checkPermission: Array<number>): boolean {
+  checkRole(checkPermission: Array<string>): boolean {
     const permission = checkPermission.filter(x => x !== null);
     if (permission == null || permission.length <= 0) {
       return true;

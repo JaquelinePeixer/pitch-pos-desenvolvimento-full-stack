@@ -7,6 +7,7 @@ import { finalize } from 'rxjs';
 import { Usuario } from '@service/usuario/usuario';
 import { AlertModalService } from '@service/alert-modal/alert-modal.service';
 import { PaginatorComponent } from '@shared/paginator/paginator.component';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-list',
@@ -31,6 +32,7 @@ export class ListComponent extends PaginatorComponent {
     private loadingService: LoadingService,
     private usuarioService: UsuarioService,
     private router: Router,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) {
     super();
@@ -45,7 +47,7 @@ export class ListComponent extends PaginatorComponent {
           this.tableData = result.content;
           this.totalRecords = result.totalElements;
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
@@ -62,7 +64,7 @@ export class ListComponent extends PaginatorComponent {
           this.alertService.defaultSuccess(result.message);
           this.fetch();
         },
-        error: error => this.alertService.defaultError(error.error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 

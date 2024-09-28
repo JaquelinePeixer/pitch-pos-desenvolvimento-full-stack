@@ -57,7 +57,6 @@ export class LoginComponent {
             // this.router.navigate(['/intranet/emprestimo']);
             this.router.navigate(['/intranet/usuario']);
           }
-
         },
         error: error => {
           this.alertService.defaultError(error.message)

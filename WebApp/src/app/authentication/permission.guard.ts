@@ -11,7 +11,8 @@ export class PermissionGuard {
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         const loggedUser = this.authenticationService.loggedUser();
-        if (!loggedUser) {
+        
+        if (!loggedUser?.token) {
             return this.authenticationService.logoutRedirect(state.url, this.router)
         }
 
@@ -19,7 +20,7 @@ export class PermissionGuard {
         if (isTokenExpired) {
             return this.authenticationService.logoutRedirect(state.url, this.router)
         }
-
+        
         if (!route.data['role'] || route.data['role'].includes(loggedUser.role)) {           
             return true
         }

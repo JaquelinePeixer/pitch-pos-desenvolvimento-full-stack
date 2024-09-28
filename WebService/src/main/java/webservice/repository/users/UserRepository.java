@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, String>, JpaSpecific
 	UserDetails findByEmail(String email);
 	
 	Page<User> findByNameContainingAndDelayedUsers(String name, Boolean delayedUsers, Pageable pageable);
+
+	boolean existsByEmail(String email);
 }
