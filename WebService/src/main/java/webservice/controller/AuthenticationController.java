@@ -58,6 +58,10 @@ public class AuthenticationController {
 
 	@PostMapping("/register")
 	public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
+		if (userRepository.existsByEmail(data.email())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("Usuário já cadastrado"));
+		}
+		
 		if (this.userRepository.findByEmail(data.email()) != null) {
 			return ResponseEntity.badRequest().build();
 		}

@@ -14,7 +14,7 @@ export class ToastErrorService {
   ) { }
 
   alertError(error: HttpErrorResponse) {
-    let msg = error.message;
+    let msg = error?.error?.message || error.message;
 
     if (error.status == 403)
       msg = this.translate.instant(`toast.msg-error.${error.status}`);
