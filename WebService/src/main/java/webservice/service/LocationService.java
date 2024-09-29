@@ -37,7 +37,7 @@ public class LocationService {
 
 	public ResponseEntity<EmptyResponse> postLocation(LocationReponse location) {
 		 saveLocation(location, RequestMethod.POST);
-		return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Localização criada com sucesso"));
+		return ResponseEntity.status(HttpStatus.CREATED).body(new EmptyResponse("Localização criada com sucesso"));
 	}
 
 	public ResponseEntity<EmptyResponse> putLocation(String id, LocationReponse location) {

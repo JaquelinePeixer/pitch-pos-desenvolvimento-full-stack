@@ -55,7 +55,7 @@ export class LoginComponent {
             this.router.navigate(['/intranet/obra-emprestada']);
           } else {
             // this.router.navigate(['/intranet/emprestimo']);
-            this.router.navigate(['/intranet/localizacao']);
+            this.router.navigate(['/intranet/assunto']);
           }
         },
         error: error => {

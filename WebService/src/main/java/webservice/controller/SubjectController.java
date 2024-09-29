@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import webservice.entity.EmptyResponse;
 import webservice.entity.ResponseModel;
 import webservice.entity.Subject;
 import webservice.service.SubjectService;
@@ -41,7 +42,7 @@ public class SubjectController {
 	}
 
 	@GetMapping
-	public Page<Subject> getAuthorAll(@RequestParam(required = false) String name,
+	public Page<Subject> getSubjectAll(@RequestParam(required = false) String name,
 			@RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "5") Integer pageSize) {
 		if (name != null) {
@@ -53,17 +54,17 @@ public class SubjectController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Subject> postSubject(@RequestBody Subject subject) {
+	public ResponseEntity<EmptyResponse> postSubject(@RequestBody Subject subject) {
 		return subjectService.postSubject(subject);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseModel> putSubject(@PathVariable String id, @RequestBody Subject subject) {
+	public ResponseEntity<EmptyResponse> putSubject(@PathVariable String id, @RequestBody Subject subject) {
 		return subjectService.putSubject(id, subject);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseModel> removeSubject(@PathVariable String id) {
+	public ResponseEntity<EmptyResponse> removeSubject(@PathVariable String id) {
 		return subjectService.removeSubject(id);
 	}
 

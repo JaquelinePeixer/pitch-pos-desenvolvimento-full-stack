@@ -1,14 +1,13 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
+import { LoadingService } from '@shared/loading/loading.service';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
-import { FormComponent } from '../../components/form/form.component';
-import { AssuntoService } from '../../../../../service/assunto/assunto.service';
-import { Assunto } from '../../../../../service/assunto/assunto';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-
+import { FormComponent } from '@intranet/assunto/components/form/form.component';
+import { AssuntoService } from '@service/assunto/assunto.service';
+import { Assunto } from '@service/assunto/assunto';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-new',
@@ -34,14 +33,14 @@ export class NewComponent implements AfterViewInit {
 
   menuBack = AppMenuModel.menuAssunto
 
-  @ViewChild('form') 
+  @ViewChild('form')
   form!: FormComponent
 
   constructor(
-    private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private assuntoService: AssuntoService,
     private router: Router,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) { }
 
@@ -56,10 +55,10 @@ export class NewComponent implements AfterViewInit {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result)
+          this.alertService.defaultSuccess(result.message)
           this.router.navigate([this.menuBack.routerLink])
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
