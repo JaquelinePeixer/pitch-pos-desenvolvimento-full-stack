@@ -15,8 +15,15 @@
             <app-autor-filter (onSearch)="filter($event)"></app-autor-filter>
 
             <div class="row ">
-                <p-table id="tableAssunto" [value]="tableData" [paginator]="true" [rows]="pageSize"
-                    [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50]">
+                <p-table                    
+                    id="tableAutor"
+                    [value]="tableData"
+                    [paginator]="true"
+                    [lazy]="true"
+                    (onLazyLoad)="paginate($event)"
+                    [rows]="pageSize"
+                    [totalRecords]="totalRecords"
+                    dataKey="id">
                     <ng-template pTemplate="header">
                         <tr>
                             <th scope="col">{{ 'autor.field.name' | translate}}</th>
