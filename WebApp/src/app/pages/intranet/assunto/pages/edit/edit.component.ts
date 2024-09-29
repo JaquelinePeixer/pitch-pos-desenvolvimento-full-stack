@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { FormComponent } from '../../components/form/form.component';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { AssuntoService } from '../../../../../service/assunto/assunto.service';
-import { FormBuilder } from '@angular/forms';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
+import { FormComponent } from '@intranet/assunto/components/form/form.component';
+import { LoadingService } from '@shared/loading/loading.service';
+import { AssuntoService } from '@service/assunto/assunto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { Assunto } from '../../../../../service/assunto/assunto';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { Assunto } from '@service/assunto/assunto';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-edit',
@@ -39,11 +39,11 @@ export class EditComponent implements OnInit, AfterViewInit {
   form!: FormComponent;
 
   constructor(
-    private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private assuntoService: AssuntoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) {
     this.id = this.activatedRoute.snapshot.params['id'];
@@ -58,10 +58,8 @@ export class EditComponent implements OnInit, AfterViewInit {
     this.assuntoService.getId(this.id)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: (result: Assunto) => {
-          this.form.patchValue(result)
-        },
-        error: error => this.alertService.defaultError(error.error)
+        next: (result: Assunto) => this.form.patchValue(result),
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
@@ -80,7 +78,7 @@ export class EditComponent implements OnInit, AfterViewInit {
           this.alertService.defaultSuccess(result.message)
           this.router.navigate([this.menuBack.routerLink])
         },
-        error: error => this.alertService.defaultError(error.error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 }

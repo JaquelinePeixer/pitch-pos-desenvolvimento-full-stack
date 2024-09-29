@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import webservice.entity.ResponseModel;
+import webservice.entity.EmptyResponse;
 import webservice.entity.Subject;
 import webservice.repository.SubjectRepository;
 
@@ -18,49 +18,45 @@ import webservice.repository.SubjectRepository;
 @Service
 public class SubjectService {
 
-    private SubjectRepository subjectRepository;
+	private SubjectRepository subjectRepository;
 
-    public ResponseEntity<Subject> getSubjectPorId(String id) {
-        if (subjectRepository.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.OK).body(subjectRepository.findById(id).get());
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
+	public ResponseEntity<Subject> getSubjectPorId(String id) {
+		if (subjectRepository.existsById(id)) {
+			return ResponseEntity.status(HttpStatus.OK).body(subjectRepository.findById(id).get());
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	}
 
-    public Page<Subject> getSubjectAll(PageRequest page) {
-        return subjectRepository.findAll(page);
-    }
+	public Page<Subject> getSubjectAll(PageRequest page) {
+		return subjectRepository.findAll(page);
+	}
 
-    public List<Subject> getSubjectAllFindList() {
-        return subjectRepository.findAll();
-    }
+	public List<Subject> getSubjectAllFindList() {
+		return subjectRepository.findAll();
+	}
 
-    public Page<Subject> subjectFilter(String name, Pageable page) {
-        return subjectRepository.findByNameContaining(name, page);
-    }
+	public Page<Subject> subjectFilter(String name, Pageable page) {
+		return subjectRepository.findByNameContaining(name, page);
+	}
 
-    public ResponseEntity<Subject> postSubject(Subject subject) {
-        Subject subjectSave = subjectRepository.save(subject);
-        return ResponseEntity.status(HttpStatus.CREATED).body(subjectSave);
-    }
+	public ResponseEntity<EmptyResponse> postSubject(Subject subject) {
+		subjectRepository.save(subject);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new EmptyResponse("Assunto criado com sucesso"));
+	}
 
-    public ResponseEntity<ResponseModel> putSubject(String id, Subject subject) {
-        if (subjectRepository.existsById(id)) {
-            subjectRepository.save(subject);
-            ResponseModel responseModel = new ResponseModel(1, "Assunto atualizado");
-            return ResponseEntity.status(HttpStatus.OK).body(responseModel);
-        }
-        ResponseModel responseModelError = new ResponseModel(2, "Autor não encontrado");
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
-    }
+	public ResponseEntity<EmptyResponse> putSubject(String id, Subject subject) {
+		if (subjectRepository.existsById(id)) {
+			subjectRepository.save(subject);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Assunto salvo com sucesso!"));
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Assunto não encontrado"));
+	}
 
-    public ResponseEntity<ResponseModel> removeSubject(String id) {
-        if (subjectRepository.existsById(id)) {
-            subjectRepository.deleteById(id);
-            ResponseModel responseModel = new ResponseModel(1, "Assunto removido com sucesso");
-            return ResponseEntity.status(HttpStatus.OK).body(responseModel);
-        }
-        ResponseModel responseModelError = new ResponseModel(2, "Autor não encontrado");
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
-    }
+	public ResponseEntity<EmptyResponse> removeSubject(String id) {
+		if (subjectRepository.existsById(id)) {
+			subjectRepository.deleteById(id);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Assunto removido com sucesso"));
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Assunto não encontrado"));
+	}
 }

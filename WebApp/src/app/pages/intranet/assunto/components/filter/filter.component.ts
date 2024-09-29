@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { onlySpaceValidator } from '../../../../../domain/validators/only-space-validaor';
+import { onlySpaceValidator } from '@domain/validators/only-space-validaor';
 
 @Component({
   selector: 'app-assunto-filter',

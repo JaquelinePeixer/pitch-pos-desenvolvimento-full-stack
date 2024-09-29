@@ -1,12 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { AssuntoService } from '../../../../../service/assunto/assunto.service';
+import { Component } from '@angular/core';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
+import { LoadingService } from '@shared/loading/loading.service';
+import { AssuntoService } from '@service/assunto/assunto.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { Assunto } from '../../../../../service/assunto/assunto';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
+import { Assunto } from '@service/assunto/assunto';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { PaginatorComponent } from '@app/shared/paginator/paginator.component';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-list',
@@ -14,11 +15,8 @@ import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
+export class ListComponent extends PaginatorComponent {
   tableData: Assunto[] = [];
-  search: any;
-  pageSize = PageSize.sizeDefault;
-
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -34,9 +32,10 @@ export class ListComponent {
     private loadingService: LoadingService,
     private assuntoService: AssuntoService,
     private router: Router,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) {
-    this.fetch();
+    super();
   }
 
   fetch(event?: number) {
@@ -46,8 +45,9 @@ export class ListComponent {
       .subscribe({
         next: result => {
           this.tableData = result.content;
+          this.totalRecords = result.totalElements;
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
@@ -64,12 +64,8 @@ export class ListComponent {
           this.alertService.defaultSuccess(result.message);
           this.fetch();
         },
-        error: error => this.alertService.defaultError(error.error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
-  filter(params: any) {
-    this.search = params;
-    this.fetch();
-  }
 }
