@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import webservice.entity.Author;
-import webservice.entity.ResponseModel;
+import webservice.entity.EmptyResponse;
 import webservice.repository.AuthorRepository;
 
 @AllArgsConstructor
@@ -39,28 +39,24 @@ public class AuthorService {
 		return authorRepository.findByNameContaining(name, page);
 	}
 
-	public ResponseEntity<Author> postAuthor(Author author) {
-		Author authorSave = authorRepository.save(author);
-		return ResponseEntity.status(HttpStatus.CREATED).body(authorSave);
+	public ResponseEntity<EmptyResponse> postAuthor(Author author) {
+		authorRepository.save(author);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new EmptyResponse("Autor criado com sucesso"));
 	}
 
-	public ResponseEntity<ResponseModel> putAuthor(String id, Author author) {
+	public ResponseEntity<EmptyResponse> putAuthor(String id, Author author) {
 		if (authorRepository.existsById(id)) {
 			authorRepository.save(author);
-			ResponseModel responseModel = new ResponseModel(1, "Autor atualizado");
-			return ResponseEntity.status(HttpStatus.OK).body(responseModel);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Autor salvo com sucesso!"));
 		}
-		ResponseModel responseModelError = new ResponseModel(2, "Autor não encontrado");
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Autor não encontrado"));
 	}
 
-	public ResponseEntity<ResponseModel> removeAuthor(String id) {
+	public ResponseEntity<EmptyResponse> removeAuthor(String id) {
 		if (authorRepository.existsById(id)) {
 			authorRepository.deleteById(id);
-			ResponseModel responseModel = new ResponseModel(1, "Autor removido com sucesso");
-			return ResponseEntity.status(HttpStatus.OK).body(responseModel);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Autor removido com sucesso!"));
 		}
-		ResponseModel responseModelError = new ResponseModel(2, "Autor não encontrado");
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Autor não encontrado"));
 	}
 }

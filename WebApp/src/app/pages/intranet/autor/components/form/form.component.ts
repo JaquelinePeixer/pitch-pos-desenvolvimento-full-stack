@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Autor } from '../../../../../service/autor/autor';
-import { onlySpaceValidator } from '../../../../../domain/validators/only-space-validaor';
+import { Autor } from '@service/autor/autor';
+import { onlySpaceValidator } from '@domain/validators/only-space-validaor';
 
 @Component({
   selector: 'app-form',
@@ -43,6 +43,8 @@ export class FormComponent {
   patchValue(entity: Autor): void {
     if (entity != null) {
       this.formGroup.patchValue(entity);
+      if (entity.deathhYear) this.formGroup.controls['deathhYear'].setValue(new Date(entity.deathhYear));
+      if (entity.birthYear) this.formGroup.controls['birthYear'].setValue(new Date(entity.birthYear));
     }
   }
 
