@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import webservice.entity.BookLoan;
+import webservice.domains.book.BookLoan;
 import webservice.service.BookLoanService;
 
 

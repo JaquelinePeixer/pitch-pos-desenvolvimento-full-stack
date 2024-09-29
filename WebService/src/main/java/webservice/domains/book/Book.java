@@ -1,4 +1,4 @@
-package webservice.entity;
+package webservice.domains.book;
 
 import java.util.Set;
 
@@ -15,6 +15,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import webservice.domains.location.Location;
+import webservice.entity.Author;
+import webservice.entity.Subject;
 
 @Getter
 @Setter
@@ -40,9 +42,6 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "fk_author")
 	private Author author;
-
-	@ManyToMany
-	private Set<Author> secondaryAuthor;
 
 	@ManyToOne
 	@JoinColumn(name = "fk_location")

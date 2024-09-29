@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import webservice.entity.Book;
+import webservice.domains.book.Book;
+import webservice.entity.EmptyResponse;
 import webservice.service.BookService;
 
 @RestController
@@ -34,10 +35,10 @@ public class BookController {
 
 	@GetMapping
 	public Page<Book> getBookAll(@RequestParam(required = false) String title,
-			@RequestParam(required = false) String author_id, @RequestParam(required = false) String id,
-			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
-		if (title != null || author_id != null || id != null) {
-			return bookService.bookFilter(title, author_id, id,
+			@RequestParam(required = false) String author_id, @RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "5") Integer pageSize) {
+		if (title != null || author_id != null) {
+			return bookService.getBookFilter(title, author_id,
 					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "title")));
 		} else {
 			return bookService.getBookAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "title")));
@@ -45,17 +46,17 @@ public class BookController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Book> postBook(@RequestBody Book book) {
+	public ResponseEntity<EmptyResponse> postBook(@RequestBody Book book) {
 		return bookService.postBook(book);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Book> putBook(@PathVariable String id, @RequestBody Book book) {
+	public ResponseEntity<EmptyResponse> putBook(@PathVariable String id, @RequestBody Book book) {
 		return bookService.putBook(id, book);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> removeBook(@PathVariable String id) {
+	public ResponseEntity<EmptyResponse> removeBook(@PathVariable String id) {
 		return bookService.removeBook(id);
 	}
 }

@@ -1,16 +1,16 @@
 import { Component, Input } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Obra } from '../../../../../service/obra/obra';
-import { Assunto } from '../../../../../service/assunto/assunto';
-import { AssuntoService } from '../../../../../service/assunto/assunto.service';
+import { Obra } from '@service/obra/obra';
+import { Assunto } from '@service/assunto/assunto';
+import { AssuntoService } from '@service/assunto/assunto.service';
 import { finalize } from 'rxjs';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { TipoAutor } from '../../../../../domain/enum/tipoAutor.enum';
-import { AutorService } from '../../../../../service/autor/autor.service';
-import { Autor } from '../../../../../service/autor/autor';
-import { onlySpaceValidator } from '../../../../../domain/validators/only-space-validaor';
+import { LoadingService } from '@shared/loading/loading.service';
+import { TipoAutor } from '@domain/enum/tipoAutor.enum';
+import { AutorService } from '@service/autor/autor.service';
+import { Autor } from '@service/autor/autor';
+import { onlySpaceValidator } from '@domain/validators/only-space-validaor';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-form',
@@ -35,7 +35,7 @@ export class FormComponent {
     private loadingService: LoadingService,
     private assuntoService: AssuntoService,
     private autorService: AutorService,
-    private alertService: AlertModalService
+    private toastErrorService: ToastErrorService
   ) {
     this.formGroup = this.formBuilder.group({
       id: [null, [Validators.required]],
@@ -79,7 +79,7 @@ export class FormComponent {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => this.optionAssuntos = result,
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
@@ -119,7 +119,7 @@ export class FormComponent {
         .pipe(finalize(() => this.loadingService.stopLoadind()))
         .subscribe({
           next: result => this.optionAutor = result,
-          error: error => this.alertService.defaultError(error.message)
+          error: error => this.toastErrorService.alertError(error)
         })
     }
   }

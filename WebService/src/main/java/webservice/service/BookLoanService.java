@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import webservice.entity.BookLoan;
+import webservice.domains.book.BookLoan;
 import webservice.repository.BookLoanRepository;
 
 @AllArgsConstructor
