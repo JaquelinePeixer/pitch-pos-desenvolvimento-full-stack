@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { config } from '../../config';
+import { config } from '@app/config';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from './usuario';
 import { Observable } from 'rxjs';
-import { PageSize } from '../../domain/pagination/pagesize.enum';
+import { PageSize } from '@domain/pagination/pagesize.enum';
 
 @Injectable({
   providedIn: 'root'

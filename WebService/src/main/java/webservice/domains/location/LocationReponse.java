@@ -1,4 +1,4 @@
-package webservice.entity;
+package webservice.domains.location;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,8 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Location {
-
+public class LocationReponse {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
@@ -24,6 +23,7 @@ public class Location {
 
 	private String section;
 
-	private Integer bookcase;
+	private Integer initialBookcase;
 
+	private Integer finalBookcase;
 }

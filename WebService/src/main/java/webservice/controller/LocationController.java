@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import webservice.entity.Location;
-import webservice.entity.LocationReponse;
+import webservice.domains.location.Location;
+import webservice.domains.location.LocationReponse;
+import webservice.entity.EmptyResponse;
 import webservice.entity.ResponseModel;
 import webservice.service.LocationService;
 
@@ -35,30 +36,30 @@ public class LocationController {
 	}
 
 	@GetMapping
-	public Page<Location> getAuthorAll(@RequestParam(required = false) Integer floor,
+	public Page<Location> getLocationAll(@RequestParam(required = false) Integer floor,
 			@RequestParam(required = false) String section, @RequestParam(required = false) Integer bookcase,
 			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
 
 		if (floor != null || section != null || bookcase != null) {
 			return locationService.locationFilter(floor, section, bookcase,
-					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
+					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "section")));
 		} else {
-			return locationService.getLocationAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
+			return locationService.getLocationAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "section")));
 		}
 	}
 
 	@PostMapping
-	public ResponseEntity<ResponseModel> postLocation(@RequestBody LocationReponse location) {
+	public ResponseEntity<EmptyResponse> postLocation(@RequestBody LocationReponse location) {
 		return locationService.postLocation(location);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseModel> putLocation(@PathVariable String id, @RequestBody LocationReponse location) {
+	public ResponseEntity<EmptyResponse> putLocation(@PathVariable String id, @RequestBody LocationReponse location) {
 		return locationService.putLocation(id, location);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseModel> removeLocation(@PathVariable String id) {
+	public ResponseEntity<EmptyResponse> removeLocation(@PathVariable String id) {
 		return locationService.removeLocation(id);
 	}
 

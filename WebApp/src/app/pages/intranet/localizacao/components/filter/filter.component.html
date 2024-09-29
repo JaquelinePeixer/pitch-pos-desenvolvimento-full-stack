@@ -6,7 +6,8 @@
         </div>
         <div class="col-4">
             <label for="section" class="form-label">{{'localizacao.field.section' | translate}}</label>
-            <input pInputText type="text" class="form-control" id="section" formControlName="section">
+            <input pInputText type="text" class="form-control" id="section" formControlName="section"
+                oninput="section.value = section.value.toUpperCase()">
         </div>
         <div class="col-3">
             <label for="bookcase" class="form-label">{{'localizacao.field.bookcase' | translate}}</label>

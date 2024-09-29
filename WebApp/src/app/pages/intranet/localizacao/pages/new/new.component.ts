@@ -1,15 +1,13 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
+import { LoadingService } from '@shared/loading/loading.service';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormComponent } from '../../components/form/form.component';
-import { LocalizacaoService } from '../../../../../service/localizacao/localizacao.service';
-import { Localizacao } from '../../../../../service/localizacao/localizacao';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-
-
+import { LocalizacaoService } from '@service/localizacao/localizacao.service';
+import { Localizacao } from '@service/localizacao/localizacao';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-new',
@@ -42,6 +40,7 @@ export class NewComponent implements AfterViewInit {
     private loadingService: LoadingService,
     private localizacaoService: LocalizacaoService,
     private router: Router,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) { }
 
@@ -59,7 +58,7 @@ export class NewComponent implements AfterViewInit {
           this.alertService.defaultSuccess(result.message)
           this.router.navigate([this.menuBack.routerLink])
         },
-        error: error => this.alertService.defaultError(error.error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
