@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.entity.EmptyResponse;
-import webservice.entity.ResponseModel;
 import webservice.entity.Subject;
 import webservice.service.SubjectService;
 
@@ -35,10 +34,10 @@ public class SubjectController {
 	public ResponseEntity<Subject> getSubjectPorId(@PathVariable String id) {
 		return subjectService.getSubjectPorId(id);
 	}
-
+	
 	@GetMapping("/find-list")
-	public List<Subject> getSubjectFindList() {
-		return subjectService.getSubjectAllFindList();
+	public List<Subject> getSubjectFindList(@RequestParam String name) {
+		return subjectService.getSubjectAllFindList(name);
 	}
 
 	@GetMapping

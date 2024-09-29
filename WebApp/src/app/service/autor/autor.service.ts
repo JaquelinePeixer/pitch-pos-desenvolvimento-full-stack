@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { config } from '../../config';
 import { Observable } from 'rxjs';
 import { Autor } from './autor';
-import { PageSize } from '../../domain/pagination/pagesize.enum';
+import { PageSize } from '@domain/pagination/pagesize.enum';
 
 
 @Injectable({

@@ -44,7 +44,7 @@ public class BookController {
 			return bookService.getBookAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "title")));
 		}
 	}
-
+	
 	@PostMapping
 	public ResponseEntity<EmptyResponse> postBook(@RequestBody Book book) {
 		return bookService.postBook(book);

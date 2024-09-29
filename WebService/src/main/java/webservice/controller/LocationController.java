@@ -1,5 +1,7 @@
 package webservice.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,7 +21,6 @@ import lombok.AllArgsConstructor;
 import webservice.domains.location.Location;
 import webservice.domains.location.LocationReponse;
 import webservice.entity.EmptyResponse;
-import webservice.entity.ResponseModel;
 import webservice.service.LocationService;
 
 @RestController
@@ -46,6 +47,11 @@ public class LocationController {
 		} else {
 			return locationService.getLocationAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "section")));
 		}
+	}
+	
+	@GetMapping("/find-list")
+	public List<Location> getLocationFindList() {
+		return locationService.getLocationAllFindList();
 	}
 
 	@PostMapping

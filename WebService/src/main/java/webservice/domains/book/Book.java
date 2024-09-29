@@ -31,12 +31,19 @@ public class Book {
 	private String id;
 
 	private String title;
-	private Integer publicationYear;
+	
+	private String publicationYear;
+	
 	private String publisherName;
+	
 	private Integer volume;
+	
 	private Integer pageQuantity;
+	
 	private String publicationLocation;
+	
 	private Integer quantityOfCopies;
+	
 	private String edition;
 
 	@ManyToOne
@@ -47,7 +54,8 @@ public class Book {
 	@JoinColumn(name = "fk_location")
 	private Location location;
 
-	@ManyToMany
-	private Set<Subject> subject;
+	@ManyToOne
+	@JoinColumn(name = "fk_subject")
+	private Subject subject;
 
 }

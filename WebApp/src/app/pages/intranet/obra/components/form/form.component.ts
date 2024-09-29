@@ -6,11 +6,12 @@ import { Assunto } from '@service/assunto/assunto';
 import { AssuntoService } from '@service/assunto/assunto.service';
 import { finalize } from 'rxjs';
 import { LoadingService } from '@shared/loading/loading.service';
-import { TipoAutor } from '@domain/enum/tipoAutor.enum';
 import { AutorService } from '@service/autor/autor.service';
 import { Autor } from '@service/autor/autor';
 import { onlySpaceValidator } from '@domain/validators/only-space-validaor';
 import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
+import { LocalizacaoService } from '@app/service/localizacao/localizacao.service';
+import { Localizacao } from '@app/service/localizacao/localizacao';
 
 @Component({
   selector: 'app-form',
@@ -26,6 +27,7 @@ export class FormComponent {
   optionAssuntos: Assunto[];
   tableAutor: any[] = [];
   optionAutor: Autor[] = [];
+  optionBookcase: Localizacao[] = [];
 
   onSubmit!: (entity: Obra) => void;
   onCancel!: () => void;
@@ -34,6 +36,7 @@ export class FormComponent {
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private assuntoService: AssuntoService,
+    private localizacaoService: LocalizacaoService,
     private autorService: AutorService,
     private toastErrorService: ToastErrorService
   ) {
@@ -42,17 +45,16 @@ export class FormComponent {
       title: [null, [Validators.required, Validators.maxLength(255), onlySpaceValidator]],
       publicationYear: [null, [Validators.required]],
       publisherName: [null, [Validators.required, Validators.maxLength(255), onlySpaceValidator]],
-      bookcase: [null, [Validators.required]],
+      fk_location: [null, [Validators.required]],
       volume: [null, [Validators.required]],
       pageQuantity: [null, [Validators.required]],
       publicationLocation: [null],
       quantityOfCopies: [null],
-      author: [null, [Validators.required]],
-      secondaryAuthor: [null],
-      subject: [null, [Validators.required]],
+      fk_author: [null, [Validators.required]],
+      fk_subject: [null, [Validators.required]],
       edition: [null, [Validators.required]],
     })
-    this.getAssuntos();
+    this.getLocalizacao();
   }
 
   submit() {
@@ -73,49 +75,32 @@ export class FormComponent {
     }
   }
 
-  getAssuntos() {
+  getLocalizacao(){
     this.loadingService.startLoadind();
-    this.assuntoService.getList()
+    this.localizacaoService.getList()
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: result => this.optionAssuntos = result,
+        next: result => this.optionBookcase = result,
         error: error => this.toastErrorService.alertError(error)
       })
   }
 
-  removerAutor(id: any) {
-    this.tableAutor = this.tableAutor.filter(x => x.id != id);
-  }
-
-  addAutorSecundario() {
-    this.tableAutor.push({
-      id: this.getIdAutor(),
-      tipo: TipoAutor.autorSecundario,
-      author: `Autor ${this.tableAutor.length}`
-    })
-  }
-
-  addAutor() {
-    this.tableAutor.push({
-      id: this.getIdAutor(),
-      tipo: TipoAutor.autor,
-      author: `Autor ${this.tableAutor.length}`
-    })
-  }
-
-  getIdAutor() {
-    return this.tableAutor.length + 1;
-  }
-
-  selectEvent(autor: Autor, item: any) {
-    item.author = autor;
-  }
-
-  searchAutor(query: any) {
-    debugger
-    if (query.length > 2) {
+  searchAssuntos(value: any) {
+    if (value.query.length > 2) {
       this.loadingService.startLoadind();
-      this.autorService.getList(query)
+      this.assuntoService.getList(value.query)
+        .pipe(finalize(() => this.loadingService.stopLoadind()))
+        .subscribe({
+          next: result => this.optionAssuntos = result,
+          error: error => this.toastErrorService.alertError(error)
+        })
+    }
+  }
+
+  searchAutor(value: any) {
+    if (value.query.length > 2) {
+      this.loadingService.startLoadind();
+      this.autorService.getList(value.query)
         .pipe(finalize(() => this.loadingService.stopLoadind()))
         .subscribe({
           next: result => this.optionAutor = result,

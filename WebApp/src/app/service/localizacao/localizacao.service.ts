@@ -18,6 +18,10 @@ export class LocalizacaoService {
     return this.http.get<any>(`${this.baseUrl}?page=${page ?? 0}&pageSize=${this.pageSize}`, { params });
   }
 
+  getList(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/find-list`);
+  }
+
   getId(id: any): Observable<Localizacao> {
     return this.http.get<Localizacao>(`${this.baseUrl}/${id}`);
   }

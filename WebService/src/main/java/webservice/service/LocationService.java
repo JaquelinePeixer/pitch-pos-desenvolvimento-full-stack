@@ -1,5 +1,7 @@
 package webservice.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import webservice.domains.location.Location;
 import webservice.domains.location.LocationReponse;
 import webservice.entity.EmptyResponse;
 import webservice.entity.ResponseModel;
+import webservice.entity.Subject;
 import webservice.repository.LocationRepository;
 
 @AllArgsConstructor
@@ -29,6 +32,10 @@ public class LocationService {
 
 	public Page<Location> getLocationAll(PageRequest page) {
 		return locationRepository.findAll(page);
+	}
+	
+	public List<Location> getLocationAllFindList() {
+		return locationRepository.findAll();
 	}
 
 	public Page<Location> locationFilter(Integer floor, String section, Integer bookcase, PageRequest page) {
