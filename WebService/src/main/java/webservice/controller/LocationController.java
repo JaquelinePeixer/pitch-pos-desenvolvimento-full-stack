@@ -36,15 +36,15 @@ public class LocationController {
 	}
 
 	@GetMapping
-	public Page<Location> getAuthorAll(@RequestParam(required = false) Integer floor,
+	public Page<Location> getLocationAll(@RequestParam(required = false) Integer floor,
 			@RequestParam(required = false) String section, @RequestParam(required = false) Integer bookcase,
 			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
 
 		if (floor != null || section != null || bookcase != null) {
 			return locationService.locationFilter(floor, section, bookcase,
-					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
+					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "section")));
 		} else {
-			return locationService.getLocationAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "floor")));
+			return locationService.getLocationAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "section")));
 		}
 	}
 
