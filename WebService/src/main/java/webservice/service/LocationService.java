@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.AllArgsConstructor;
-import webservice.entity.Location;
-import webservice.entity.LocationReponse;
+import webservice.domains.location.Location;
+import webservice.domains.location.LocationReponse;
+import webservice.entity.EmptyResponse;
 import webservice.entity.ResponseModel;
 import webservice.repository.LocationRepository;
 
@@ -34,18 +35,19 @@ public class LocationService {
 		return locationRepository.search(floor, section, bookcase, page);
 	}
 
-	public ResponseEntity<ResponseModel> postLocation(LocationReponse location) {
-		ResponseModel responseModel = saveLocation(location, RequestMethod.POST);
-		return ResponseEntity.status(HttpStatus.CREATED).body(responseModel);
+	public ResponseEntity<EmptyResponse> postLocation(LocationReponse location) {
+		 saveLocation(location, RequestMethod.POST);
+		return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Localização criada com sucesso"));
 	}
 
-	public ResponseEntity<ResponseModel> putLocation(String id, LocationReponse location) {
+	public ResponseEntity<EmptyResponse> putLocation(String id, LocationReponse location) {
 		if (locationRepository.existsById(id)) {
-			ResponseModel responseModel = saveLocation(location, RequestMethod.PUT);
-			return ResponseEntity.status(HttpStatus.OK).body(responseModel);
+			Location newLocation = new Location(location.getId(), location.getFloor(), location.getSection(),
+					location.getInitialBookcase());
+			locationRepository.save(newLocation);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Localização salvo com sucesso!"));
 		}
-		ResponseModel responseModelError = new ResponseModel(2, "Localização não encontrada");
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Localização não encontrado"));
 	}
 
 	public ResponseModel saveLocation(LocationReponse location, RequestMethod method) {
@@ -90,14 +92,12 @@ public class LocationService {
 		return new ResponseModel(2, "Não foi possivel salvar a localização");
 	}
 
-	public ResponseEntity<ResponseModel> removeLocation(String id) {
+	public ResponseEntity<EmptyResponse> removeLocation(String id) {
 		if (locationRepository.existsById(id)) {
 			locationRepository.deleteById(id);
-			ResponseModel responseModel = new ResponseModel(1, "Localização removida com sucesso");
-			return ResponseEntity.status(HttpStatus.OK).body(responseModel);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Localização removida com sucesso"));
 		}
-		ResponseModel responseModelError = new ResponseModel(2, "Localização não encontrada");
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseModelError);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Localização não encontrada"));
 	}
 
 }

@@ -58,9 +58,7 @@ export class EditComponent implements OnInit, AfterViewInit {
     this.usuarioService.getId(this.id)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: (result: Usuario) => {
-          this.form.patchValue(result)
-        },
+        next: (result: Usuario) => this.form.patchValue(result),
         error: error => this.toastErrorService.alertError(error)
       })
   }

@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { FormComponent } from '../../components/form/form.component';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { FormBuilder } from '@angular/forms';
+import { LoadingService } from '@shared/loading/loading.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { LocalizacaoService } from '../../../../../service/localizacao/localizacao.service';
-import { Localizacao } from '../../../../../service/localizacao/localizacao';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { LocalizacaoService } from '@service/localizacao/localizacao.service';
+import { Localizacao } from '@service/localizacao/localizacao';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-edit',
@@ -43,6 +43,7 @@ export class EditComponent implements OnInit, AfterViewInit {
     private localizacaoService: LocalizacaoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) {
     this.id = this.activatedRoute.snapshot.params['id'];
@@ -57,9 +58,7 @@ export class EditComponent implements OnInit, AfterViewInit {
     this.localizacaoService.getId(this.id)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: (result: Localizacao) => {
-          this.form.patchValue(result)
-        },
+        next: (result: Localizacao) => this.form.patchValue(result),
         error: error => this.alertService.defaultError(error.message)
       })
   }
@@ -79,7 +78,7 @@ export class EditComponent implements OnInit, AfterViewInit {
           this.alertService.defaultSuccess(result.message)
           this.router.navigate([this.menuBack.routerLink])
         },
-        error: error => this.alertService.defaultError(error.error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Localizacao } from '../../../../../service/localizacao/localizacao';
+import { Localizacao } from '@service/localizacao/localizacao';
 
 @Component({
   selector: 'app-form',

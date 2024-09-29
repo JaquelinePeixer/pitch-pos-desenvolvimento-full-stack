@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import webservice.entity.Location;
-import webservice.entity.LocationReponse;
+import webservice.domains.location.Location;
+import webservice.domains.location.LocationReponse;
+import webservice.entity.EmptyResponse;
 import webservice.entity.ResponseModel;
 import webservice.service.LocationService;
 
@@ -48,17 +49,17 @@ public class LocationController {
 	}
 
 	@PostMapping
-	public ResponseEntity<ResponseModel> postLocation(@RequestBody LocationReponse location) {
+	public ResponseEntity<EmptyResponse> postLocation(@RequestBody LocationReponse location) {
 		return locationService.postLocation(location);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseModel> putLocation(@PathVariable String id, @RequestBody LocationReponse location) {
+	public ResponseEntity<EmptyResponse> putLocation(@PathVariable String id, @RequestBody LocationReponse location) {
 		return locationService.putLocation(id, location);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseModel> removeLocation(@PathVariable String id) {
+	public ResponseEntity<EmptyResponse> removeLocation(@PathVariable String id) {
 		return locationService.removeLocation(id);
 	}
 

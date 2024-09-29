@@ -15,20 +15,29 @@
                     </div>
                     <div class="col-3">
                         <label for="section" class="form-label">{{'localizacao.field.section' | translate}}</label>
-                        <input #section type="text" class="form-control" id="section" formControlName="section"
+                        <input pInputText class="form-control" id="section" formControlName="section"
                             oninput="section.value = section.value.toUpperCase()">
                     </div>
                     <div class="col-3">
-                        <label for="initialBookcase" class="form-label">{{'localizacao.field.initialBookcase' |
-                            translate}}</label>
+                        <label for="initialBookcase" class="form-label">
+                            @if(isNew){
+                            {{'localizacao.field.initialBookcase' | translate}}
+                            }
+                            @else {
+                            {{'localizacao.field.bookcase' | translate}}
+                            }
+                        </label>
                         <input pInputText type="number" class="form-control" id="initialBookcase"
                             formControlName="initialBookcase">
                     </div>
+                    @if(isNew){
                     <div class="col-3">
                         <label for="finalBookcase" class="form-label">{{'localizacao.field.finalBookcase' |
                             translate}}</label>
-                        <input pInputText type="number" class="form-control" id="finalBookcase" formControlName="finalBookcase">
+                        <input pInputText type="number" class="form-control" id="finalBookcase"
+                            formControlName="finalBookcase">
                     </div>
+                    }
                 </div>
 
                 <div class="row">

@@ -16,14 +16,14 @@
 
             <div class="row ">
                 <p-table
-                id="tableUser"
-                [value]="tableData"
-                [paginator]="true"                
-                [lazy]="true"
-                (onLazyLoad)="paginate($event)"                         
-                [rows]="pageSize"
-                [totalRecords]="totalRecords"
-                dataKey="id"
+                    id="tableUser"
+                    [value]="tableData"
+                    [paginator]="true"
+                    [lazy]="true"
+                    (onLazyLoad)="paginate($event)"
+                    [rows]="pageSize"
+                    [totalRecords]="totalRecords"
+                    dataKey="id"
                 >
                     <ng-template pTemplate="header">
                         <tr>

@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { LocalizacaoService } from '../../../../../service/localizacao/localizacao.service';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
+import { LoadingService } from '@shared/loading/loading.service';
+import { LocalizacaoService } from '@service/localizacao/localizacao.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { Localizacao } from '../../../../../service/localizacao/localizacao';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
+import { Localizacao } from '@service/localizacao/localizacao';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { PaginatorComponent } from '@app/shared/paginator/paginator.component';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-list',
@@ -14,11 +15,8 @@ import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
+export class ListComponent extends PaginatorComponent {
   tableData: Localizacao[] = [];
-  search: Localizacao;
-  pageSize = PageSize.sizeDefault;
-
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -34,9 +32,10 @@ export class ListComponent {
     private loadingService: LoadingService,
     private localizacaoService: LocalizacaoService,
     private router: Router,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) {
-    this.fetch();
+    super();
   }
 
   fetch(event?: number) {
@@ -45,9 +44,10 @@ export class ListComponent {
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
-          this.tableData = result.content;          
+          this.tableData = result.content;
+          this.totalRecords = result.totalElements;
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
@@ -64,21 +64,8 @@ export class ListComponent {
           this.alertService.defaultSuccess(result.message);
           this.fetch();
         },
-        error: error => this.alertService.defaultError(error.error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
-  filter(params: Localizacao) {
-    this.search = {};
-    if (params.floor != null) {
-      this.search.floor = params.floor;
-    }
-    if (params.section != null) {
-      this.search.section = params.section;
-    }
-    if (params.bookcase != null) {
-      this.search.bookcase = params.bookcase;
-    }
-    this.fetch();
-  }
 }
