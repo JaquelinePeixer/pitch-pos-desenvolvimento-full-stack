@@ -41,24 +41,26 @@ export class FormComponent {
     private toastErrorService: ToastErrorService
   ) {
     this.formGroup = this.formBuilder.group({
-      id: [null, [Validators.required]],
+      id: [null],
       title: [null, [Validators.required, Validators.maxLength(255), onlySpaceValidator]],
       publicationYear: [null, [Validators.required]],
       publisherName: [null, [Validators.required, Validators.maxLength(255), onlySpaceValidator]],
-      fk_location: [null, [Validators.required]],
+      location: [null, [Validators.required]],
       volume: [null, [Validators.required]],
       pageQuantity: [null, [Validators.required]],
       publicationLocation: [null],
       quantityOfCopies: [null],
-      fk_author: [null, [Validators.required]],
-      fk_subject: [null, [Validators.required]],
+      author: [null, [Validators.required]],
+      subject: [null, [Validators.required]],
       edition: [null, [Validators.required]],
     })
     this.getLocalizacao();
   }
 
   submit() {
-    this.onSubmit(this.formGroup.value)
+    if (this.formGroup.valid) {
+      this.onSubmit(this.formGroup.value)
+    }
   }
 
   cancel() {
@@ -75,10 +77,12 @@ export class FormComponent {
     }
   }
 
-  getLocalizacao(){
+  getLocalizacao() {
     this.loadingService.startLoadind();
     this.localizacaoService.getList()
-      .pipe(finalize(() => this.loadingService.stopLoadind()))
+      .pipe(finalize(() => {
+        this.loadingService.stopLoadind()
+      }))
       .subscribe({
         next: result => this.optionBookcase = result,
         error: error => this.toastErrorService.alertError(error)

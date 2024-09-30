@@ -31,19 +31,19 @@ public class Book {
 	private String id;
 
 	private String title;
-	
+
 	private String publicationYear;
-	
+
 	private String publisherName;
-	
+
 	private Integer volume;
-	
+
 	private Integer pageQuantity;
-	
+
 	private String publicationLocation;
-	
+
 	private Integer quantityOfCopies;
-	
+
 	private String edition;
 
 	@ManyToOne
@@ -57,5 +57,18 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "fk_subject")
 	private Subject subject;
+
+	public Book(String id, String title, String publicationYear, String publisherName, Integer volume,
+			Integer pageQuantity, String publicationLocation, Integer quantityOfCopies, String edition) {
+		this.id = id;
+		this.title = title;
+		this.publicationYear = publicationYear;
+		this.publisherName = publisherName;
+		this.volume = volume;
+		this.pageQuantity = pageQuantity;
+		this.publicationLocation = publicationLocation;
+		this.quantityOfCopies = quantityOfCopies;
+		this.edition = edition;
+	}
 
 }

@@ -238,11 +238,17 @@ a {
     width: 100%;
 }
 
-.icon-link{
+.icon-link {
     text-decoration: none;
 }
 
 .p-autocomplete-panel .p-autocomplete-items {
-    padding:  0;
+    padding: 0;
     margin: 0;
+}
+
+.ng-submitted .ng-invalid.p-inputtext,
+.ng-submitted .ng-invalid .p-inputtext,
+.ng-submitted .ng-invalid .p-dropdown {
+    border-color: var(--danger-500);
 }

@@ -15,9 +15,8 @@
                     </div>
                     <div class="col-2">
                         <label for="location" class="form-label">{{'obra.field.bookcase' | translate}}</label>
-                        <p-dropdown id="location" formControlName="fk_location" [showClear]="true"
-                            [options]="optionBookcase" optionLabel="bookcase" optionValue="id" [filter]="true"
-                            filterBy="name" />
+                        <p-dropdown id="location" formControlName="location" [showClear]="true"
+                            [options]="optionBookcase" optionLabel="bookcase" [filter]="true" filterBy="name" />
                     </div>
                 </div>
                 <div class="row mb-4">
@@ -57,7 +56,7 @@
                 <div class="row mb-4">
                     <div class="col-8">
                         <label for="subject" class="form-label">{{'obra.field.subject' | translate}}</label>
-                        <p-autoComplete formControlName="fk_subject" [suggestions]="optionAssuntos" optionValue="id"
+                        <p-autoComplete formControlName="subject" [suggestions]="optionAssuntos"
                             (completeMethod)="searchAssuntos($event)" field="name" class="field" />
                     </div>
                     <div class="col-4">
@@ -70,7 +69,7 @@
                 <div class="row mb-4">
                     <div class="col-12">
                         <label for="author" class="form-label">{{'obra.field.author' | translate}}</label>
-                        <p-autoComplete formControlName="fk_author" [suggestions]="optionAutor" optionValue="id"
+                        <p-autoComplete formControlName="author" [suggestions]="optionAutor"
                             (completeMethod)="searchAutor($event)" field="name" class="field" />
                     </div>
                 </div>
