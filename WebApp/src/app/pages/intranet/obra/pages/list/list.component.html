@@ -15,11 +15,17 @@
             <app-obra-filter (onSearch)="filter($event)"></app-obra-filter>
 
             <div class="row ">
-                <p-table id="tableAssunto" [value]="tableData" [paginator]="true" [rows]="pageSize"
-                    [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50]">
+                <p-table 
+                    id="tableObra"
+                    [value]="tableData"
+                    [paginator]="true"
+                    [lazy]="true"
+                    (onLazyLoad)="paginate($event)"
+                    [rows]="pageSize"
+                    [totalRecords]="totalRecords"
+                    dataKey="id">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th scope="col">{{ 'obra.field.id' | translate}}</th>
                             <th scope="col">{{ 'obra.field.title' | translate}}</th>
                             <th scope="col">{{ 'obra.field.author' | translate}}</th>
                             <th scope="col" class="text-center" style="width: 100px;">{{ 'action.acoes' | translate}}
@@ -28,7 +34,6 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-item>
                         <tr>
-                            <td>{{item.id}}</td>
                             <td>{{item.title}}</td>
                             <td>{{item.author?.name}}</td>
                             <td class="text-center">

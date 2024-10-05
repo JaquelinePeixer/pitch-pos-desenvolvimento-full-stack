@@ -1,4 +1,4 @@
-package webservice.entity;
+package webservice.domains.book;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

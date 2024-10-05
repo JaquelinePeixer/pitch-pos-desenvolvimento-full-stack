@@ -491,7 +491,7 @@
     }
 
     .p-autocomplete-panel .p-autocomplete-items {
-        padding: 0.75rem 0;
+        padding:  0;
     }
 
     .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item {
@@ -1238,7 +1238,7 @@
         padding: 0.75rem 1.25rem;
         border-bottom: 1px solid #424b57;
         color: var(--text-color);
-        background: var(--bs-body);
+        background: var(--border);
         margin: 0;
         border-top-right-radius: var(--border-radius);
         border-top-left-radius: var(--border-radius);
@@ -1556,7 +1556,7 @@
     .p-inputtext:enabled:focus {
         outline: 0 none;
         outline-offset: 0;
-        box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.2);
+        box-shadow: none;
         border-color: var(--border-color);
     }
 

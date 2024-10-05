@@ -9,13 +9,14 @@
 
             <form (submit)="submit()" [formGroup]="formGroup">
                 <div class="row mb-4">
-                    <div class="col-8">
+                    <div class="col-10">
                         <label for="title" class="form-label">{{'obra.field.title' | translate}}</label>
                         <input pInputText type="text" class="form-control" id="title" formControlName="title">
                     </div>
-                    <div class="col-4">
-                        <label for="id" class="form-label">{{'obra.field.id' | translate}}</label>
-                        <input pInputText type="text" class="form-control" id="id" formControlName="id">
+                    <div class="col-2">
+                        <label for="location" class="form-label">{{'obra.field.bookcase' | translate}}</label>
+                        <p-dropdown id="location" formControlName="location" [showClear]="true"
+                            [options]="optionBookcase" optionLabel="bookcase" [filter]="true" filterBy="name" />
                     </div>
                 </div>
                 <div class="row mb-4">
@@ -30,20 +31,20 @@
                     </div>
                     <div class="col-2">
                         <label for="volume" class="form-label">{{'obra.field.volume' | translate}}</label>
-                        <input pInputText type="text" class="form-control" id="volume" formControlName="volume">
+                        <input pInputText type="number" class="form-control" id="volume" formControlName="volume">
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col-3">
+                    <div class="col-4">
                         <label for="pageQuantity" class="form-label">{{'obra.field.pageQuantity' | translate}}</label>
                         <input pInputText type="number" class="form-control" id="pageQuantity"
                             formControlName="pageQuantity">
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <label for="publicationYear" class="form-label">{{'obra.field.publicationYear' |
                             translate}}</label>
-                        <input pInputText type="number" class="form-control" id="publicationYear"
-                            formControlName="publicationYear">
+                        <p-calendar inputId="=publicationYear" view="year" formControlName="publicationYear"
+                            [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" dateFormat="yy" />
                     </div>
                     <div class="col-5">
                         <label for="publicationLocation" class="form-label">{{'obra.field.publicationLocation' |
@@ -51,16 +52,12 @@
                         <input pInputText type="text" class="form-control" id="publicationLocation"
                             formControlName="publicationLocation">
                     </div>
-                    <div class="col-2">
-                        <label for="bookcase" class="form-label">{{'obra.field.bookcase' | translate}}</label>
-                        <input pInputText type="number" class="form-control" id="bookcase" formControlName="bookcase">
-                    </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-8">
                         <label for="subject" class="form-label">{{'obra.field.subject' | translate}}</label>
-                        <p-dropdown id="subject" formControlName="subject" [showClear]="true" [options]="optionAssuntos"
-                            optionLabel="name" />
+                        <p-autoComplete formControlName="subject" [suggestions]="optionAssuntos"
+                            (completeMethod)="searchAssuntos($event)" field="name" class="field" />
                     </div>
                     <div class="col-4">
                         <label for="quantityOfCopies" class="form-label">{{'obra.field.quantityOfCopies' |
@@ -70,44 +67,10 @@
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <!-- <p-table id="tableAutorSecundario" [value]="tableAutor" [paginator]="true" [rows]="pageSize"
-                        [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50]">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th scope="col">{{ 'obra.listAuthors.tipo' | translate}}</th>
-                                <th scope="col">{{ 'obra.listAuthors.author' | translate}}</th>
-                                <th scope="col" class="text-center" style="width: 100px;">{{ 'obra.listAuthors.acao' |
-                                    translate}}
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-item>
-                            <tr>
-                                <td>
-                                    <span>{{item.tipo}}</span>
-                                </td>
-                                <td>
-                                    <p-autoComplete formControlName="author" [suggestions]="optionAutor"
-                                        (completeMethod)="searchAutor($event)" field="name"
-                                        class="form-control field" />
-                                </td>
-                                <td class="text-center">
-                                    <app-form-buttons [item]="item" [showEdit]="false" page="obra"
-                                        (onDelete)="removerAutor(item.id)"></app-form-buttons>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table> -->
-
-                    <div class="row">
-                        <button pButton pRipple class="col-3 btn btn-outline-primary btn-add-autor" type="button"
-                            (click)="addAutorSecundario()">
-                            {{'obra.listAuthors.addAutorSecundario' | translate}}
-                        </button>
-                        <button pButton pRipple class="col-3 btn btn-outline-primary btn-add-autor ms-3" type="button"
-                            (click)="addAutor()">
-                            {{'obra.listAuthors.addAutor' | translate}}
-                        </button>
+                    <div class="col-12">
+                        <label for="author" class="form-label">{{'obra.field.author' | translate}}</label>
+                        <p-autoComplete formControlName="author" [suggestions]="optionAutor"
+                            (completeMethod)="searchAutor($event)" field="name" class="field" />
                     </div>
                 </div>
 

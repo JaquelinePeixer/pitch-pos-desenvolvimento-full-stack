@@ -27,6 +27,8 @@
     color-scheme: dark;
 }
 
+.p-inputtext:enabled:focus,
+.p-dropdown:not(.p-disabled).p-focus,
 .form-control:focus {
     box-shadow: none;
     border-color: #c8a600;
@@ -229,12 +231,24 @@ a {
     --bs-dropdown-border-radius: var(--border-radius);
 }
 
+.p-autocomplete,
 .p-password,
 .p-inputtext,
 .p-calendar {
     width: 100%;
 }
 
-.icon-link{
+.icon-link {
     text-decoration: none;
+}
+
+.p-autocomplete-panel .p-autocomplete-items {
+    padding: 0;
+    margin: 0;
+}
+
+.ng-submitted .ng-invalid.p-inputtext,
+.ng-submitted .ng-invalid .p-inputtext,
+.ng-submitted .ng-invalid .p-dropdown {
+    border-color: var(--danger-500);
 }

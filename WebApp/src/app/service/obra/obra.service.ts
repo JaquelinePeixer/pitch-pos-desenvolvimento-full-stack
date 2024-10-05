@@ -3,7 +3,7 @@ import { config } from '../../config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Obra } from './obra';
-import { PageSize } from '../../domain/pagination/pagesize.enum';
+import { PageSize } from '@domain/pagination/pagesize.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,10 @@ export class ObraService {
 
   get(page?: number, params?: any): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}?page=${page ?? 0}&pageSize=${this.pageSize}`, { params });
+  }
+
+  getList(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/find-list`);
   }
 
   getId(id: any): Observable<Obra> {

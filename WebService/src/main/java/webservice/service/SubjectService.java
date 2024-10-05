@@ -30,9 +30,9 @@ public class SubjectService {
 	public Page<Subject> getSubjectAll(PageRequest page) {
 		return subjectRepository.findAll(page);
 	}
-
-	public List<Subject> getSubjectAllFindList() {
-		return subjectRepository.findAll();
+	
+	public List<Subject> getSubjectAllFindList(String name) {
+		return subjectRepository.findAllByName(name);
 	}
 
 	public Page<Subject> subjectFilter(String name, Pageable page) {

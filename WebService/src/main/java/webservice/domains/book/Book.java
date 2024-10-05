@@ -1,4 +1,4 @@
-package webservice.entity;
+package webservice.domains.book;
 
 import java.util.Set;
 
@@ -15,6 +15,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import webservice.domains.location.Location;
+import webservice.entity.Author;
+import webservice.entity.Subject;
 
 @Getter
 @Setter
@@ -29,26 +31,44 @@ public class Book {
 	private String id;
 
 	private String title;
-	private Integer publicationYear;
+
+	private String publicationYear;
+
 	private String publisherName;
+
 	private Integer volume;
+
 	private Integer pageQuantity;
+
 	private String publicationLocation;
+
 	private Integer quantityOfCopies;
+
 	private String edition;
 
 	@ManyToOne
 	@JoinColumn(name = "fk_author")
 	private Author author;
 
-	@ManyToMany
-	private Set<Author> secondaryAuthor;
-
 	@ManyToOne
 	@JoinColumn(name = "fk_location")
 	private Location location;
 
-	@ManyToMany
-	private Set<Subject> subject;
+	@ManyToOne
+	@JoinColumn(name = "fk_subject")
+	private Subject subject;
+
+	public Book(String id, String title, String publicationYear, String publisherName, Integer volume,
+			Integer pageQuantity, String publicationLocation, Integer quantityOfCopies, String edition) {
+		this.id = id;
+		this.title = title;
+		this.publicationYear = publicationYear;
+		this.publisherName = publisherName;
+		this.volume = volume;
+		this.pageQuantity = pageQuantity;
+		this.publicationLocation = publicationLocation;
+		this.quantityOfCopies = quantityOfCopies;
+		this.edition = edition;
+	}
 
 }

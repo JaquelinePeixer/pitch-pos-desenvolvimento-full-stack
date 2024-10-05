@@ -1,16 +1,12 @@
 <form [formGroup]="formGroupFilter">
     <app-filter (onSearch)="filter()">       
-        <div class="col-4">
+        <div class="col-6">
             <label for="title" class="form-label">{{'obra.field.title' | translate}}</label>
             <input pInputText type="text" class="form-control" id="title" formControlName="title">
         </div>
-        <div class="col-4">
+        <div class="col-5">
             <label for="author" class="form-label">{{'obra.field.author' | translate}}</label>
             <input pInputText type="text" class="form-control" id="author" formControlName="author">
-        </div>
-        <div class="col-3">
-            <label for="id" class="form-label">{{'obra.field.id' | translate}}</label>
-            <input pInputText type="text" class="form-control" id="id" formControlName="id">
         </div>
     </app-filter>
 </form>

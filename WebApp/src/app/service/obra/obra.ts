@@ -12,7 +12,6 @@ export interface Obra {
     publicationLocation?: string;
     quantityOfCopies?: number;
     author?: Autor;
-    secondaryAuthor?: Autor;
     location?: Localizacao;
     subject?: Assunto;
     edition?: string;

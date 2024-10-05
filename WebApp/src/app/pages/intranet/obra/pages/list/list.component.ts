@@ -1,12 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
+import { Component } from '@angular/core';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
+import { LoadingService } from '@shared/loading/loading.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { Obra } from '../../../../../service/obra/obra';
-import { ObraService } from '../../../../../service/obra/obra.service';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
+import { Obra } from '@service/obra/obra';
+import { ObraService } from '@service/obra/obra.service';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { PaginatorComponent } from '@app/shared/paginator/paginator.component';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-list',
@@ -14,11 +15,8 @@ import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
+export class ListComponent extends PaginatorComponent {
   tableData: Obra[] = [];
-  search: any;
-  pageSize = PageSize.sizeDefault;
-
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -34,9 +32,10 @@ export class ListComponent {
     private loadingService: LoadingService,
     private obraService: ObraService,
     private router: Router,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) {
-    this.fetch();
+    super();
   }
 
   fetch(event?: number) {
@@ -46,8 +45,9 @@ export class ListComponent {
       .subscribe({
         next: result => {
           this.tableData = result.content;
+          this.totalRecords = result.totalElements;
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
@@ -64,21 +64,8 @@ export class ListComponent {
           this.alertService.defaultSuccess(result.message);
           this.fetch();
         },
-        error: error => this.alertService.defaultError(error.error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
-  filter(params: Obra) {
-    this.search = {};
-    if (params.title != null) {
-      this.search.title = params.title;
-    }
-    if (params.id != null) {
-      this.search.id = params.id;
-    }
-    if (params.author != null) {
-      this.search.author_id = params.author?.id;
-    }
-    this.fetch();
-  }
 }

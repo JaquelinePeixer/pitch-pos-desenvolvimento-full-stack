@@ -1,5 +1,5 @@
 import { TableLazyLoadEvent } from 'primeng/table';
-import { PageSize } from '../../domain/pagination/pagesize.enum';
+import { PageSize } from '@domain/pagination/pagesize.enum';
 
 export abstract class PaginatorComponent {
   search: any;
@@ -12,7 +12,7 @@ export abstract class PaginatorComponent {
   }
 
   removeNulls(obj: any): any {
-    if (obj === null || obj === undefined) {
+    if (obj === null || obj === undefined || obj === '') {
       return undefined;
     }
 
