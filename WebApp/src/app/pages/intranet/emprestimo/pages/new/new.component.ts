@@ -23,10 +23,6 @@ export class NewComponent implements AfterViewInit {
     },
     {
       title: 'emprestimo.page.title',
-      action: AppMenuModel.menuEmprestimo.routerLink
-    },
-    {
-      title: 'emprestimo.page.new',
       action: null
     }
   ];
@@ -46,7 +42,6 @@ export class NewComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.form.onSubmit = (entity: Emprestimo) => this.onSubmit(entity);
-    this.form.onCancel = () => this.router.navigate([this.menuBack.routerLink]).then();
   }
 
   onSubmit(entity: Emprestimo): void {

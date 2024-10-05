@@ -18,7 +18,8 @@ export class ObraService {
     return this.http.get<any>(`${this.baseUrl}?page=${page ?? 0}&pageSize=${this.pageSize}`, { params });
   }
 
-  getList(): Observable<any> {
+  getList(name?: string): Observable<any> {
+    if (name) return this.http.get<any>(`${this.baseUrl}/find-list`, { params: { name } });
     return this.http.get<any>(`${this.baseUrl}/find-list`);
   }
 

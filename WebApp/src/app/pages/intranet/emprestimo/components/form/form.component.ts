@@ -2,6 +2,11 @@ import { Component, Input } from '@angular/core';
 import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Emprestimo } from '@app/service/emprestimo/emprestimo';
+import { ObraService } from '@app/service/obra/obra.service';
+import { LoadingService } from '@app/shared/loading/loading.service';
+import { finalize } from 'rxjs';
+import { Obra } from '@app/service/obra/obra';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-form',
@@ -12,13 +17,18 @@ import { Emprestimo } from '@app/service/emprestimo/emprestimo';
 export class FormComponent {
   @Input() isNew?: boolean;
 
-  menuBack = AppMenuModel.menuAutor;
+  menuBack = AppMenuModel.menuEmprestimo;
   formGroup: FormGroup;
+  optionObra: Obra[] = [];
 
   onSubmit!: (entity: Emprestimo) => void;
-  onCancel!: () => void;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loadingService: LoadingService,
+    private obraService: ObraService,
+    private toastErrorService: ToastErrorService
+  ) {
     this.formGroup = this.formBuilder.group({
       id: [null],
       cpf: [[Validators.required]],
@@ -27,12 +37,12 @@ export class FormComponent {
     })
   }
 
-  submit() {
-    this.onSubmit(this.formGroup.value)
+  emprestimo() {
+    // this.onSubmit(this.formGroup.value)
   }
 
-  cancel() {
-    this.onCancel()
+  devolucao() {
+    // this.onCancel()
   }
 
   get form(): { [key: string]: AbstractControl } {
@@ -42,6 +52,18 @@ export class FormComponent {
   patchValue(entity: Emprestimo): void {
     if (entity != null) {
       this.formGroup.patchValue(entity);
+    }
+  }
+
+  searchObras(value: any) {
+    if (value.query.length > 2) {
+      this.loadingService.startLoadind();
+      this.obraService.getList(value.query)
+        .pipe(finalize(() => this.loadingService.stopLoadind()))
+        .subscribe({
+          next: result => this.optionObra = result,
+          error: error => this.toastErrorService.alertError(error)
+        })
     }
   }
 

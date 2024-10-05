@@ -7,6 +7,8 @@ import { SharedModule } from '@shared/shared.module';
 import { FormComponent } from './components/form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmprestimoService } from '@app/service/emprestimo/emprestimo.service';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { EmprestimoService } from '@app/service/emprestimo/emprestimo.service';
     ReactiveFormsModule,
     SharedModule,
     EmprestimoRoutingModule,
-    TranslateModule
+    TranslateModule,
+    AutoCompleteModule,
+    InputMaskModule
   ],
   providers: [
     EmprestimoService

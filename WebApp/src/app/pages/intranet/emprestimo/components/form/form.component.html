@@ -3,34 +3,36 @@
         <div class="grid">
             <div class="row  mb-4">
                 <div class="col-10">
-                    <h1>{{'emprestimo.page.new' | translate}}</h1>
+                    <h1>{{'emprestimo.page.title' | translate}}</h1>
                 </div>
             </div>
 
-            <form (submit)="submit()" [formGroup]="formGroup">
+            <form [formGroup]="formGroup">
                 <div class="row mb-4">
-                    <div class="col-12">
+                    <div class="col-4">
+                        <label for="cpf" class="form-label">{{'emprestimo.field.cpf' | translate}}</label>
+                        <p-inputMask mask="999.999.999-99" inputId="cpf" formControlName="cpf" />
+                    </div>
+                    <div class="col-8">
                         <label for="name" class="form-label">{{'emprestimo.field.name' | translate}}</label>
                         <input pInputText type="text" class="form-control" id="name" formControlName="name"
                             placeholder="{{'emprestimo.field.name' | translate}}">
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col-4">
-                        <label for="birthYear" class="form-label">{{'emprestimo.field.birthYear' | translate}}</label>
-                        <input pInputText type="number" class="form-control" id="birthYear" formControlName="birthYear">
-                    </div>
-                    <div class="col-4">
-                        <label for="deathhYear" class="form-label">{{'emprestimo.field.deathhYear' | translate}}</label>
-                        <input pInputText type="number" class="form-control" id="deathhYear" formControlName="deathhYear">
+                    <div class="col-12">
+                        <label for="book" class="form-label">{{'emprestimo.field.book' | translate}}</label>
+                        <p-autoComplete formControlName="book" [suggestions]="optionObra"
+                            (completeMethod)="searchObras($event)" field="name" class="field" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="d-grid gap-2 d-md-flex">
-                        <button class="btn btn-primary" type="submit">{{'action.salvar' | translate}}</button>
-                        <button class="btn btn-outline-secondary" type="button" (click)="cancel()">{{'action.cancelar'
-                            |
+                        <button class="btn btn-primary" type="button"
+                            (click)="emprestimo()">{{'emprestimo.action.emprestimo' |
                             translate}}</button>
+                        <button class="btn btn-outline-secondary" type="button"
+                            (click)="devolucao()">{{'emprestimo.action.devolucao' | translate}}</button>
                     </div>
                 </div>
             </form>
