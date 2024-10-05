@@ -50,7 +50,7 @@ public class BookService {
 		return bookRepository.findAll(page);
 	}
 
-	public Page<Book> getBookFilter(String author, String title, Pageable page) {
+	public Page<Book> getBookFilter(String title, String author, Pageable page) {
 		BookSearch request = new BookSearch();
 		request.setAuthor(author);
 		request.setTitle(title);

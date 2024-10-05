@@ -35,10 +35,10 @@ public class BookController {
 
 	@GetMapping
 	public Page<Book> getBookAll(@RequestParam(required = false) String title,
-			@RequestParam(required = false) String author_id, @RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(required = false) String author, @RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "5") Integer pageSize) {
-		if (title != null || author_id != null) {
-			return bookService.getBookFilter(title, author_id,
+		if (title != null || author != null) {
+			return bookService.getBookFilter(title, author,
 					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "title")));
 		} else {
 			return bookService.getBookAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "title")));

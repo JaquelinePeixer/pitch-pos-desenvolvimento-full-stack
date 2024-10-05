@@ -12,12 +12,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import webservice.domains.book.Book;
 import webservice.domains.book.BookSearch;
 import webservice.domains.users.SearchDao;
+import webservice.entity.Author;
 
 @Repository
 @RequiredArgsConstructor
@@ -35,11 +37,14 @@ public class BookSearchDao {
 		Root<Book> root = criteriaQuery.from(Book.class);
 
 		if (request.getAuthor() != null) {
-			Predicate authorPredicate = criteriaBuilder.like(root.get("author"), "%" + request.getAuthor() + "%");
-			predicates.add(authorPredicate);
+			System.out.println("entrou no get Author");
+			Join<Book, Author> authorJoin = root.join("author");
+			Predicate authorPredicate = criteriaBuilder.like(authorJoin.get("name"), "%" + request.getAuthor() + "%");
+	        predicates.add(authorPredicate);
 		}
 
 		if (request.getTitle() != null) {
+			System.out.println("entrou no get title");
 			Predicate titlePredicate = criteriaBuilder.like(root.get("title"), "%" + request.getTitle() + "%");
 			predicates.add(titlePredicate);
 		}
@@ -61,8 +66,9 @@ public class BookSearchDao {
 
 		List<Predicate> countPredicates = new ArrayList<>();
 		if (request.getAuthor() != null) {
-			Predicate authorPredicate = criteriaBuilder.like(root.get("author"), "%" + request.getAuthor() + "%");
-			predicates.add(authorPredicate);
+			Join<Book, Author> authorJoin = root.join("author");
+			Predicate authorPredicate = criteriaBuilder.like(authorJoin.get("name"), "%" + request.getAuthor() + "%");
+	        predicates.add(authorPredicate);
 		}
 
 		if (request.getTitle() != null) {
