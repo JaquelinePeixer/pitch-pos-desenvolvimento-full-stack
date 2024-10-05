@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Autor } from '../../../../../service/autor/autor';
+import { Emprestimo } from '@app/service/emprestimo/emprestimo';
 
 @Component({
   selector: 'app-form',
@@ -15,15 +15,15 @@ export class FormComponent {
   menuBack = AppMenuModel.menuAutor;
   formGroup: FormGroup;
 
-  onSubmit!: (entity: Autor) => void;
+  onSubmit!: (entity: Emprestimo) => void;
   onCancel!: () => void;
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
       id: [null],
-      name: [null, [Validators.required, Validators.maxLength(150)]],
-      birthYear: [null, [Validators.required]],
-      deathhYear: [null]
+      cpf: [[Validators.required]],
+      name: [null],
+      book: [null, [Validators.required]]
     })
   }
 
@@ -39,7 +39,7 @@ export class FormComponent {
     return this.formGroup.controls;
   }
 
-  patchValue(entity: Autor): void {
+  patchValue(entity: Emprestimo): void {
     if (entity != null) {
       this.formGroup.patchValue(entity);
     }
