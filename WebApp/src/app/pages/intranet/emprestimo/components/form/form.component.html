@@ -11,7 +11,8 @@
                 <div class="row mb-4">
                     <div class="col-4">
                         <label for="cpf" class="form-label">{{'emprestimo.field.cpf' | translate}}</label>
-                        <p-inputMask mask="999.999.999-99" inputId="cpf" formControlName="cpf" />
+                        <p-inputMask mask="999.999.999-99" inputId="cpf" formControlName="cpf"
+                            (onBlur)="searchUsuario($event)" />
                     </div>
                     <div class="col-8">
                         <label for="name" class="form-label">{{'emprestimo.field.name' | translate}}</label>
@@ -23,7 +24,7 @@
                     <div class="col-12">
                         <label for="book" class="form-label">{{'emprestimo.field.book' | translate}}</label>
                         <p-autoComplete formControlName="book" [suggestions]="optionObra"
-                            (completeMethod)="searchObras($event)" field="name" class="field" />
+                            (completeMethod)="searchObras($event)" field="title" class="field" />
                     </div>
                 </div>
                 <div class="row">

@@ -35,6 +35,15 @@ public class UserService {
 			return ResponseEntity.status(HttpStatus.OK).body(userResponse);
 		}).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 	}
+	
+	public ResponseEntity<UserResponse> getUserPorCpf(String cpf) {
+		return userRepository.findByCpf(cpf).map(user -> {
+			UserResponse userResponse = new UserResponse(user.getId(), user.getName(), user.getEmail(),
+					user.getBirthDate(), user.getCpf(), user.getUserSituation(), user.getRole());
+
+			return ResponseEntity.status(HttpStatus.OK).body(userResponse);
+		}).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+	}
 
 	public Page<User> getUserAll(PageRequest page) {
 		return userRepository.findAll(page);

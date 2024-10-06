@@ -1,5 +1,8 @@
 package webservice.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import webservice.domains.book.Book;
 import webservice.domains.book.BookSearch;
+import webservice.domains.book.BookSimple;
 import webservice.domains.location.Location;
 import webservice.entity.Author;
 import webservice.entity.EmptyResponse;
@@ -44,6 +48,16 @@ public class BookService {
 			return ResponseEntity.status(HttpStatus.OK).body(bookRepository.findById(id).get());
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	}
+
+	public List<BookSimple> getBookAllFindList(String title) {
+		List<Book> listBook = bookRepository.findAllByTitle(title);
+		if (listBook == null || listBook.isEmpty()) {
+			throw new RuntimeException("Obra não encontrada: " + title);
+		}
+		return listBook.stream().map(book -> {
+			return new BookSimple(book);
+		}).collect(Collectors.toList());
 	}
 
 	public Page<Book> getBookAll(PageRequest page) {

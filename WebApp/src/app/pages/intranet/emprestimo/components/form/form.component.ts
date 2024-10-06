@@ -7,6 +7,7 @@ import { LoadingService } from '@app/shared/loading/loading.service';
 import { finalize } from 'rxjs';
 import { Obra } from '@app/service/obra/obra';
 import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
+import { UsuarioService } from '@app/service/usuario/usuario.service';
 
 @Component({
   selector: 'app-form',
@@ -27,7 +28,8 @@ export class FormComponent {
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private obraService: ObraService,
-    private toastErrorService: ToastErrorService
+    private toastErrorService: ToastErrorService,
+    private usuarioService: UsuarioService
   ) {
     this.formGroup = this.formBuilder.group({
       id: [null],
@@ -38,10 +40,12 @@ export class FormComponent {
   }
 
   emprestimo() {
+    debugger
     // this.onSubmit(this.formGroup.value)
   }
 
   devolucao() {
+    debugger
     // this.onCancel()
   }
 
@@ -62,6 +66,18 @@ export class FormComponent {
         .pipe(finalize(() => this.loadingService.stopLoadind()))
         .subscribe({
           next: result => this.optionObra = result,
+          error: error => this.toastErrorService.alertError(error)
+        })
+    }
+  }
+
+  searchUsuario(event: any) {
+    if (event.target.value) {
+      this.loadingService.startLoadind();
+      this.usuarioService.getByCpf(event.target.value)
+        .pipe(finalize(() => this.loadingService.stopLoadind()))
+        .subscribe({
+          next: result => this.formGroup.controls['name'].setValue(result.name),
           error: error => this.toastErrorService.alertError(error)
         })
     }

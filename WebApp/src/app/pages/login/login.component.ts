@@ -54,8 +54,7 @@ export class LoginComponent {
           if (response.role === PermissionEnum.USER) {
             this.router.navigate(['/intranet/obra-emprestada']);
           } else {
-            // this.router.navigate(['/intranet/emprestimo']);
-            this.router.navigate(['/intranet/obra']);
+            this.router.navigate(['/intranet/emprestimo']);
           }
         },
         error: error => {

@@ -1,5 +1,7 @@
 package webservice.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import webservice.domains.book.Book;
+import webservice.domains.book.BookSimple;
 import webservice.entity.EmptyResponse;
 import webservice.service.BookService;
 
@@ -43,6 +46,11 @@ public class BookController {
 		} else {
 			return bookService.getBookAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "title")));
 		}
+	}
+		
+	@GetMapping("/find-list")
+	public List<BookSimple> getBookFindList(@RequestParam String title) {
+		return bookService.getBookAllFindList(title);
 	}
 	
 	@PostMapping

@@ -22,6 +22,10 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.baseUrl}/${id}`);
   }
 
+  getByCpf(cpf: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseUrl}/cpf/${cpf}`);
+  }
+
   put(id: any, data: any): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.baseUrl}/${id}`, data);
   }
