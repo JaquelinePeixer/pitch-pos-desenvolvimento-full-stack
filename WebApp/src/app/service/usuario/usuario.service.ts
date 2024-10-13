@@ -34,6 +34,10 @@ export class UsuarioService {
     return this.http.put<Usuario>(`${this.baseUrl}/${id}`, data);
   }
 
+  putEditUser(id: any, data: any): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.baseUrl}/edit-user/${id}`, data);
+  }
+
   post(data: any): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.baseUrl}`, data);
   }

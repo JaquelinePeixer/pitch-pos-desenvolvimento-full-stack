@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { FormComponent } from '../../components/form/form.component';
 import { LoadingService } from '@shared/loading/loading.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { UsuarioService } from '@service/usuario/usuario.service';
 import { Usuario } from '@service/usuario/usuario';
@@ -63,11 +61,11 @@ export class EditComponent implements OnInit, AfterViewInit {
 
   submit(entity: Usuario): void {
     this.loadingService.startLoadind();
-    this.usuarioService.put(entity.id, entity)
+    this.usuarioService.putEditUser(entity.id, entity)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result)
+          this.alertService.defaultSuccess(result.message)
         },
         error: error => this.toastErrorService.alertError(error)
       })

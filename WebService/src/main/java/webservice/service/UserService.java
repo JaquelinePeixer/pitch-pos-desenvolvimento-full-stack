@@ -81,6 +81,14 @@ public class UserService {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Usuário não encontrado"));
 	}
+	
+	public ResponseEntity<EmptyResponse> putEditUser(String id, User user) {
+		if (userRepository.existsById(id)) {
+			User userSave = userRepository.save(user);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Usuário salvo com sucesso!"));
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Usuário não encontrado"));
+	}
 
 	public ResponseEntity<EmptyResponse> removeUser(String id) {
 		if (userRepository.existsById(id)) {

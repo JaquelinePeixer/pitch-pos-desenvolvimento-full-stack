@@ -25,7 +25,7 @@ export class FormComponent {
       birthDate: [null, [Validators.required]],
       email: [null, [Validators.email, onlySpaceValidator]],
       role: [null],
-      cpf: [null],
+      cpf: [{ value: null, disabled: true }],
     })
   }
 
