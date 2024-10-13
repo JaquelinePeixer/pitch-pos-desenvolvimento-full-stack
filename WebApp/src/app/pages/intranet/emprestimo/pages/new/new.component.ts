@@ -27,7 +27,7 @@ export class NewComponent implements AfterViewInit {
     }
   ];
 
-  menuBack = AppMenuModel.menuAutor
+  menuBack = AppMenuModel.menuEmprestimo
 
   @ViewChild('form') 
   form!: FormComponent
@@ -46,7 +46,7 @@ export class NewComponent implements AfterViewInit {
 
   onSubmit(entity: Emprestimo): void {
     this.loadingService.startLoadind();
-    this.emprestimoService.post(entity)
+    this.emprestimoService.emprestimo(entity)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {

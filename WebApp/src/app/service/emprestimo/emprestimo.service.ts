@@ -9,7 +9,7 @@ import { Emprestimo } from './emprestimo';
   providedIn: 'root'
 })
 export class EmprestimoService {
-  private baseUrl = `${config.obterUrl()}/bookloan`;
+  private baseUrl = `${config.obterUrl()}/books-loan`;
   pageSize = PageSize.sizeDefault;
 
   constructor(private http: HttpClient) { }
@@ -22,15 +22,11 @@ export class EmprestimoService {
     return this.http.get<Emprestimo>(`${this.baseUrl}/${id}`);
   }
 
-  put(id: any, data: any): Observable<Emprestimo> {
-    return this.http.put<Emprestimo>(`${this.baseUrl}/${id}`, data);
+  emprestimo(data: any): Observable<Emprestimo> {
+    return this.http.post<Emprestimo>(`${this.baseUrl}/emprestimo`, data);
   }
 
-  post(data: any): Observable<Emprestimo> {
-    return this.http.post<Emprestimo>(`${this.baseUrl}`, data);
-  }
-
-  delete(id: any): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${id}`);
+  devolucao(data: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/devolucao`, data);
   }
 }

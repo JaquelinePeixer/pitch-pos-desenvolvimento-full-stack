@@ -1,55 +1,55 @@
 package webservice.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import webservice.domains.book.BookLoan;
+import webservice.domains.book.Book;
+import webservice.domains.bookloan.BookLoan;
+import webservice.domains.users.User;
+import webservice.entity.EmptyResponse;
 import webservice.repository.BookLoanRepository;
+import webservice.repository.BookRepository;
+import webservice.repository.users.UserRepository;
 
 @AllArgsConstructor
 @Service
 public class BookLoanService {
 
-	  private BookLoanRepository bookLoanRepository;
+	private BookRepository bookRepository;
 
-	    public ResponseEntity<BookLoan> getBookPorId(String id) {
-	        if (bookLoanRepository.existsById(id)) {
-	            return ResponseEntity.status(HttpStatus.OK).body(bookLoanRepository.findById(id).get());
-	        }
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-	    }
+	private BookLoanRepository bookLoanRepository;
 
-	    public Page<BookLoan> getBookAll(PageRequest pageRequest) {
-	        return (Page<BookLoan>) bookLoanRepository.findAll();
-	    }
+	private UserRepository userRepository;
 
-	    public ResponseEntity<BookLoan> postBook(BookLoan book) {
-	    	BookLoan bookSave = bookLoanRepository.save(book);
-	        return ResponseEntity.status(HttpStatus.CREATED).body(bookSave);
-	    }
+	public ResponseEntity<EmptyResponse> postBookLoan(BookLoan bookLoan) {
+		Optional<User> user = userRepository.findByCpf(bookLoan.getUser().getCpf());
+		if (!user.isPresent()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("Erro ao buscar usuário"));
+		}
+		Optional<Book> book = bookRepository.findById(bookLoan.getBook().getId());
 
-	    public ResponseEntity<BookLoan> putBook(String id, BookLoan book) {
-	        if (bookLoanRepository.existsById(id)) {
-	        	BookLoan bookSave = bookLoanRepository.save(book);
-	            return ResponseEntity.status(HttpStatus.OK).body(bookSave);
-	        }
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-	    }
+		bookLoan.setUser(user.get());
+		bookLoan.setBook(book.get());
 
-	    public ResponseEntity<String> removeBook(String id) {
-	        if (bookLoanRepository.existsById(id)) {
-	        	bookLoanRepository.deleteById(id);
-	            return ResponseEntity.status(HttpStatus.OK).body("Success");
-	        }
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book não encontrado");
-	    }
+		bookLoan.setLoanDate(LocalDateTime.now());
+		bookLoan.setReturnDate(LocalDateTime.now().plusDays(7));
+		
+		bookLoanRepository.save(bookLoan);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new EmptyResponse("Empréstimo realizado com sucesso!"));
+	}
 
-	    public Page<BookLoan> bookFilter(String title, String author_id, String id, PageRequest of) {
-	        return null;
-	    }
-	    
+	public ResponseEntity<EmptyResponse> removeBookLoan(BookLoan book) {		
+		BookLoan bookLoan = bookLoanRepository.findByBook(book.getBook());		
+		if (bookLoanRepository.existsById(bookLoan.getId())) {
+			bookLoanRepository.deleteById(bookLoan.getId());
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Obra devolvida com sucesso!"));
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Emprestimo não encontrado"));
+	}
+
 }
