@@ -45,7 +45,7 @@
         "info": "Informação!",
         "success": "Sucesso!",
         "warning": "Aviso!",
-        "msg-error":{
+        "msg-error": {
             "403": "Usuário sem permissão"
         }
     },
@@ -198,7 +198,15 @@
         "page": {
             "title": "Empréstimos"
         },
-        "field": {},
+        "field": {
+            "cpf": "CPF",
+            "name": "Nome do Usuário",
+            "book": "Obra"
+        },
+        "action": {
+            "emprestimo": "Empréstimo",
+            "devolucao": "Devolução"
+        },
         "message": {}
     },
     "perfil-usuario": {

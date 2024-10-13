@@ -46,6 +46,11 @@ public class UserController {
 		}
 	}
 
+	@GetMapping("/cpf/{cpf}")
+	public ResponseEntity<UserResponse> getUserPorCpf(@PathVariable String cpf) {
+		return userService.getUserPorCpf(cpf);
+	}
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<EmptyResponse> putUser(@PathVariable String id, @RequestBody User user) {
 		return userService.putUser(id, user);

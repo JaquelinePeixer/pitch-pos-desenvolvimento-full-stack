@@ -1,19 +1,18 @@
 package webservice.domains.book;
 
-import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import webservice.domains.bookloan.BookLoan;
 import webservice.domains.location.Location;
 import webservice.entity.Author;
 import webservice.entity.Subject;
@@ -57,6 +56,9 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "fk_subject")
 	private Subject subject;
+
+	@OneToOne(mappedBy = "book")
+	private BookLoan bookLoan;
 
 	public Book(String id, String title, String publicationYear, String publisherName, Integer volume,
 			Integer pageQuantity, String publicationLocation, Integer quantityOfCopies, String edition) {

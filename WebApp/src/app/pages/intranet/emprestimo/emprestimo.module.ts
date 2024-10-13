@@ -1,34 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewComponent } from './pages/new/new.component';
-import { ListComponent } from './pages/list/list.component';
-import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { EmprestimoRoutingModule } from './emprestimo-routing.module';
-import { SharedModule } from '../../../shared/shared.module';
-import { FilterComponent } from './components/filter/filter.component';
+import { SharedModule } from '@shared/shared.module';
 import { FormComponent } from './components/form/form.component';
-import { EditComponent } from './pages/edit/edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EmprestimoService } from '@app/service/emprestimo/emprestimo.service';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 @NgModule({
   declarations: [
     NewComponent,
-    ListComponent,
-    EditComponent,
-    FormComponent,
-    FilterComponent
+    FormComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
     EmprestimoRoutingModule,
-    TranslateModule
+    TranslateModule,
+    AutoCompleteModule,
+    InputMaskModule
   ],
   providers: [
-    // EmprestimoService
+    EmprestimoService
   ]
 })
 export class EmprestimoModule { }
