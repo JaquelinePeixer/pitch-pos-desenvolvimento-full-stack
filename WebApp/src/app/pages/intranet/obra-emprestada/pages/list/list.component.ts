@@ -35,7 +35,7 @@ export class ListComponent extends PaginatorComponent{
 
   fetch(event?: number) {
     this.loadingService.startLoadind();
-    this.usuarioService.getPorUsuario(event)
+    this.usuarioService.getObrasEmprestadaPorUsuario(event)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {

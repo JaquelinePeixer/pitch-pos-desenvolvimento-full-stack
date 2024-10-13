@@ -81,6 +81,14 @@ public class UserService {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Usuário não encontrado"));
 	}
+	
+	public ResponseEntity<EmptyResponse> putEditUser(String id, User user) {
+		if (userRepository.existsById(id)) {
+			User userSave = userRepository.save(user);
+			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Usuário salvo com sucesso!"));
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new EmptyResponse("Usuário não encontrado"));
+	}
 
 	public ResponseEntity<EmptyResponse> removeUser(String id) {
 		if (userRepository.existsById(id)) {
@@ -133,6 +141,23 @@ public class UserService {
 				.map(bookLoan -> new BookLoanDTO(bookLoan.getBook().getTitle(), bookLoan.getLoanDate(),
 						bookLoan.getReturnDate()));
 
+	}
+
+	public ResponseEntity<UserResponse> getUserByToken() {
+		UserDetails authenticatedUser = getAuthenticatedUser();
+		if (authenticatedUser == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+
+		User userAuth = (User) userRepository.findByEmail(authenticatedUser.getUsername());
+		if (userAuth == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+
+		UserResponse newUserResponse = new UserResponse(userAuth.getId(), userAuth.getName(), userAuth.getEmail(),
+				userAuth.getBirthDate(), userAuth.getCpf(), userAuth.getUserSituation(), userAuth.getRole());
+
+		return ResponseEntity.status(HttpStatus.OK).body(newUserResponse);
 	}
 
 }

@@ -26,6 +26,7 @@
         "editar": "Editar",
         "salvar": "Salvar",
         "cancelar": "Cancelar",
+        "atualizar": "Atualizar",
         "acoes": "Ações",
         "no": "Não",
         "yes": "Sim",
@@ -215,9 +216,15 @@
     },
     "perfil-usuario": {
         "page": {
-            "title": "Perfil do Usuário"
+            "new": "Perfil do Usuário"
         },
-        "field": {},
+        "field": {
+            "id": "Registro",
+            "name": "Nome do Usuário",
+            "cpf": "CPF",
+            "email": "E-mail",
+            "birthDate": "Data de aniversário"
+        },
         "message": {}
     }
 }

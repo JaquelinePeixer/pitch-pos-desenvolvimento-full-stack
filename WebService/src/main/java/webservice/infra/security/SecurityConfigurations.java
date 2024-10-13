@@ -33,6 +33,7 @@ public class SecurityConfigurations {
 				.authorizeHttpRequests(
 						authorize -> authorize
 								.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+								.requestMatchers(HttpMethod.PUT, "/users/edit-user/**").authenticated()
 								.requestMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "LIBRARIAN")
 								.requestMatchers(HttpMethod.PUT).hasAnyRole("ADMIN", "LIBRARIAN")
 								.requestMatchers(HttpMethod.DELETE).hasAnyRole("ADMIN", "LIBRARIAN")

@@ -1,13 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { FormComponent } from '../../components/form/form.component';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingService } from '@shared/loading/loading.service';
 import { finalize } from 'rxjs';
-import { UsuarioService } from '../../../../../service/usuario/usuario.service';
-import { Usuario } from '../../../../../service/usuario/usuario';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
+import { UsuarioService } from '@service/usuario/usuario.service';
+import { Usuario } from '@service/usuario/usuario';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-edit',
@@ -22,31 +20,22 @@ export class EditComponent implements OnInit, AfterViewInit {
       action: null
     },
     {
-      title: 'perfil-usuario.page.title',
-      action: AppMenuModel.menuPerfilUsuario.routerLink
-    },
-    {
       title: 'perfil-usuario.page.new',
       action: null
     }
   ];
 
-  menuBack = AppMenuModel.menuPerfilUsuario
-
-  private id!: number;
+  id: string | undefined;
 
   @ViewChild('form')
   form!: FormComponent;
 
   constructor(
-    private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private usuarioService: UsuarioService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private alertService: AlertModalService
+    private alertService: AlertModalService,
+    private toastErrorService: ToastErrorService
   ) {
-    this.id = this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
@@ -55,32 +44,30 @@ export class EditComponent implements OnInit, AfterViewInit {
 
   fetch() {
     this.loadingService.startLoadind();
-    this.usuarioService.getId(this.id)
+    this.usuarioService.getByToken()
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: Usuario) => {
-          this.form.patchValue(result)
+          this.form.patchValue(result);
+          this.id = result.id;
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 
   ngAfterViewInit(): void {
-    console.log(this.form)
     this.form.onSubmit = (entity: Usuario) => this.submit(entity);
-    this.form.onCancel = () => this.router.navigate([this.menuBack.routerLink]).then();
   }
 
   submit(entity: Usuario): void {
     this.loadingService.startLoadind();
-    this.usuarioService.put(this.id, entity)
+    this.usuarioService.putEditUser(entity.id, entity)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: (result: any) => {
-          this.alertService.defaultSuccess(result)
-          this.router.navigate([this.menuBack.routerLink])
+          this.alertService.defaultSuccess(result.message)
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 }

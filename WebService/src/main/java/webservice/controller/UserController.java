@@ -52,9 +52,19 @@ public class UserController {
 		return userService.getUserPorCpf(cpf);
 	}
 
+	@GetMapping("/getByToken")
+	public ResponseEntity<UserResponse> getUserByToken() {
+		return userService.getUserByToken();
+	}
+
 	@PutMapping("/{id}")
 	public ResponseEntity<EmptyResponse> putUser(@PathVariable String id, @RequestBody User user) {
 		return userService.putUser(id, user);
+	}
+	
+	@PutMapping("/edit-user/{id}")
+	public ResponseEntity<EmptyResponse> putEditUser(@PathVariable String id, @RequestBody User user) {
+		return userService.putEditUser(id, user);
 	}
 
 	@DeleteMapping("/{id}")

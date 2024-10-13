@@ -22,12 +22,20 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.baseUrl}/${id}`);
   }
 
+  getByToken(): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseUrl}/getByToken`);
+  }
+
   getByCpf(cpf: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.baseUrl}/cpf/${cpf}`);
   }
 
   put(id: any, data: any): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.baseUrl}/${id}`, data);
+  }
+
+  putEditUser(id: any, data: any): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.baseUrl}/edit-user/${id}`, data);
   }
 
   post(data: any): Observable<Usuario> {
@@ -38,7 +46,7 @@ export class UsuarioService {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
 
-  getPorUsuario(page?: number): Observable<any> {
+  getObrasEmprestadaPorUsuario(page?: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/user-bookloan?page=${page ?? 0}&pageSize=${this.pageSize}&sort=returnDate,desc`);
   }
 }
