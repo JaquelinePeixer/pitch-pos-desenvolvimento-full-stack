@@ -6,7 +6,6 @@ import { PermissionEnum } from '../../authentication/permission.enum';
 const routesIntranet: Routes = [
   {
     path: 'renovacao',
-    pathMatch: 'full',
     loadChildren: () => import('./renovacao/renovacao.module').then(mod => mod.RenovacaoModule),
     canActivate: [PermissionGuard],
     data: { role: [PermissionEnum.USER] }

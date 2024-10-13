@@ -1,8 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Renovacao } from '../../../../../service/renovacao/renovacao';
-import { Obra } from '../../../../../service/obra/obra';
+import { Renovacao } from '@service/renovacao/renovacao';
+import { Obra } from '@service/obra/obra';
+import { ObraService } from '@app/service/obra/obra.service';
+import { LoadingService } from '@app/shared/loading/loading.service';
+import { finalize } from 'rxjs';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-form',
@@ -13,18 +16,20 @@ import { Obra } from '../../../../../service/obra/obra';
 export class FormComponent {
   @Input() isNew?: boolean;
 
-  optionObra:Obra[];
-  menuBack = AppMenuModel.menuRenovacao;
   formGroup: FormGroup;
+  optionObra: Obra[] = [];
 
   onSubmit!: (entity: Renovacao) => void;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loadingService: LoadingService,
+    private obraService: ObraService,
+    private toastErrorService: ToastErrorService
+  ) {
     this.formGroup = this.formBuilder.group({
-      idUser: [null, [Validators.required]],
-      obra: [null, [Validators.required]]
+      book: [null, [Validators.required]]
     })
-    this.getObrasUsuario()
   }
 
   submit() {
@@ -35,8 +40,16 @@ export class FormComponent {
     return this.formGroup.controls;
   }
 
-  getObrasUsuario(){
-    // Todo
+  searchObras(value: any) {
+    if (value.query.length > 2) {
+      this.loadingService.startLoadind();
+      this.obraService.getList(value.query)
+        .pipe(finalize(() => this.loadingService.stopLoadind()))
+        .subscribe({
+          next: result => this.optionObra = result,
+          error: error => this.toastErrorService.alertError(error)
+        })
+    }
   }
 
 }

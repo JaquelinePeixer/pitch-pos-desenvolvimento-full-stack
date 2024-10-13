@@ -51,7 +51,7 @@ export class LoginComponent {
         next: response => {
           this.authService.setLocalStorage(response);
           if (response.role === PermissionEnum.USER) {
-            this.router.navigate(['/intranet/obra-emprestada']);
+            this.router.navigate(['/intranet/renovacao']);
           } else {
             this.router.navigate(['/intranet/emprestimo']);
           }

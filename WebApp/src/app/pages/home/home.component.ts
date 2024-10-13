@@ -26,7 +26,7 @@ export class HomeComponent {
 
     if(loggedUser?.role){
       if (loggedUser.role === PermissionEnum.USER) {
-        this.router.navigate(['/intranet/obra-emprestada']);
+        this.router.navigate(['/intranet/renovacao']);
       } else {
         this.router.navigate(['/intranet/emprestimo']);
       }
