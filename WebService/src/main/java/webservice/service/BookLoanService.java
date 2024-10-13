@@ -1,6 +1,7 @@
 package webservice.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,16 @@ public class BookLoanService {
 		if (!user.isPresent()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("Erro ao buscar usuário"));
 		}
+
 		Optional<Book> book = bookRepository.findById(bookLoan.getBook().getId());
+		if (!book.isPresent()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("Livro não encontrado"));
+		}
+
+		List<BookLoan> activeLoans = bookLoanRepository.findByBookId(book.get().getId());
+		if (!activeLoans.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("O livro já está emprestado"));
+		}
 
 		bookLoan.setUser(user.get());
 		bookLoan.setBook(book.get());
