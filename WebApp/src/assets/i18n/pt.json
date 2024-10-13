@@ -75,7 +75,7 @@
             "question_03": "Quais tecnologias foram utilizadas para a implementação?",
             "answers_03": "Para o front-end foi utilizado Angular 17, Bootstrap, PrimeNg. Para o back-end foi utilizado Java.",
             "question_04": "Como posso testar os diferentes níveis de permissões?",
-            "answers_04": "teste de resposta",
+            "answers_04": "Existem 3 tipos de permissão no sistema: USER que é destinado ao usuário padrão, LIBRARIAN destinado ao bibliotecário e o ADMIN que é para a diretoria e gerência.",
             "question_05": "Porque não consigo remover alguns dados?",
             "answers_05": "O sistema possui alguns dados que somente o desenvolvedor poderá remover para que os dados não sejam comprometidos no decorrer dos testes."
         }
