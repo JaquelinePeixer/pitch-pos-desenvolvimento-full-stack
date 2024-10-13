@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +34,7 @@ public class UserController {
 	}
 
 	@GetMapping
-	public Page<User> getUserAll(@RequestParam(required = false) String name,
+	public Page<UserResponse> getUserAll(@RequestParam(required = false) String name,
 			@RequestParam(required = false) Boolean delayedUsers, @RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "5") Integer pageSize) {
 		if (name != null || delayedUsers != null) {
@@ -50,7 +49,7 @@ public class UserController {
 	public ResponseEntity<UserResponse> getUserPorCpf(@PathVariable String cpf) {
 		return userService.getUserPorCpf(cpf);
 	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<EmptyResponse> putUser(@PathVariable String id, @RequestBody User user) {
 		return userService.putUser(id, user);
