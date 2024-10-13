@@ -7,8 +7,9 @@
                 <div class="col-6">
                     <h1>{{'home.title' | translate}}</h1>
                     <div class="d-grid gap-2 d-md-flex">
-                        <button class="btn btn-outline-secondary" routerLink="/acervo">{{'menu.consultCollection' | translate}}</button>
-                        <button class="btn btn-primary" routerLink="/intranet">{{'menu.intranet' | translate}}</button>
+                        <button class="btn btn-outline-secondary" routerLink="/acervo">{{'menu.consultCollection' |
+                            translate}}</button>
+                        <button class="btn btn-primary" (click)="intranet()">{{'menu.intranet' | translate}}</button>
                     </div>
                 </div>
                 <div class="col-6">
@@ -31,7 +32,13 @@
             <p> {{'home.faq.answers_03' | translate}} </p>
         </p-accordionTab>
         <p-accordionTab header="{{'home.faq.question_04' | translate}}">
-            <p> {{'home.faq.answers_04' | translate}} </p>
+            <ng-container>
+                <p> {{'home.faq.answers_04' | translate}} </p>
+                <ul>
+                    <li> Senha USER: é possivel criar usuários utilizando a permissão LIBRARIAN </li>
+                    <li> Senha LIBRARIAN: librarian&#64;mail.com / librarian123 </li>
+                </ul>
+            </ng-container>
         </p-accordionTab>
         <p-accordionTab header="{{'home.faq.question_05' | translate}}">
             <p> {{'home.faq.answers_05' | translate}} </p>
