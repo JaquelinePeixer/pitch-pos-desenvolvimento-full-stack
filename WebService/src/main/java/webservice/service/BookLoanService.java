@@ -38,13 +38,13 @@ public class BookLoanService {
 
 		bookLoan.setLoanDate(LocalDateTime.now());
 		bookLoan.setReturnDate(LocalDateTime.now().plusDays(7));
-		
+
 		bookLoanRepository.save(bookLoan);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new EmptyResponse("Empréstimo realizado com sucesso!"));
 	}
 
-	public ResponseEntity<EmptyResponse> removeBookLoan(BookLoan book) {		
-		BookLoan bookLoan = bookLoanRepository.findByBook(book.getBook());		
+	public ResponseEntity<EmptyResponse> removeBookLoan(BookLoan book) {
+		BookLoan bookLoan = bookLoanRepository.findByBook(book.getBook());
 		if (bookLoanRepository.existsById(bookLoan.getId())) {
 			bookLoanRepository.deleteById(bookLoan.getId());
 			return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Obra devolvida com sucesso!"));
