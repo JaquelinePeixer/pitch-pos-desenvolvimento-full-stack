@@ -51,6 +51,11 @@ public class UserController {
 	public ResponseEntity<UserResponse> getUserPorCpf(@PathVariable String cpf) {
 		return userService.getUserPorCpf(cpf);
 	}
+	
+	@GetMapping("/getByToken")
+	public ResponseEntity<UserResponse> getUserByToken() {
+		return userService.getUserByToken();
+	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<EmptyResponse> putUser(@PathVariable String id, @RequestBody User user) {

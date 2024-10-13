@@ -135,4 +135,21 @@ public class UserService {
 
 	}
 
+	public ResponseEntity<UserResponse> getUserByToken() {
+		UserDetails authenticatedUser = getAuthenticatedUser();
+		if (authenticatedUser == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+
+		User userAuth = (User) userRepository.findByEmail(authenticatedUser.getUsername());
+		if (userAuth == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+
+		UserResponse newUserResponse = new UserResponse(userAuth.getId(), userAuth.getName(), userAuth.getEmail(),
+				userAuth.getBirthDate(), userAuth.getCpf(), userAuth.getUserSituation(), userAuth.getRole());
+
+		return ResponseEntity.status(HttpStatus.OK).body(newUserResponse);
+	}
+
 }

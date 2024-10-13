@@ -22,6 +22,10 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.baseUrl}/${id}`);
   }
 
+  getByToken(): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseUrl}/getByToken`);
+  }
+
   getByCpf(cpf: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.baseUrl}/cpf/${cpf}`);
   }
@@ -38,7 +42,7 @@ export class UsuarioService {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
 
-  getPorUsuario(page?: number): Observable<any> {
+  getObrasEmprestadaPorUsuario(page?: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/user-bookloan?page=${page ?? 0}&pageSize=${this.pageSize}&sort=returnDate,desc`);
   }
 }
