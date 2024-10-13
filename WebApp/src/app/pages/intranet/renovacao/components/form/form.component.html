@@ -10,15 +10,9 @@
             <form (submit)="submit()" [formGroup]="formGroup">
                 <div class="row mb-4">
                     <div class="col-12">
-                        <label for="idUser" class="form-label">{{'renovacao.field.idUser' | translate}}</label>
-                        <input pInputText type="text" class="form-control" id="idUser" formControlName="idUser">
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <label for="obra" class="form-label">{{'renovacao.field.obra' | translate}}</label>
-                        <p-dropdown id="obra" formControlName="obra" [showClear]="true" [options]="optionObra"
-                            optionLabel="name" />
+                        <label for="book" class="form-label">{{'emprestimo.field.book' | translate}}</label>
+                        <p-autoComplete formControlName="book" [suggestions]="optionObra"
+                            (completeMethod)="searchObras($event)" field="title" class="field" />
                     </div>
                 </div>
                 <div class="row">

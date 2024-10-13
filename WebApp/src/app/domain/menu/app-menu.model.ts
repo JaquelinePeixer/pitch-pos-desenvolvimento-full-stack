@@ -13,7 +13,8 @@ export class AppMenuModel {
 
     public static readonly menuRenovacao: AppMenuItem = {
         label: 'menu.renovacao',
-        routerLink: '/intranet/renovacao'
+        routerLink: '/intranet/renovacao',
+        role: [PermissionEnum.USER]
     }
 
     public static readonly menuObraEmprestada: AppMenuItem = {

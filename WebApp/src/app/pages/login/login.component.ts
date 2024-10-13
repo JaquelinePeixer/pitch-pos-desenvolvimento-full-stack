@@ -9,8 +9,8 @@ import { PasswordModule } from 'primeng/password';
 import { PermissionEnum } from '@app/authentication/permission.enum';
 import { SharedModule } from '@app/shared/shared.module';
 import { AuthenticationService } from '@app/authentication/authentication.service';
-import { AlertModalService } from '@app/service/alert-modal/alert-modal.service';
 import { Login } from '@app/authentication/login.model';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-login',
@@ -34,8 +34,8 @@ export class LoginComponent {
   constructor(
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private alertService: AlertModalService,
-    private router: Router
+    private router: Router,
+    private toastErrorService: ToastErrorService
   ) {
     this.formGroup = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
@@ -51,14 +51,12 @@ export class LoginComponent {
         next: response => {
           this.authService.setLocalStorage(response);
           if (response.role === PermissionEnum.USER) {
-            this.router.navigate(['/intranet/obra-emprestada']);
+            this.router.navigate(['/intranet/renovacao']);
           } else {
             this.router.navigate(['/intranet/emprestimo']);
           }
         },
-        error: error => {
-          this.alertService.defaultError(error.message)
-        }
+        error: error => this.toastErrorService.alertError(error)
       })
     }
   }

@@ -1,13 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
+import { AppMenuModel } from '@domain/menu/app-menu.model';
 import { FormComponent } from '../../components/form/form.component';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { Renovacao } from '../../../../../service/renovacao/renovacao';
-import { RenovacaoService } from '../../../../../service/renovacao/renovacao.service';
+import { LoadingService } from '@shared/loading/loading.service';
+import { AlertModalService } from '@service/alert-modal/alert-modal.service';
+import { Renovacao } from '@service/renovacao/renovacao';
 import { finalize } from 'rxjs';
+import { EmprestimoService } from '@app/service/emprestimo/emprestimo.service';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 
 @Component({
   selector: 'app-edit',
@@ -33,11 +32,9 @@ export class EditComponent implements AfterViewInit {
   form!: FormComponent;
 
   constructor(
-    private formBuilder: FormBuilder,
     private loadingService: LoadingService,
-    private renovacaoService: RenovacaoService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private emprestimoService: EmprestimoService,
+    private toastErrorService: ToastErrorService,
     private alertService: AlertModalService
   ) {
   }
@@ -48,14 +45,13 @@ export class EditComponent implements AfterViewInit {
 
   submit(entity: Renovacao): void {
     this.loadingService.startLoadind();
-    this.renovacaoService.post(entity)
+    this.emprestimoService.putByUser(entity)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
-        next: () => {
-          // this.alertService.defaultSuccess(result)
-          // this.router.navigate([this.menuBack.routerLink])
+        next: (result) => {
+          this.alertService.defaultSuccess(result.message)
         },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 }

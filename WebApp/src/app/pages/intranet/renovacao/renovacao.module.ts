@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { RenovacaoRoutingModule } from './renovacao-routing.module';
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditComponent } from './pages/edit/edit.component';
 import { FormComponent } from './components/form/form.component';
+import { EmprestimoService } from '@app/service/emprestimo/emprestimo.service';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 
 @NgModule({
@@ -19,10 +21,11 @@ import { FormComponent } from './components/form/form.component';
     SharedModule,
     RenovacaoRoutingModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AutoCompleteModule
   ],
   providers: [
-    // LivroService
+    EmprestimoService
   ]
 })
 export class RenovacaoModule { }

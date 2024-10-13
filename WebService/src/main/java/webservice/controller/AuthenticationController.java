@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,17 +45,25 @@ public class AuthenticationController {
 
 	@PostMapping("/login")
 	public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
-		var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-		var auth = this.authenticationManager.authenticate(usernamePassword);
+		try {
+			var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+			var auth = this.authenticationManager.authenticate(usernamePassword);
 
-		var user = (User) auth.getPrincipal();
-		var token = tokenService.generateToken(user);
+			var user = (User) auth.getPrincipal();
+			var token = tokenService.generateToken(user);
 
-		String name = user.getName();
-		UserRole userRole = user.getRole();
-		int role = user.getRole().compareTo(userRole);
+			String name = user.getName();
+			UserRole userRole = user.getRole();
+			int role = user.getRole().compareTo(userRole);
 
-		return ResponseEntity.ok(new LoginResponseDTO(token, userRole, name));
+			return ResponseEntity.ok(new LoginResponseDTO(token, userRole, name));
+		} catch (BadCredentialsException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.body(new EmptyResponse("E-mail ou senha incorretos"));
+		} catch (AuthenticationException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.body(new EmptyResponse("E-mail ou senha incorretos"));
+		}
 	}
 
 	@PostMapping("/register")
