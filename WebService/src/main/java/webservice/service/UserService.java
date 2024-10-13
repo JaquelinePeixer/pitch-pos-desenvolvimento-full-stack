@@ -35,7 +35,7 @@ public class UserService {
 			return ResponseEntity.status(HttpStatus.OK).body(userResponse);
 		}).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 	}
-	
+
 	public ResponseEntity<UserResponse> getUserPorCpf(String cpf) {
 		return userRepository.findByCpf(cpf).map(user -> {
 			UserResponse userResponse = new UserResponse(user.getId(), user.getName(), user.getEmail(),
@@ -45,16 +45,27 @@ public class UserService {
 		}).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 	}
 
-	public Page<User> getUserAll(PageRequest page) {
-		return userRepository.findAll(page);
+	public Page<UserResponse> getUserAll(PageRequest page) {
+
+		return userRepository.findAll(page).map(user -> {
+			UserResponse userResponse = new UserResponse(user.getId(), user.getName(), user.getEmail(),
+					user.getBirthDate(), user.getCpf(), user.getUserSituation(), user.getRole());
+
+			return userResponse;
+		});
 	}
 
-	public Page<User> getUserFilter(String name, Boolean delayedUsers, Pageable page) {
+	public Page<UserResponse> getUserFilter(String name, Boolean delayedUsers, Pageable page) {
 		SearchDao request = new SearchDao();
 		request.setName(name);
 		request.setDelayedUsers(delayedUsers);
 
-		return userSearchDao.findAllByCriteria(request, page);
+		return userSearchDao.findAllByCriteria(request, page).map(user -> {
+			UserResponse userResponse = new UserResponse(user.getId(), user.getName(), user.getEmail(),
+					user.getBirthDate(), user.getCpf(), user.getUserSituation(), user.getRole());
+
+			return userResponse;
+		});
 	}
 
 	public ResponseEntity<EmptyResponse> putUser(String id, User user) {
@@ -76,7 +87,7 @@ public class UserService {
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 						.body(new EmptyResponse("Usuário não autenticado"));
 			}
-			
+
 			User userAuth = (User) userRepository.findByEmail(authenticatedUser.getUsername());
 			if (userAuth == null) {
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -95,13 +106,13 @@ public class UserService {
 	}
 
 	public UserDetails getAuthenticatedUser() {
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-	    if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
-	        throw new IllegalStateException("Usuário não está autenticado.");
-	    }
+		if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
+			throw new IllegalStateException("Usuário não está autenticado.");
+		}
 
-	    return (UserDetails) authentication.getPrincipal();
+		return (UserDetails) authentication.getPrincipal();
 	}
 
 }

@@ -61,25 +61,39 @@ public class AuthenticationController {
 		if (userRepository.existsByEmail(data.email())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("Usuário já cadastrado"));
 		}
-		
+
 		if (this.userRepository.findByEmail(data.email()) != null) {
 			return ResponseEntity.badRequest().build();
+		}
+
+		if (data.email() != null) {
+			return userRepository.findUserByEmail(data.email()).map(email -> {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("E-mail já cadastrado"));
+			}).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new EmptyResponse("Erro ao validar e-mail")));
+		}
+
+		if (data.cpf() != null) {
+			return userRepository.findByCpf(data.cpf()).map(user -> {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("CPF já cadastrado"));
+			}).orElseGet(
+					() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("Erro ao validar CPF")));
 		}
 
 		String encrytedPassword = new BCryptPasswordEncoder().encode(data.password());
 		User newUser = new User(data.name(), data.birthDate(), data.email(), data.role(), data.cpf(), encrytedPassword);
 		newUser.setUserSituation(UserSituationEnum.ACTIVE);
 		newUser.setCreationDate(LocalDateTime.now());
-		
-		 // Obtendo o usuário autenticado
-	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    if (principal instanceof UserDetails) {
-	        String username = ((UserDetails) principal).getUsername();
-	        System.out.println("Usuário autenticado: " + username);
-	    }
+
+		// Obtendo o usuário autenticado
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			String username = ((UserDetails) principal).getUsername();
+			System.out.println("Usuário autenticado: " + username);
+		}
 
 		this.userRepository.save(newUser);
 		return ResponseEntity.status(HttpStatus.OK).body(new EmptyResponse("Usuário salvo com sucesso!"));
 	}
-	
+
 }
