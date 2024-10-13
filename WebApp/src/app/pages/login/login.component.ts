@@ -32,7 +32,6 @@ export class LoginComponent {
   formGroup: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
     private alertService: AlertModalService,
