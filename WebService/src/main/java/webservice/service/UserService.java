@@ -12,10 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import webservice.domains.bookloan.BookLoanDTO;
 import webservice.domains.users.SearchDao;
 import webservice.domains.users.User;
 import webservice.domains.users.UserResponse;
 import webservice.entity.EmptyResponse;
+import webservice.repository.BookLoanRepository;
 import webservice.repository.users.UserRepository;
 import webservice.repository.users.UserSearchDao;
 
@@ -26,6 +28,8 @@ public class UserService {
 	private UserRepository userRepository;
 
 	private UserSearchDao userSearchDao;
+
+	private BookLoanRepository bookLoanRepository;
 
 	public ResponseEntity<UserResponse> getUserPorId(String id) {
 		return userRepository.findById(id).map(user -> {
@@ -113,6 +117,22 @@ public class UserService {
 		}
 
 		return (UserDetails) authentication.getPrincipal();
+	}
+
+	public Page<BookLoanDTO> getUserBookLoan(Pageable pageable) {
+		UserDetails authenticatedUser = getAuthenticatedUser();
+		if (authenticatedUser == null) {
+			return Page.empty();
+		}
+
+		User userAuth = (User) userRepository.findByEmail(authenticatedUser.getUsername());
+		if (userAuth == null) {
+			return Page.empty();
+		}
+		return bookLoanRepository.findByUser(userAuth, pageable)
+				.map(bookLoan -> new BookLoanDTO(bookLoan.getBook().getTitle(), bookLoan.getLoanDate(),
+						bookLoan.getReturnDate()));
+
 	}
 
 }

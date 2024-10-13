@@ -37,4 +37,8 @@ export class UsuarioService {
   delete(id: any): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
+
+  getPorUsuario(page?: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/user-bookloan?page=${page ?? 0}&pageSize=${this.pageSize}&sort=returnDate,desc`);
+  }
 }

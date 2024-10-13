@@ -2,6 +2,7 @@ package webservice.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import webservice.domains.bookloan.BookLoanDTO;
 import webservice.domains.users.User;
 import webservice.domains.users.UserResponse;
 import webservice.entity.EmptyResponse;
@@ -58,5 +60,10 @@ public class UserController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<EmptyResponse> removeUser(@PathVariable String id) {
 		return userService.removeUser(id);
+	}
+
+	@GetMapping("/user-bookloan")
+	public Page<BookLoanDTO> getUserBookLoan(Pageable pageable) {
+		return userService.getUserBookLoan(pageable);
 	}
 }

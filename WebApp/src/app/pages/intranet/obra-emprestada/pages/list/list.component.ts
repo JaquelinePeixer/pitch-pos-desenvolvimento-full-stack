@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { AppMenuModel } from '../../../../../domain/menu/app-menu.model';
-import { Obra } from '../../../../../service/obra/obra';
-import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { AutorService } from '../../../../../service/autor/autor.service';
-import { Router } from '@angular/router';
+import { LoadingService } from '@shared/loading/loading.service';
 import { finalize } from 'rxjs';
-import { AlertModalService } from '../../../../../service/alert-modal/alert-modal.service';
-import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
+import { UsuarioService } from '@app/service/usuario/usuario.service';
+import { UsuarioObrasEmprestadas } from '@app/service/usuario/usuario-obras-emprestadas';
+import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
+import { PaginatorComponent } from '@app/shared/paginator/paginator.component';
 
 @Component({
   selector: 'app-list',
@@ -14,10 +12,8 @@ import { PageSize } from '../../../../../domain/pagination/pagesize.enum';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
-  tableData: Obra[] = [];
-  pageSize = PageSize.sizeDefault;
-  
+export class ListComponent extends PaginatorComponent{
+  tableData: UsuarioObrasEmprestadas[] = [];
   contentBreadcrumb = [
     {
       title: 'menu.intranet',
@@ -31,40 +27,22 @@ export class ListComponent {
 
   constructor(
     private loadingService: LoadingService,
-    private autorService: AutorService,
-    private router: Router,
-    private alertService: AlertModalService
+    private usuarioService: UsuarioService,
+    private toastErrorService: ToastErrorService
   ) {
-    this.fetch();
+    super();
   }
 
-  fetch() {
+  fetch(event?: number) {
     this.loadingService.startLoadind();
-    this.autorService.get()
+    this.usuarioService.getPorUsuario(event)
       .pipe(finalize(() => this.loadingService.stopLoadind()))
       .subscribe({
         next: result => {
-          this.tableData = result;
+          this.tableData = result.content;
+          this.totalRecords = result.totalElements;
         },
-        error: error => this.alertService.defaultError(error.message)
-      })
-  }
-
-
-  edit(item?: any) {
-    this.router.navigate([`${AppMenuModel.menuAutor.routerLink}/edit/${item.id}`])
-  }
-
-  remover(item?: any) {
-    this.loadingService.startLoadind();
-    this.autorService.delete(item.id)
-      .pipe(finalize(() => this.loadingService.stopLoadind()))
-      .subscribe({
-        next: (result: any) => {
-          this.alertService.defaultSuccess(result)
-          this.fetch();
-        },
-        error: error => this.alertService.defaultError(error.message)
+        error: error => this.toastErrorService.alertError(error)
       })
   }
 }

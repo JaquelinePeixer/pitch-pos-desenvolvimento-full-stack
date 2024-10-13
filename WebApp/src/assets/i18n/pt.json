@@ -191,7 +191,11 @@
         "page": {
             "title": "Obras Emprestadas"
         },
-        "field": {},
+        "field": {
+            "name": "Nome da Obra",
+            "dataDevolucao": "Data de Devolução",
+            "dataEmprestimo": "Data do Emprétimo"
+        },
         "message": {}
     },
     "emprestimo": {
