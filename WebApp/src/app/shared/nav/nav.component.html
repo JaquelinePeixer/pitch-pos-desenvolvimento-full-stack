@@ -13,8 +13,8 @@
           </a>
           }
           <ul #menu class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" routerLink="/intranet">{{'menu.intranet' | translate}}</a></li>
-            <li><a class="dropdown-item" routerLink="/acervo">{{'menu.consultCollection' | translate}}</a></li>
+            <li><a class="dropdown-item" (click)="intranet()">{{'menu.intranet' | translate}}</a></li>
+            <li><a class="dropdown-item" routerLink="/acervo">{{'acervo.title' | translate}}</a></li>
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="logout()">{{'menu.logout' | translate}}</a>
             </li>
           </ul>

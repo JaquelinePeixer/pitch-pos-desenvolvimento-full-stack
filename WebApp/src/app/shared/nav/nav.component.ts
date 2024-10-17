@@ -5,6 +5,8 @@ import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { AlertModalService } from '../../service/alert-modal/alert-modal.service';
+import { AuthUser } from '@app/authentication/auth-user.model';
+import { PermissionEnum } from '@app/authentication/permission.enum';
 
 @Component({
   selector: 'app-nav',
@@ -40,5 +42,19 @@ export class NavComponent {
     } catch (error) {
       this.alertService.defaultError('Problema ao sair, favor tente novamente')
     }
+  }
+
+  intranet() {
+    const loggedUser: AuthUser = this.authService.loggedUser();
+
+    if(loggedUser?.role){
+      if (loggedUser.role === PermissionEnum.USER) {
+        this.router.navigate(['/intranet/renovacao']);
+      } else {
+        this.router.navigate(['/intranet/emprestimo']);
+      }
+    } else {
+      this.router.navigate(['/login']);
+    }    
   }
 }
