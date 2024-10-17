@@ -64,10 +64,11 @@ public class BookService {
 		return bookRepository.findAll(page);
 	}
 
-	public Page<Book> getBookFilter(String title, String author, Pageable page) {
+	public Page<Book> getBookFilter(String title, String author, String subject, Pageable page) {
 		BookSearch request = new BookSearch();
 		request.setAuthor(author);
 		request.setTitle(title);
+		request.setSubject(subject);
 		return bookSearchDao.findAllByCriteria(request, page);
 	}
 

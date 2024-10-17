@@ -65,6 +65,11 @@ export class AppMenuModel {
         role: [PermissionEnum.ADMIN, PermissionEnum.LIBRARIAN]
     }
 
+    public static readonly menuAcervo: AppMenuItem = {
+        label: 'acervo.title',
+        routerLink: '/acervo'
+    }
+
     public static readonly menuIntranet: AppMenuItem = {
         label: '',
         routerLink: '/intranet',

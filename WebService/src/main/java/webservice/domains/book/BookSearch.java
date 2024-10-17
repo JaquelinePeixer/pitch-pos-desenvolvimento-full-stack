@@ -9,5 +9,6 @@ public class BookSearch {
 
 	private String title;
 	private String author;
+	private String subject;
 
 }

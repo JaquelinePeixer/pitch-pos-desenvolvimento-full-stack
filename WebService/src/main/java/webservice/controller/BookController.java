@@ -38,21 +38,21 @@ public class BookController {
 
 	@GetMapping
 	public Page<Book> getBookAll(@RequestParam(required = false) String title,
-			@RequestParam(required = false) String author, @RequestParam(defaultValue = "0") Integer page,
-			@RequestParam(defaultValue = "5") Integer pageSize) {
-		if (title != null || author != null) {
-			return bookService.getBookFilter(title, author,
+			@RequestParam(required = false) String author, @RequestParam(required = false) String subject,
+			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "5") Integer pageSize) {
+		if (title != null || author != null || subject != null) {
+			return bookService.getBookFilter(title, author, subject,
 					PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "title")));
 		} else {
 			return bookService.getBookAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "title")));
 		}
 	}
-		
+
 	@GetMapping("/find-list")
 	public List<BookSimple> getBookFindList(@RequestParam String title) {
 		return bookService.getBookAllFindList(title);
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<EmptyResponse> postBook(@RequestBody Book book) {
 		return bookService.postBook(book);
