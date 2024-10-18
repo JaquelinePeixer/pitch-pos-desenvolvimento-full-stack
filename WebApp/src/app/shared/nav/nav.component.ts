@@ -17,7 +17,7 @@ import { PermissionEnum } from '@app/authentication/permission.enum';
 })
 export class NavComponent {
   usuario: string;
-  
+
   @ViewChild('menu')
   menu: any
 
@@ -30,8 +30,12 @@ export class NavComponent {
   }
 
   getUsuario() {
-    const user = this.authService.getUser()
-    return user?.name;
+    const invalid = this.authService.isAuthenticatedRefresh();
+    if (!invalid) {
+      const user = this.authService.getUser()
+      return user?.name;
+    }
+    return null;
   }
 
   async logout() {
@@ -47,7 +51,7 @@ export class NavComponent {
   intranet() {
     const loggedUser: AuthUser = this.authService.loggedUser();
 
-    if(loggedUser?.role){
+    if (loggedUser?.role) {
       if (loggedUser.role === PermissionEnum.USER) {
         this.router.navigate(['/intranet/renovacao']);
       } else {
@@ -55,6 +59,6 @@ export class NavComponent {
       }
     } else {
       this.router.navigate(['/login']);
-    }    
+    }
   }
 }

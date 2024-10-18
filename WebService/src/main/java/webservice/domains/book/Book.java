@@ -1,5 +1,8 @@
 package webservice.domains.book;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -57,7 +60,8 @@ public class Book {
 	@JoinColumn(name = "fk_subject")
 	private Subject subject;
 
-	@OneToOne(mappedBy = "book")
+	@OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private BookLoan bookLoan;
 
 	public Book(String id, String title, String publicationYear, String publisherName, Integer volume,

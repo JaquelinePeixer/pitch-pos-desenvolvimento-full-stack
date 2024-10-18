@@ -1,6 +1,7 @@
 import { Assunto } from "../assunto/assunto";
 import { Autor } from "../autor/autor";
 import { Localizacao } from "../localizacao/localizacao";
+import { UsuarioObrasEmprestadas } from "../usuario/usuario-obras-emprestadas";
 
 export interface Obra {
     id: string;
@@ -15,4 +16,5 @@ export interface Obra {
     location: Localizacao;
     subject: Assunto;
     edition: string;
+    bookLoan?: UsuarioObrasEmprestadas;
 }

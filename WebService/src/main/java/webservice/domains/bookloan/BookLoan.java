@@ -2,6 +2,9 @@ package webservice.domains.bookloan;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,11 +29,13 @@ public class BookLoan {
 	private String id;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
+	@JsonBackReference
 	private User user;
 
 	@OneToOne
-	@JoinColumn(name = "book_id")
+	@JoinColumn(name = "book_id", nullable = false, unique = true)
+	@JsonBackReference
 	private Book book;
 
 	private LocalDateTime loanDate;

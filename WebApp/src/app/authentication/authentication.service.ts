@@ -57,9 +57,6 @@ export class AuthenticationService {
   isAuthenticatedRefresh() {
     const user = this.loggedUser();
     const tokenExpired = this.jwtHelperService.isTokenExpired(user?.token);
-    if (tokenExpired) {
-      // fazer função
-    }
     return tokenExpired
   }
 

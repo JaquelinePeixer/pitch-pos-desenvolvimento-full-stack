@@ -96,7 +96,10 @@
             "referenciaBibliografica": "Referência Bibliográfica",
             "subject": "Assuntos",
             "location": "Localização",
-            "quantityOfCopies": "Quantidade de cópias"
+            "quantityOfCopies": "Quantidade de cópias",
+            "situationBookLoan": "Situação da obra",
+            "loanDate": "Data do empréstimo",
+            "returnDate": "Data de devolução"
         }
     },
     "autor": {
@@ -135,7 +138,8 @@
             "pageQuantity": "Quantidade de página",
             "publicationYear": "Ano de publicação",
             "publicationLocation": "Local de publicação",
-            "quantityOfCopies": "Quantidade de cópias"
+            "quantityOfCopies": "Quantidade de cópias",
+            "situationBookLoan": "Situação da obra"
         },
         "listAuthors": {
             "tipo": "Tipo",

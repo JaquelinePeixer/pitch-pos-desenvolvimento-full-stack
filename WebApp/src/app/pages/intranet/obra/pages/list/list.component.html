@@ -28,6 +28,7 @@
                         <tr>
                             <th scope="col">{{ 'obra.field.title' | translate}}</th>
                             <th scope="col">{{ 'obra.field.author' | translate}}</th>
+                            <th scope="col">{{ 'obra.field.situationBookLoan' | translate}}</th>
                             <th scope="col" class="text-center" style="width: 100px;">{{ 'action.acoes' | translate}}
                             </th>
                         </tr>
@@ -36,6 +37,7 @@
                         <tr>
                             <td>{{item.title}}</td>
                             <td>{{item.author?.name}}</td>
+                            <td>{{item.bookLoan ? 'Indisponível': 'Disponível'}}</td>
                             <td class="text-center">
                                 <app-form-buttons [item]="item" (onEdit)="edit($event)" page="obra"
                                     (onDelete)="remover($event)"></app-form-buttons>
