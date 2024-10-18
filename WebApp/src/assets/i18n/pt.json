@@ -38,7 +38,8 @@
         "librarian": "Bibliotecário",
         "user": "Usuário",
         "ativo": "Ativo",
-        "inativo": "Inativo"
+        "inativo": "Inativo",
+        "voltar": "Voltar"
     },
     "toast": {
         "error": "Erro!",
@@ -84,11 +85,19 @@
         "title": "Consulta de Acervo",
         "field": {
             "name": "Nome da Obra",
-            "author":"Nome do autor"
+            "author": "Nome do autor"
         }
     },
     "acervo-detalhamento": {
-        "title": "Detalhes da Obra"
+        "title": "Detalhes da Obra",
+        "field": {
+            "title": "Nome da obra",
+            "author": "Autor",
+            "referenciaBibliografica": "Referência Bibliográfica",
+            "subject": "Assuntos",
+            "location": "Localização",
+            "quantityOfCopies": "Quantidade de cópias"
+        }
     },
     "autor": {
         "page": {

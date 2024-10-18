@@ -58,11 +58,9 @@ public class AuthenticationController {
 
 			return ResponseEntity.ok(new LoginResponseDTO(token, userRole, name));
 		} catch (BadCredentialsException e) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body(new EmptyResponse("E-mail ou senha incorretos"));
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new EmptyResponse("E-mail ou senha incorretos"));
 		} catch (AuthenticationException e) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body(new EmptyResponse("E-mail ou senha incorretos"));
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new EmptyResponse("E-mail ou senha incorretos"));
 		}
 	}
 
@@ -77,17 +75,15 @@ public class AuthenticationController {
 		}
 
 		if (data.email() != null) {
-			return userRepository.findUserByEmail(data.email()).map(email -> {
+			userRepository.findUserByEmail(data.email()).map(email -> {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("E-mail já cadastrado"));
-			}).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(new EmptyResponse("Erro ao validar e-mail")));
+			});
 		}
 
 		if (data.cpf() != null) {
-			return userRepository.findByCpf(data.cpf()).map(user -> {
+			userRepository.findByCpf(data.cpf()).map(user -> {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("CPF já cadastrado"));
-			}).orElseGet(
-					() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new EmptyResponse("Erro ao validar CPF")));
+			});
 		}
 
 		String encrytedPassword = new BCryptPasswordEncoder().encode(data.password());
