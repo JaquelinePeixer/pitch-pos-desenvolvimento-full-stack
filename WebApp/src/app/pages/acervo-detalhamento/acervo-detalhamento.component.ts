@@ -9,11 +9,12 @@ import { ObraService } from '@app/service/obra/obra.service';
 import { ToastErrorService } from '@app/service/toast-error/toast-error.service';
 import { finalize } from 'rxjs';
 import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-acervo-detalhamento',
   standalone: true,
-  imports: [RouterLink, SharedModule, AccordionModule, TableModule],
+  imports: [CommonModule, RouterLink, SharedModule, AccordionModule, TableModule],
   templateUrl: './acervo-detalhamento.component.html',
   styleUrl: './acervo-detalhamento.component.scss'
 })
