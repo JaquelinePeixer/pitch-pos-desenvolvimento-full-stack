@@ -1,0 +1,20 @@
+<form [formGroup]="formGroupFilter">
+    <app-filter (onSearch)="filter()">
+        <div class="col-12 mb-2 tipoObra">
+            <div *ngFor="let item of tipoObra">
+                <input 
+                  type="radio" 
+                  name="tipo" 
+                  [id]="'tipo-' + item.value" 
+                  [value]="item.value" 
+                  formControlName="tipo"
+                />
+                <label [for]="'tipo-' + item.value">{{ item.label }}</label>
+              </div>
+              
+        </div>
+        <div class="col-11">
+            <input pInputText type="text" class="form-control" id="name" formControlName="name">
+        </div>
+    </app-filter>
+</form>

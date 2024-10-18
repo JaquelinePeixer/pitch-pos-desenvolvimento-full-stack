@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { IntranetComponent } from './pages/intranet/intranet.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { AcervoComponent } from './pages/acervo/acervo.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './authentication/auth.guard';
 import { Error403Component } from './pages/error-403/error-403.component';
@@ -14,7 +13,10 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('./pages/intranet/intranet.module').then(mod => mod.IntranetModule)
     },
-    { path: 'acervo', component: AcervoComponent },
+    {
+        path: 'acervo',
+        loadChildren: () => import('./pages/acervo/acervo.module').then(mod => mod.AcervoModule)
+    },
     { path: 'login', component: LoginComponent },
     {
         path: 'errors', children: [

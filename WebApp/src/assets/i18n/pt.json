@@ -3,7 +3,6 @@
     "course": "Pós-Graduação em Desenvolvimento Full Stack",
     "menu": {
         "intranet": "Ambiente Online",
-        "consultCollection": "Consultar Acervo",
         "logout": "Sair",
         "library": "Biblioteca",
         "renovacao": "Renovação Online",
@@ -39,7 +38,8 @@
         "librarian": "Bibliotecário",
         "user": "Usuário",
         "ativo": "Ativo",
-        "inativo": "Inativo"
+        "inativo": "Inativo",
+        "voltar": "Voltar"
     },
     "toast": {
         "error": "Erro!",
@@ -82,7 +82,22 @@
         }
     },
     "acervo": {
-        "title": "Acervo"
+        "title": "Consulta de Acervo",
+        "field": {
+            "name": "Nome da Obra",
+            "author": "Nome do autor"
+        }
+    },
+    "acervo-detalhamento": {
+        "title": "Detalhes da Obra",
+        "field": {
+            "title": "Nome da obra",
+            "author": "Autor",
+            "referenciaBibliografica": "Referência Bibliográfica",
+            "subject": "Assuntos",
+            "location": "Localização",
+            "quantityOfCopies": "Quantidade de cópias"
+        }
     },
     "autor": {
         "page": {
@@ -185,8 +200,7 @@
         "field": {
             "idUser": "Registro do Usuário",
             "obra": "Obra"
-        },
-        "message": {}
+        }
     },
     "obra-emprestada": {
         "page": {
@@ -196,8 +210,7 @@
             "name": "Nome da Obra",
             "dataDevolucao": "Data de Devolução",
             "dataEmprestimo": "Data do Emprétimo"
-        },
-        "message": {}
+        }
     },
     "emprestimo": {
         "page": {
@@ -211,8 +224,7 @@
         "action": {
             "emprestimo": "Empréstimo",
             "devolucao": "Devolução"
-        },
-        "message": {}
+        }
     },
     "perfil-usuario": {
         "page": {
@@ -224,7 +236,6 @@
             "cpf": "CPF",
             "email": "E-mail",
             "birthDate": "Data de aniversário"
-        },
-        "message": {}
+        }
     }
 }
